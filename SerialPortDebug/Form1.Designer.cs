@@ -89,20 +89,20 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.ToolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.版本号v12ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemRefreshNotes = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemCommunicationAgreement = new System.Windows.Forms.ToolStripMenuItem();
             this.界面颜色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oringeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.greenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.goldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.goldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.whitesmokeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.版本号v12ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemCommunicationAgreement = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemRefreshNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxInitialization.SuspendLayout();
             this.groupBoxConfiguration.SuspendLayout();
             this.groupBoxReceivingArea.SuspendLayout();
@@ -463,8 +463,8 @@
             // 
             // groupBoxImageShow
             // 
-            this.groupBoxImageShow.Controls.Add(this.pictureBoxShow1);
             this.groupBoxImageShow.Controls.Add(this.pictureBoxShow);
+            this.groupBoxImageShow.Controls.Add(this.pictureBoxShow1);
             this.groupBoxImageShow.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBoxImageShow.Location = new System.Drawing.Point(534, 28);
             this.groupBoxImageShow.Name = "groupBoxImageShow";
@@ -728,36 +728,6 @@
             this.menuStrip1.TabIndex = 13;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // ToolStripMenuItemAbout
-            // 
-            this.ToolStripMenuItemAbout.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.版本号v12ToolStripMenuItem,
-            this.ToolStripMenuItemCommunicationAgreement,
-            this.ToolStripMenuItemRefreshNotes});
-            this.ToolStripMenuItemAbout.Name = "ToolStripMenuItemAbout";
-            this.ToolStripMenuItemAbout.Size = new System.Drawing.Size(53, 21);
-            this.ToolStripMenuItemAbout.Text = "关于...";
-            // 
-            // 版本号v12ToolStripMenuItem
-            // 
-            this.版本号v12ToolStripMenuItem.Name = "版本号v12ToolStripMenuItem";
-            this.版本号v12ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.版本号v12ToolStripMenuItem.Text = "版本号：v1.3";
-            // 
-            // ToolStripMenuItemRefreshNotes
-            // 
-            this.ToolStripMenuItemRefreshNotes.Name = "ToolStripMenuItemRefreshNotes";
-            this.ToolStripMenuItemRefreshNotes.Size = new System.Drawing.Size(152, 22);
-            this.ToolStripMenuItemRefreshNotes.Text = "更新说明";
-            this.ToolStripMenuItemRefreshNotes.Click += new System.EventHandler(this.更新说明ToolStripMenuItem_Click);
-            // 
-            // ToolStripMenuItemCommunicationAgreement
-            // 
-            this.ToolStripMenuItemCommunicationAgreement.Name = "ToolStripMenuItemCommunicationAgreement";
-            this.ToolStripMenuItemCommunicationAgreement.Size = new System.Drawing.Size(152, 22);
-            this.ToolStripMenuItemCommunicationAgreement.Text = "通信协议";
-            this.ToolStripMenuItemCommunicationAgreement.Click += new System.EventHandler(this.ToolStripMenuItemCommunicationAgreement_Click);
-            // 
             // 界面颜色ToolStripMenuItem
             // 
             this.界面颜色ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -765,7 +735,7 @@
             this.oringeToolStripMenuItem,
             this.yellowToolStripMenuItem,
             this.greenToolStripMenuItem,
-            this.goldenToolStripMenuItem,
+            this.goldToolStripMenuItem,
             this.grayToolStripMenuItem,
             this.blueToolStripMenuItem,
             this.pinkToolStripMenuItem,
@@ -802,12 +772,12 @@
             this.greenToolStripMenuItem.Text = "Green";
             this.greenToolStripMenuItem.Click += new System.EventHandler(this.greenToolStripMenuItem_Click);
             // 
-            // goldenToolStripMenuItem
+            // goldToolStripMenuItem
             // 
-            this.goldenToolStripMenuItem.Name = "goldenToolStripMenuItem";
-            this.goldenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.goldenToolStripMenuItem.Text = "Gold";
-            this.goldenToolStripMenuItem.Click += new System.EventHandler(this.goldenToolStripMenuItem_Click);
+            this.goldToolStripMenuItem.Name = "goldToolStripMenuItem";
+            this.goldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.goldToolStripMenuItem.Text = "Gold";
+            this.goldToolStripMenuItem.Click += new System.EventHandler(this.goldenToolStripMenuItem_Click);
             // 
             // grayToolStripMenuItem
             // 
@@ -836,6 +806,36 @@
             this.whitesmokeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.whitesmokeToolStripMenuItem.Text = "WhiteSmoke";
             this.whitesmokeToolStripMenuItem.Click += new System.EventHandler(this.whitesmokeToolStripMenuItem_Click);
+            // 
+            // ToolStripMenuItemAbout
+            // 
+            this.ToolStripMenuItemAbout.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.版本号v12ToolStripMenuItem,
+            this.ToolStripMenuItemCommunicationAgreement,
+            this.ToolStripMenuItemRefreshNotes});
+            this.ToolStripMenuItemAbout.Name = "ToolStripMenuItemAbout";
+            this.ToolStripMenuItemAbout.Size = new System.Drawing.Size(53, 21);
+            this.ToolStripMenuItemAbout.Text = "关于...";
+            // 
+            // 版本号v12ToolStripMenuItem
+            // 
+            this.版本号v12ToolStripMenuItem.Name = "版本号v12ToolStripMenuItem";
+            this.版本号v12ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.版本号v12ToolStripMenuItem.Text = "版本号：v1.3";
+            // 
+            // ToolStripMenuItemCommunicationAgreement
+            // 
+            this.ToolStripMenuItemCommunicationAgreement.Name = "ToolStripMenuItemCommunicationAgreement";
+            this.ToolStripMenuItemCommunicationAgreement.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemCommunicationAgreement.Text = "通信协议";
+            this.ToolStripMenuItemCommunicationAgreement.Click += new System.EventHandler(this.ToolStripMenuItemCommunicationAgreement_Click);
+            // 
+            // ToolStripMenuItemRefreshNotes
+            // 
+            this.ToolStripMenuItemRefreshNotes.Name = "ToolStripMenuItemRefreshNotes";
+            this.ToolStripMenuItemRefreshNotes.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemRefreshNotes.Text = "更新说明";
+            this.ToolStripMenuItemRefreshNotes.Click += new System.EventHandler(this.更新说明ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -961,7 +961,7 @@
         private System.Windows.Forms.ToolStripMenuItem yellowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem greenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem goldenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem goldToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem grayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem blueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;

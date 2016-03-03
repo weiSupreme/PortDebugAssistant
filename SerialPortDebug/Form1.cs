@@ -95,8 +95,24 @@ namespace SerialPortDebug
             }
         }
 
+        public void Read_Log_FormMian_BackColor()
+        {
+            string path = Application.StartupPath + "\\SystemLog\\" + "FormMain_BackColor.txt";
+            if (File.Exists(path))
+            {
+                byte[] byData = new Byte[100];
+                FileStream file = new FileStream(path, FileMode.Open);
+                file.Seek(0, SeekOrigin.Begin);
+                file.Read(byData, 0, 100); //byData传进来的字节数组,用以接受FileStream对象中的数据,第2个参数是字节数组中开始写入数据的位置,
+                //它通常是0,表示从数组的开端文件中向数组写数据,最后一个参数规定从文件读多少字符.
+                string str_color = System.Text.Encoding.ASCII.GetString(byData, 0, byData.Count());
+                this.BackColor = Color.FromArgb(Convert.ToInt32(str_color));
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            Read_Log_FormMian_BackColor();
             this.DoubleBuffered = true;
             //---------获取串口号--------//
             string[] str = SerialPort.GetPortNames();
@@ -127,6 +143,7 @@ namespace SerialPortDebug
             foreach (int stopbit in stopbits)
                 comboBoxStopBits.Items.Add(stopbit);
             //Control.CheckForIllegalCrossThreadCalls = false; 
+            
             buttonSend.Enabled = false;
             buttonAutoSend.Enabled = false;
             Com_Using.ReadBufferSize = 4096;
@@ -947,46 +964,73 @@ namespace SerialPortDebug
         private void goldenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Gold;
+            Write_Log_FormMain_BackColor(Color.Gold.ToArgb().ToString()+"         ");
         }
 
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Red;
+            Write_Log_FormMain_BackColor(Color.Red.ToArgb().ToString() + "         ");
         }
 
         private void oringeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Orange;
+            Write_Log_FormMain_BackColor(Color.Orange.ToArgb().ToString() + "         ");
         }
 
         private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Yellow;
+            Write_Log_FormMain_BackColor(Color.Yellow.ToArgb().ToString() + "         ");
         }
 
         private void greenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor =Color.FromArgb(0,192,0);
+            Write_Log_FormMain_BackColor(Color.FromArgb(0, 192, 0).ToArgb().ToString() + "         ");
         }
 
         private void grayToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Gray;
+            Write_Log_FormMain_BackColor(Color.Gray.ToArgb().ToString() + "         ");
         }
 
         private void blueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Blue;
+            Write_Log_FormMain_BackColor(Color.Blue.ToArgb().ToString() + "          ");
         }
 
         private void pinkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.LightPink;
+            Write_Log_FormMain_BackColor(Color.LightPink.ToArgb().ToString() + "         ");
         }
 
         private void whitesmokeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.WhiteSmoke;
+            Write_Log_FormMain_BackColor(Color.WhiteSmoke.ToArgb().ToString() + "         ");
+        }
+
+        public void Write_Log_FormMain_BackColor(string str)
+        {
+            string path = Application.StartupPath + "\\SystemLog\\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            path += "FormMain_BackColor.txt";
+            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+            StreamWriter sw = new StreamWriter(fs);
+            sw.Write(str);
+            //清空缓冲区
+            sw.Flush();
+            //关闭流
+            sw.Close();
+            fs.Close();
         }
     }
 }
