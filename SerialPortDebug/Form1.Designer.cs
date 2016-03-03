@@ -93,6 +93,16 @@
             this.版本号v12ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemRefreshNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemCommunicationAgreement = new System.Windows.Forms.ToolStripMenuItem();
+            this.界面颜色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oringeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.greenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.goldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.whitesmokeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxInitialization.SuspendLayout();
             this.groupBoxConfiguration.SuspendLayout();
             this.groupBoxReceivingArea.SuspendLayout();
@@ -465,7 +475,7 @@
             // 
             // pictureBoxShow1
             // 
-            this.pictureBoxShow1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.pictureBoxShow1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBoxShow1.Location = new System.Drawing.Point(6, 25);
             this.pictureBoxShow1.Name = "pictureBoxShow1";
             this.pictureBoxShow1.Size = new System.Drawing.Size(640, 480);
@@ -710,6 +720,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.界面颜色ToolStripMenuItem,
             this.ToolStripMenuItemAbout});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -731,7 +742,7 @@
             // 
             this.版本号v12ToolStripMenuItem.Name = "版本号v12ToolStripMenuItem";
             this.版本号v12ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.版本号v12ToolStripMenuItem.Text = "版本号：v1.2";
+            this.版本号v12ToolStripMenuItem.Text = "版本号：v1.3";
             // 
             // ToolStripMenuItemRefreshNotes
             // 
@@ -746,6 +757,85 @@
             this.ToolStripMenuItemCommunicationAgreement.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItemCommunicationAgreement.Text = "通信协议";
             this.ToolStripMenuItemCommunicationAgreement.Click += new System.EventHandler(this.ToolStripMenuItemCommunicationAgreement_Click);
+            // 
+            // 界面颜色ToolStripMenuItem
+            // 
+            this.界面颜色ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.redToolStripMenuItem,
+            this.oringeToolStripMenuItem,
+            this.yellowToolStripMenuItem,
+            this.greenToolStripMenuItem,
+            this.goldenToolStripMenuItem,
+            this.grayToolStripMenuItem,
+            this.blueToolStripMenuItem,
+            this.pinkToolStripMenuItem,
+            this.whitesmokeToolStripMenuItem});
+            this.界面颜色ToolStripMenuItem.Name = "界面颜色ToolStripMenuItem";
+            this.界面颜色ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.界面颜色ToolStripMenuItem.Text = "界面换肤";
+            // 
+            // redToolStripMenuItem
+            // 
+            this.redToolStripMenuItem.Name = "redToolStripMenuItem";
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.redToolStripMenuItem.Text = "Red";
+            this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
+            // 
+            // oringeToolStripMenuItem
+            // 
+            this.oringeToolStripMenuItem.Name = "oringeToolStripMenuItem";
+            this.oringeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.oringeToolStripMenuItem.Text = "Orange";
+            this.oringeToolStripMenuItem.Click += new System.EventHandler(this.oringeToolStripMenuItem_Click);
+            // 
+            // yellowToolStripMenuItem
+            // 
+            this.yellowToolStripMenuItem.Name = "yellowToolStripMenuItem";
+            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.yellowToolStripMenuItem.Text = "Yellow";
+            this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
+            // 
+            // greenToolStripMenuItem
+            // 
+            this.greenToolStripMenuItem.Name = "greenToolStripMenuItem";
+            this.greenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.greenToolStripMenuItem.Text = "Green";
+            this.greenToolStripMenuItem.Click += new System.EventHandler(this.greenToolStripMenuItem_Click);
+            // 
+            // goldenToolStripMenuItem
+            // 
+            this.goldenToolStripMenuItem.Name = "goldenToolStripMenuItem";
+            this.goldenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.goldenToolStripMenuItem.Text = "Gold";
+            this.goldenToolStripMenuItem.Click += new System.EventHandler(this.goldenToolStripMenuItem_Click);
+            // 
+            // grayToolStripMenuItem
+            // 
+            this.grayToolStripMenuItem.Name = "grayToolStripMenuItem";
+            this.grayToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.grayToolStripMenuItem.Text = "Gray";
+            this.grayToolStripMenuItem.Click += new System.EventHandler(this.grayToolStripMenuItem_Click);
+            // 
+            // blueToolStripMenuItem
+            // 
+            this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blueToolStripMenuItem.Text = "Blue";
+            this.blueToolStripMenuItem.Click += new System.EventHandler(this.blueToolStripMenuItem_Click);
+            // 
+            // pinkToolStripMenuItem
+            // 
+            this.pinkToolStripMenuItem.Name = "pinkToolStripMenuItem";
+            this.pinkToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pinkToolStripMenuItem.Text = "Pink";
+            this.pinkToolStripMenuItem.Click += new System.EventHandler(this.pinkToolStripMenuItem_Click);
+            // 
+            // whitesmokeToolStripMenuItem
+            // 
+            this.whitesmokeToolStripMenuItem.Name = "whitesmokeToolStripMenuItem";
+            this.whitesmokeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.whitesmokeToolStripMenuItem.Text = "WhiteSmoke";
+            this.whitesmokeToolStripMenuItem.Click += new System.EventHandler(this.whitesmokeToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -864,6 +954,19 @@
         private System.Windows.Forms.CheckBox checkBoxThreePointTrack;
         private System.Windows.Forms.PictureBox pictureBoxShow1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCommunicationAgreement;
+        private System.Windows.Forms.ToolStripMenuItem 界面颜色ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem redToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem oringeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem yellowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem greenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem goldenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem grayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem pinkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem whitesmokeToolStripMenuItem;
     }
 }
 
