@@ -104,15 +104,73 @@ namespace SerialPortDebug
                 FileStream file = new FileStream(path, FileMode.Open);
                 file.Seek(0, SeekOrigin.Begin);
                 file.Read(byData, 0, 100); //byData传进来的字节数组,用以接受FileStream对象中的数据,第2个参数是字节数组中开始写入数据的位置,
-                //它通常是0,表示从数组的开端文件中向数组写数据,最后一个参数规定从文件读多少字符.
+                                  //它通常是0,表示从数组的开端文件中向数组写数据,最后一个参数规定从文件读多少字符.
+                file.Close();
                 string str_color = System.Text.Encoding.ASCII.GetString(byData, 0, byData.Count());
                 this.BackColor = Color.FromArgb(Convert.ToInt32(str_color));
             }
         }
 
+        public int SetImage_Width()
+        {
+            string path = Application.StartupPath + "\\SystemLog\\" + "Image_Width.txt";
+            if (File.Exists(path))
+            {
+                byte[] byData = new Byte[100];
+                FileStream file = new FileStream(path, FileMode.Open);
+                file.Seek(0, SeekOrigin.Begin);
+                file.Read(byData, 0, 100); //byData传进来的字节数组,用以接受FileStream对象中的数据,第2个参数是字节数组中开始写入数据的位置,
+                                 //它通常是0,表示从数组的开端文件中向数组写数据,最后一个参数规定从文件读多少字符.
+                file.Close();
+                int str_width = int.Parse(System.Text.Encoding.ASCII.GetString(byData, 0, byData.Count()));
+                if(str_width!=0)
+                {
+                    return str_width;
+                }
+                else
+                {
+                    return 80;
+                }
+            }
+            else
+            {
+                return 80;
+            }
+        }
+
+        public int SetImage_Height()
+        {
+            string path = Application.StartupPath + "\\SystemLog\\" + "Image_Height.txt";
+            if (File.Exists(path))
+            {
+                byte[] byData = new Byte[100];
+                FileStream file = new FileStream(path, FileMode.Open);
+                file.Seek(0, SeekOrigin.Begin);
+                file.Read(byData, 0, 100); //byData传进来的字节数组,用以接受FileStream对象中的数据,第2个参数是字节数组中开始写入数据的位置,
+                                 //它通常是0,表示从数组的开端文件中向数组写数据,最后一个参数规定从文件读多少字符.
+                file.Close();
+                int str_height = int.Parse(System.Text.Encoding.ASCII.GetString(byData, 0, byData.Count()));
+                if (str_height != 0)
+                {
+                    return str_height;
+                }
+                else
+                {
+                    return 60;
+                }
+            }
+            else
+            {
+                return 60;
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            int image_width, image_height;
             Read_Log_FormMian_BackColor();
+            image_width=SetImage_Width();
+            image_height=SetImage_Height();
             this.DoubleBuffered = true;
             //---------获取串口号--------//
             string[] str = SerialPort.GetPortNames();
@@ -149,9 +207,9 @@ namespace SerialPortDebug
             Com_Using.ReadBufferSize = 4096;
             //textBoxReceivingArea.Text=Com_Using.ReadBufferSize.ToString();
             timerFreshPort.Interval = 500;
+            textBoxPictureWidth.Text = Convert.ToString(image_width);
+            textBoxPictureHeight.Text = Convert.ToString(image_height);
             timerFreshPort.Enabled = true;
-            textBoxPictureWidth.Text = "80";
-            textBoxPictureHeight.Text = "60";
             pictureBoxShow.Image = camera_image_bit;
             pictureBoxShow1.Image = camera_image_bit;
             camera_image_gra = Graphics.FromImage(pictureBoxShow.Image);
@@ -935,7 +993,7 @@ namespace SerialPortDebug
 
         private void 更新说明ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            textBoxReceivingArea.Text = "1.去掉了专门的信息显示框，相关信息显示在状态栏上\r\n\r\n2.增加关闭程序时的提示框\r\n\r\n3.新增加三点赛道功能\r\n\r\n4.增加界面换肤功能";         
+            textBoxReceivingArea.Text = "1.去掉了专门的信息显示框，相关信息显示在状态栏上\r\n\r\n2.增加关闭程序时的提示框\r\n\r\n3.新增加三点赛道功能\r\n\r\n4.增加界面换肤功能\r\n\r\n5.日志记录界面换肤操作";         
         }
 
         private void checkBoxTwoPixelImage_CheckedChanged(object sender, EventArgs e)
@@ -1026,6 +1084,42 @@ namespace SerialPortDebug
             FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
             StreamWriter sw = new StreamWriter(fs);
             sw.Write(str);
+            //清空缓冲区
+            sw.Flush();
+            //关闭流
+            sw.Close();
+            fs.Close();
+        }
+
+        private void textBoxPictureWidth_TextChanged(object sender, EventArgs e)
+        {
+            string path = Application.StartupPath + "\\SystemLog\\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            path += "Image_Width.txt";
+            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+            StreamWriter sw = new StreamWriter(fs);
+            sw.Write(textBoxPictureWidth.Text+"   ");
+            //清空缓冲区
+            sw.Flush();
+            //关闭流
+            sw.Close();
+            fs.Close();
+        }
+
+        private void textBoxPictureHeight_TextChanged(object sender, EventArgs e)
+        {
+            string path = Application.StartupPath + "\\SystemLog\\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            path += "Image_Height.txt";
+            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+            StreamWriter sw = new StreamWriter(fs);
+            sw.Write(textBoxPictureHeight.Text + "   ");
             //清空缓冲区
             sw.Flush();
             //关闭流

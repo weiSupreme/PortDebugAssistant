@@ -634,6 +634,7 @@
             this.textBoxPictureHeight.Name = "textBoxPictureHeight";
             this.textBoxPictureHeight.Size = new System.Drawing.Size(29, 23);
             this.textBoxPictureHeight.TabIndex = 6;
+            this.textBoxPictureHeight.TextChanged += new System.EventHandler(this.textBoxPictureHeight_TextChanged);
             // 
             // labelPictureHeight
             // 
@@ -652,6 +653,7 @@
             this.textBoxPictureWidth.Name = "textBoxPictureWidth";
             this.textBoxPictureWidth.Size = new System.Drawing.Size(29, 23);
             this.textBoxPictureWidth.TabIndex = 3;
+            this.textBoxPictureWidth.TextChanged += new System.EventHandler(this.textBoxPictureWidth_TextChanged);
             // 
             // labelPictureWidth
             // 
