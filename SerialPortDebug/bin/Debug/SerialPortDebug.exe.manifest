@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SerialPortDebug.exe" size="39424">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SerialPortDebug.exe" size="39936">
       <assemblyIdentity name="SerialPortDebug" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Mtyc/4HPqleqtTGzZBMJvpEXLL+4kfBSuGjla8+ZJfw=</dsig:DigestValue>
+        <dsig:DigestValue>fPv8DYwJuexKvDamyw6Mo9mIDTDYdzs4R6ZkZygkgeE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

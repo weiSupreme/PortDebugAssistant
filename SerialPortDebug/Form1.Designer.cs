@@ -58,13 +58,14 @@
             this.labelReceiveZifu = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonSend = new System.Windows.Forms.Button();
-            this.buttonOpenCom = new System.Windows.Forms.Button();
             this.buttonClearSending = new System.Windows.Forms.Button();
             this.buttonClearReceiving = new System.Windows.Forms.Button();
+            this.buttonOpenCom = new System.Windows.Forms.Button();
             this.groupBoxImageShow = new System.Windows.Forms.GroupBox();
             this.pictureBoxShow = new System.Windows.Forms.PictureBox();
             this.timerAutoSend = new System.Windows.Forms.Timer(this.components);
             this.groupBoxPicConfig = new System.Windows.Forms.GroupBox();
+            this.checkBoxThreePointTrack = new System.Windows.Forms.CheckBox();
             this.buttonStopShowImgTemp = new System.Windows.Forms.Button();
             this.labelAutoShowImageSpeed = new System.Windows.Forms.Label();
             this.buttonAutoShowImage = new System.Windows.Forms.Button();
@@ -86,12 +87,12 @@
             this.toolTipPicColumnRow = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ToolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.版本号v12ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemRefreshNotes = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.checkBoxThreePointTrack = new System.Windows.Forms.CheckBox();
+            this.pictureBoxShow1 = new System.Windows.Forms.PictureBox();
             this.groupBoxInitialization.SuspendLayout();
             this.groupBoxConfiguration.SuspendLayout();
             this.groupBoxReceivingArea.SuspendLayout();
@@ -103,6 +104,7 @@
             this.groupBoxPicConfig.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShow1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxInitialization
@@ -417,18 +419,6 @@
             this.buttonSend.UseVisualStyleBackColor = true;
             this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
             // 
-            // buttonOpenCom
-            // 
-            this.buttonOpenCom.BackColor = System.Drawing.Color.Transparent;
-            this.buttonOpenCom.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonOpenCom.Location = new System.Drawing.Point(29, 510);
-            this.buttonOpenCom.Name = "buttonOpenCom";
-            this.buttonOpenCom.Size = new System.Drawing.Size(126, 37);
-            this.buttonOpenCom.TabIndex = 2;
-            this.buttonOpenCom.Text = "打开串口";
-            this.buttonOpenCom.UseVisualStyleBackColor = false;
-            this.buttonOpenCom.Click += new System.EventHandler(this.buttonOpenCom_Click);
-            // 
             // buttonClearSending
             // 
             this.buttonClearSending.Location = new System.Drawing.Point(7, 62);
@@ -449,8 +439,21 @@
             this.buttonClearReceiving.UseVisualStyleBackColor = true;
             this.buttonClearReceiving.Click += new System.EventHandler(this.buttonClearReceiving_Click);
             // 
+            // buttonOpenCom
+            // 
+            this.buttonOpenCom.BackColor = System.Drawing.Color.Transparent;
+            this.buttonOpenCom.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonOpenCom.Location = new System.Drawing.Point(29, 510);
+            this.buttonOpenCom.Name = "buttonOpenCom";
+            this.buttonOpenCom.Size = new System.Drawing.Size(126, 37);
+            this.buttonOpenCom.TabIndex = 2;
+            this.buttonOpenCom.Text = "打开串口";
+            this.buttonOpenCom.UseVisualStyleBackColor = false;
+            this.buttonOpenCom.Click += new System.EventHandler(this.buttonOpenCom_Click);
+            // 
             // groupBoxImageShow
             // 
+            this.groupBoxImageShow.Controls.Add(this.pictureBoxShow1);
             this.groupBoxImageShow.Controls.Add(this.pictureBoxShow);
             this.groupBoxImageShow.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBoxImageShow.Location = new System.Drawing.Point(534, 28);
@@ -500,6 +503,17 @@
             this.groupBoxPicConfig.TabIndex = 10;
             this.groupBoxPicConfig.TabStop = false;
             this.groupBoxPicConfig.Text = "图像配置";
+            // 
+            // checkBoxThreePointTrack
+            // 
+            this.checkBoxThreePointTrack.AutoSize = true;
+            this.checkBoxThreePointTrack.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBoxThreePointTrack.Location = new System.Drawing.Point(194, 16);
+            this.checkBoxThreePointTrack.Name = "checkBoxThreePointTrack";
+            this.checkBoxThreePointTrack.Size = new System.Drawing.Size(91, 20);
+            this.checkBoxThreePointTrack.TabIndex = 19;
+            this.checkBoxThreePointTrack.Text = "三点赛道";
+            this.checkBoxThreePointTrack.UseVisualStyleBackColor = true;
             // 
             // buttonStopShowImgTemp
             // 
@@ -592,6 +606,7 @@
             this.checkBoxTwoPixelImage.TabIndex = 9;
             this.checkBoxTwoPixelImage.Text = "鹰眼二值化";
             this.checkBoxTwoPixelImage.UseVisualStyleBackColor = true;
+            this.checkBoxTwoPixelImage.CheckedChanged += new System.EventHandler(this.checkBoxTwoPixelImage_CheckedChanged);
             // 
             // textBoxPictureHeight
             // 
@@ -638,6 +653,7 @@
             this.checkBoxGrayImage.TabIndex = 0;
             this.checkBoxGrayImage.Text = "灰度图像";
             this.checkBoxGrayImage.UseVisualStyleBackColor = true;
+            this.checkBoxGrayImage.CheckedChanged += new System.EventHandler(this.checkBoxGrayImage_CheckedChanged);
             // 
             // timerFreshPort
             // 
@@ -685,6 +701,13 @@
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.AutoSize = false;
+            this.toolStripStatusLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(331, 17);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -707,33 +730,25 @@
             // 版本号v12ToolStripMenuItem
             // 
             this.版本号v12ToolStripMenuItem.Name = "版本号v12ToolStripMenuItem";
-            this.版本号v12ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.版本号v12ToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.版本号v12ToolStripMenuItem.Text = "版本号：v1.2";
             // 
             // ToolStripMenuItemRefreshNotes
             // 
             this.ToolStripMenuItemRefreshNotes.Name = "ToolStripMenuItemRefreshNotes";
-            this.ToolStripMenuItemRefreshNotes.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemRefreshNotes.Size = new System.Drawing.Size(147, 22);
             this.ToolStripMenuItemRefreshNotes.Text = "更新说明";
             this.ToolStripMenuItemRefreshNotes.Click += new System.EventHandler(this.更新说明ToolStripMenuItem_Click);
             // 
-            // toolStripStatusLabel2
+            // pictureBoxShow1
             // 
-            this.toolStripStatusLabel2.AutoSize = false;
-            this.toolStripStatusLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(331, 17);
-            // 
-            // checkBoxThreePointTrack
-            // 
-            this.checkBoxThreePointTrack.AutoSize = true;
-            this.checkBoxThreePointTrack.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBoxThreePointTrack.Location = new System.Drawing.Point(194, 16);
-            this.checkBoxThreePointTrack.Name = "checkBoxThreePointTrack";
-            this.checkBoxThreePointTrack.Size = new System.Drawing.Size(91, 20);
-            this.checkBoxThreePointTrack.TabIndex = 19;
-            this.checkBoxThreePointTrack.Text = "三点赛道";
-            this.checkBoxThreePointTrack.UseVisualStyleBackColor = true;
+            this.pictureBoxShow1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.pictureBoxShow1.Location = new System.Drawing.Point(6, 25);
+            this.pictureBoxShow1.Name = "pictureBoxShow1";
+            this.pictureBoxShow1.Size = new System.Drawing.Size(640, 480);
+            this.pictureBoxShow1.TabIndex = 1;
+            this.pictureBoxShow1.TabStop = false;
+            this.pictureBoxShow1.Visible = false;
             // 
             // Form1
             // 
@@ -780,6 +795,7 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShow1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -850,6 +866,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemRefreshNotes;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.CheckBox checkBoxThreePointTrack;
+        private System.Windows.Forms.PictureBox pictureBoxShow1;
     }
 }
 
