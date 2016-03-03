@@ -143,8 +143,6 @@ namespace SerialPortDebug
             //camera_image_gra.InterpolationMode =(InterpolationMode) CompositingQuality.HighQuality;
             camera_image_gra.Clear(Color.Transparent);
             camera_image_gra1.Clear(Color.Transparent);
-            toolStripStatusLabel1.Text = "(图像发送协议：uint8 frame_head[]={1,254,254,1};uart_putbuff(UARTn,frame_head,4);)";
-            MessageBox.Show("欢迎使用此上位机！！！");
         }
 
         private void buttonOpenCom_Click(object sender, EventArgs e)
@@ -915,6 +913,11 @@ namespace SerialPortDebug
                 pictureBoxShow.Visible = true;
                 pictureBoxShow1.Visible = false;
             }
+        }
+
+        private void ToolStripMenuItemCommunicationAgreement_Click(object sender, EventArgs e)
+        {
+            textBoxReceivingArea.Text = "灰度图像：\r\n\r\n uint8 frame_head[]={1,254,254,1};\r\n uart_putbuff(UARTn,frame_head,4);\r\n uart_putbuff(UARTn,image,image_size);\r\n\r\n鹰眼二值化(压缩图像)：\r\n 同灰度图像\r\n\r\n三点赛道：\r\n uint8 frame_head[]={1,254,254,1};\r\n uart_putbuff(UARTn,frame_head,4);\r\n uart_putchar(UARTn,effective_line);\r\n for(int i=0;i<picture_height;i++){\r\n uart_putchar(UARTn,left_line[i];\r\n uart_putchar(UARTn,center_line[i];\r\n uart_putchar(UARTn,right_line[i];}";
         }
     }
 }

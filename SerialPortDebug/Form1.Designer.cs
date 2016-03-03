@@ -62,6 +62,7 @@
             this.buttonClearReceiving = new System.Windows.Forms.Button();
             this.buttonOpenCom = new System.Windows.Forms.Button();
             this.groupBoxImageShow = new System.Windows.Forms.GroupBox();
+            this.pictureBoxShow1 = new System.Windows.Forms.PictureBox();
             this.pictureBoxShow = new System.Windows.Forms.PictureBox();
             this.timerAutoSend = new System.Windows.Forms.Timer(this.components);
             this.groupBoxPicConfig = new System.Windows.Forms.GroupBox();
@@ -86,13 +87,12 @@
             this.Com_Using = new System.IO.Ports.SerialPort(this.components);
             this.toolTipPicColumnRow = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ToolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.版本号v12ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemRefreshNotes = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBoxShow1 = new System.Windows.Forms.PictureBox();
+            this.ToolStripMenuItemCommunicationAgreement = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxInitialization.SuspendLayout();
             this.groupBoxConfiguration.SuspendLayout();
             this.groupBoxReceivingArea.SuspendLayout();
@@ -100,11 +100,11 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxImageShow.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShow1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShow)).BeginInit();
             this.groupBoxPicConfig.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShow1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxInitialization
@@ -463,6 +463,16 @@
             this.groupBoxImageShow.TabStop = false;
             this.groupBoxImageShow.Text = "图像显示区";
             // 
+            // pictureBoxShow1
+            // 
+            this.pictureBoxShow1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.pictureBoxShow1.Location = new System.Drawing.Point(6, 25);
+            this.pictureBoxShow1.Name = "pictureBoxShow1";
+            this.pictureBoxShow1.Size = new System.Drawing.Size(640, 480);
+            this.pictureBoxShow1.TabIndex = 1;
+            this.pictureBoxShow1.TabStop = false;
+            this.pictureBoxShow1.Visible = false;
+            // 
             // pictureBoxShow
             // 
             this.pictureBoxShow.BackColor = System.Drawing.Color.Transparent;
@@ -683,23 +693,12 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
             this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(0, 607);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1187, 22);
             this.statusStrip1.TabIndex = 12;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.AutoSize = false;
-            this.toolStripStatusLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(510, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
             // toolStripStatusLabel2
             // 
@@ -722,6 +721,7 @@
             // 
             this.ToolStripMenuItemAbout.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.版本号v12ToolStripMenuItem,
+            this.ToolStripMenuItemCommunicationAgreement,
             this.ToolStripMenuItemRefreshNotes});
             this.ToolStripMenuItemAbout.Name = "ToolStripMenuItemAbout";
             this.ToolStripMenuItemAbout.Size = new System.Drawing.Size(53, 21);
@@ -730,25 +730,22 @@
             // 版本号v12ToolStripMenuItem
             // 
             this.版本号v12ToolStripMenuItem.Name = "版本号v12ToolStripMenuItem";
-            this.版本号v12ToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.版本号v12ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.版本号v12ToolStripMenuItem.Text = "版本号：v1.2";
             // 
             // ToolStripMenuItemRefreshNotes
             // 
             this.ToolStripMenuItemRefreshNotes.Name = "ToolStripMenuItemRefreshNotes";
-            this.ToolStripMenuItemRefreshNotes.Size = new System.Drawing.Size(147, 22);
+            this.ToolStripMenuItemRefreshNotes.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItemRefreshNotes.Text = "更新说明";
             this.ToolStripMenuItemRefreshNotes.Click += new System.EventHandler(this.更新说明ToolStripMenuItem_Click);
             // 
-            // pictureBoxShow1
+            // ToolStripMenuItemCommunicationAgreement
             // 
-            this.pictureBoxShow1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.pictureBoxShow1.Location = new System.Drawing.Point(6, 25);
-            this.pictureBoxShow1.Name = "pictureBoxShow1";
-            this.pictureBoxShow1.Size = new System.Drawing.Size(640, 480);
-            this.pictureBoxShow1.TabIndex = 1;
-            this.pictureBoxShow1.TabStop = false;
-            this.pictureBoxShow1.Visible = false;
+            this.ToolStripMenuItemCommunicationAgreement.Name = "ToolStripMenuItemCommunicationAgreement";
+            this.ToolStripMenuItemCommunicationAgreement.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemCommunicationAgreement.Text = "通信协议";
+            this.ToolStripMenuItemCommunicationAgreement.Click += new System.EventHandler(this.ToolStripMenuItemCommunicationAgreement_Click);
             // 
             // Form1
             // 
@@ -788,6 +785,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBoxImageShow.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShow1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShow)).EndInit();
             this.groupBoxPicConfig.ResumeLayout(false);
             this.groupBoxPicConfig.PerformLayout();
@@ -795,7 +793,6 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShow1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -859,7 +856,6 @@
         private System.Windows.Forms.Button buttonStopShowImgTemp;
         private System.Windows.Forms.ToolTip toolTipPicColumnRow;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemAbout;
         private System.Windows.Forms.ToolStripMenuItem 版本号v12ToolStripMenuItem;
@@ -867,6 +863,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.CheckBox checkBoxThreePointTrack;
         private System.Windows.Forms.PictureBox pictureBoxShow1;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCommunicationAgreement;
     }
 }
 
