@@ -44,6 +44,7 @@ namespace SerialPortDebug
         private int image_column_count = 0;
         private int three_point_track_dist_flag = 0;    //三点赛道模式标志位
         private int picturebox_who_flag=0;
+        private int effective_line = -5;        //三点赛道模式下的有效行
         public Form1()
         {
             InitializeComponent(); 
@@ -159,8 +160,8 @@ namespace SerialPortDebug
                 {
                     if (checkBoxGrayImage.Checked || checkBoxTwoPixelImage.Checked || checkBoxThreePointTrack.Checked)
                     {
-                        pictureBoxShow.BackColor = Color.Gray;
-                        pictureBoxShow1.BackColor = Color.Gray;
+                        pictureBoxShow.BackColor = Color.WhiteSmoke;
+                        pictureBoxShow1.BackColor = Color.WhiteSmoke;
                         if (textBoxPictureWidth.Text != "" && textBoxPictureHeight.Text != "")
                         {
                             width = int.Parse(textBoxPictureWidth.Text);
@@ -364,87 +365,107 @@ namespace SerialPortDebug
                     }
                     else if(checkBoxThreePointTrack.Checked)   //三点赛道模式
                     {
-                        if (picturebox_who_flag == 0)    //使用第0个picturebox
+                        if (effective_line < 0)
                         {
-                            if (three_point_track_dist_flag == 0)   //左边界
+                            effective_line = data;
+                            image_row_count = effective_line * pictureBoxShow.Height / height+1;
+                        }
+                        else
+                        {
+                            if (picturebox_who_flag == 0)    //使用第0个picturebox
                             {
-                                camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                                three_point_track_dist_flag = 1;
-                            }
-                            else if (three_point_track_dist_flag == 1)    //中线
-                            {
-                                camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(0, 0, 255)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 255)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                                three_point_track_dist_flag = 2;
-                            }
-                            else    //右边界
-                            {
-                                camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                                three_point_track_dist_flag = 0;
-                                image_row_count += pictureBoxShow.Height / height;
-                                if (image_row_count >= pictureBoxShow.Height)
+                                if (three_point_track_dist_flag == 0)   //左边界
                                 {
-                                    image_row_count = 0;
-                                    image_get_flag = 0;
-                                    this.Invoke((EventHandler)(delegate
+                                    camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                                    camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                                    three_point_track_dist_flag = 1;
+                                }
+                                else if (three_point_track_dist_flag == 1)    //中线
+                                {
+                                    camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(0, 0, 255)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                                    camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 255)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                                    three_point_track_dist_flag = 2;
+                                }
+                                else    //右边界
+                                {
+                                    camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                                    camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                                    three_point_track_dist_flag = 0;
+                                    image_row_count += pictureBoxShow.Height / height;
+                                    if (image_row_count >= pictureBoxShow.Height)
                                     {
-                                        pictureBoxShow.Visible = true;
-                                        pictureBoxShow.Refresh();
-                                        camera_image_gra1.Clear(Color.Gray);
-                                        pictureBoxShow1.Visible = false;
-                                        picturebox_who_flag = 1;
-                                        if (checkBoxAutoSaveImage.Checked)
+                                        image_row_count = 0;
+                                        image_get_flag = 0;
+                                        for (int i = 0; i < pictureBoxShow.Width;i+=pictureBoxShow.Width / width )
                                         {
-                                            string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
-                                            pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                                            toolStripStatusLabel2.Text = Image_save_name + "保存成功";
-                                            Image_save_Num++;
+                                            camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(0, 0, 0)), i, effective_line * pictureBoxShow.Height / height, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                                            camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), i, effective_line * pictureBoxShow.Height / height, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
                                         }
-                                    }));
+                                        effective_line = -5;
+                                        this.Invoke((EventHandler)(delegate
+                                        {
+                                            pictureBoxShow.Visible = true;
+                                            pictureBoxShow.Refresh();
+                                            camera_image_gra1.Clear(Color.WhiteSmoke);
+                                            pictureBoxShow1.Visible = false;
+                                            picturebox_who_flag = 1;
+                                            if (checkBoxAutoSaveImage.Checked)
+                                            {
+                                                string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                                                pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                                                toolStripStatusLabel2.Text = Image_save_name + "保存成功";
+                                                Image_save_Num++;
+                                            }
+                                        }));
+                                    }
                                 }
                             }
-                        }
-                        else      //使用第1个picturebox
-                        {
-                            if (three_point_track_dist_flag == 0)   //左边界
+                            else      //使用第1个picturebox
                             {
-                                camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                                camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                                three_point_track_dist_flag = 1;
-                            }
-                            else if (three_point_track_dist_flag == 1)    //中线
-                            {
-                                camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(0, 0, 255)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                                camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 255)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                                three_point_track_dist_flag = 2;
-                            }
-                            else    //右边界
-                            {
-                                camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                                camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                                three_point_track_dist_flag = 0;
-                                image_row_count += pictureBoxShow1.Height / height;
-                                if (image_row_count >= pictureBoxShow1.Height)
+                                if (three_point_track_dist_flag == 0)   //左边界
                                 {
-                                    image_row_count = 0;
-                                    image_get_flag = 0;
-                                    this.Invoke((EventHandler)(delegate
+                                    camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                                    camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                                    three_point_track_dist_flag = 1;
+                                }
+                                else if (three_point_track_dist_flag == 1)    //中线
+                                {
+                                    camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(0, 0, 255)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                                    camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 255)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                                    three_point_track_dist_flag = 2;
+                                }
+                                else    //右边界
+                                {
+                                    camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                                    camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                                    three_point_track_dist_flag = 0;
+                                    image_row_count += pictureBoxShow1.Height / height;
+                                    if (image_row_count >= pictureBoxShow1.Height)
                                     {
-                                        pictureBoxShow1.Visible = true;
-                                        pictureBoxShow1.Refresh();
-                                        camera_image_gra.Clear(Color.Gray);
-                                        pictureBoxShow.Visible = false;
-                                        picturebox_who_flag = 0;
-                                        if (checkBoxAutoSaveImage.Checked)
+                                        image_row_count = 0;
+                                        image_get_flag = 0;
+                                        for (int i = 0; i < pictureBoxShow1.Width; i += pictureBoxShow1.Width / width)
                                         {
-                                            string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
-                                            pictureBoxShow1.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                                            toolStripStatusLabel2.Text = Image_save_name + "保存成功";
-                                            Image_save_Num++;
+                                            camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(0, 0, 0)), i, effective_line * pictureBoxShow.Height / height, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                                            camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), i, effective_line * pictureBoxShow.Height / height, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
                                         }
-                                    }));
+                                        effective_line = -5;
+                                        this.Invoke((EventHandler)(delegate
+                                        {
+                                            pictureBoxShow1.Visible = true;
+                                            pictureBoxShow1.Refresh();
+                                            camera_image_gra.Clear(Color.WhiteSmoke);
+                                            pictureBoxShow.Visible = false;
+                                            picturebox_who_flag = 0;
+                                            if (checkBoxAutoSaveImage.Checked)
+                                            {
+                                                string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                                                pictureBoxShow1.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                                                toolStripStatusLabel2.Text = Image_save_name + "保存成功";
+                                                Image_save_Num++;
+                                            }
+                                        }));
+                                    }
                                 }
                             }
                         }
@@ -875,7 +896,7 @@ namespace SerialPortDebug
 
         private void 更新说明ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            textBoxReceivingArea.Text = "1.去掉了专门的信息显示框，相关信息显示在状态栏上\r\n\r\n2.增加打开和关闭程序时的提示框\r\n\r\n";         
+            textBoxReceivingArea.Text = "1.去掉了专门的信息显示框，相关信息显示在状态栏上\r\n\r\n2.增加打开和关闭程序时的提示框\r\n\r\n3.新增加三点赛道功能\r\n\r\n";         
         }
 
         private void checkBoxTwoPixelImage_CheckedChanged(object sender, EventArgs e)
