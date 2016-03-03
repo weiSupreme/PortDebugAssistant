@@ -103,6 +103,7 @@
             this.版本号v12ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemCommunicationAgreement = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemRefreshNotes = new System.Windows.Forms.ToolStripMenuItem();
+            this.picturegridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxInitialization.SuspendLayout();
             this.groupBoxConfiguration.SuspendLayout();
             this.groupBoxReceivingArea.SuspendLayout();
@@ -741,7 +742,8 @@
             this.grayToolStripMenuItem,
             this.blueToolStripMenuItem,
             this.pinkToolStripMenuItem,
-            this.whitesmokeToolStripMenuItem});
+            this.whitesmokeToolStripMenuItem,
+            this.picturegridToolStripMenuItem});
             this.界面颜色ToolStripMenuItem.Name = "界面颜色ToolStripMenuItem";
             this.界面颜色ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.界面颜色ToolStripMenuItem.Text = "界面换肤";
@@ -838,6 +840,13 @@
             this.ToolStripMenuItemRefreshNotes.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItemRefreshNotes.Text = "更新说明";
             this.ToolStripMenuItemRefreshNotes.Click += new System.EventHandler(this.更新说明ToolStripMenuItem_Click);
+            // 
+            // picturegridToolStripMenuItem
+            // 
+            this.picturegridToolStripMenuItem.Name = "picturegridToolStripMenuItem";
+            this.picturegridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.picturegridToolStripMenuItem.Text = "图像栅格显示";
+            this.picturegridToolStripMenuItem.Click += new System.EventHandler(this.picturegridToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -969,6 +978,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem pinkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem whitesmokeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem picturegridToolStripMenuItem;
     }
 }
 
