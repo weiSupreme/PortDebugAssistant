@@ -1,0 +1,22 @@
+c:\users\zhu wei\documents\visual studio 2013\Projects\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.exe.config
+c:\users\zhu wei\documents\visual studio 2013\Projects\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.exe
+c:\users\zhu wei\documents\visual studio 2013\Projects\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.pdb
+c:\users\zhu wei\documents\visual studio 2013\Projects\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.csprojResolveAssemblyReference.cache
+c:\users\zhu wei\documents\visual studio 2013\Projects\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.Form1.resources
+c:\users\zhu wei\documents\visual studio 2013\Projects\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.Properties.Resources.resources
+c:\users\zhu wei\documents\visual studio 2013\Projects\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.csproj.GenerateResource.Cache
+c:\users\zhu wei\documents\visual studio 2013\Projects\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.exe
+c:\users\zhu wei\documents\visual studio 2013\Projects\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.pdb
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.exe.config
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.exe
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.pdb
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.exe
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.pdb
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.Form1.resources
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.Properties.Resources.resources
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.csproj.GenerateResource.Cache
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.exe.manifest
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.application
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.exe.manifest
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.application
+G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\obj\Debug\SerialPortDebug.csprojResolveAssemblyReference.cache
