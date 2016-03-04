@@ -106,9 +106,9 @@ namespace SerialPortDebug
                 file.Seek(0, SeekOrigin.Begin);
                 file.Read(byData, 0, 100); //byData传进来的字节数组,用以接受FileStream对象中的数据,第2个参数是字节数组中开始写入数据的位置,
                                   //它通常是0,表示从数组的开端文件中向数组写数据,最后一个参数规定从文件读多少字符.
-                file.Close();
                 string str_color = System.Text.Encoding.ASCII.GetString(byData, 0, byData.Count());
                 this.BackColor = Color.FromArgb(Convert.ToInt32(str_color));
+                file.Close();
             }
         }
 
@@ -1113,6 +1113,7 @@ namespace SerialPortDebug
             }
             path += "FormMain_BackColor.txt";
             FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+            
             StreamWriter sw = new StreamWriter(fs);
             sw.Write(str);
             //清空缓冲区

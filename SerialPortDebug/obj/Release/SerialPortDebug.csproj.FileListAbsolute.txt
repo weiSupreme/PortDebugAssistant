@@ -8,3 +8,13 @@ G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\obj\Release\Se
 G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\obj\Release\SerialPortDebug.exe.manifest
 G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\obj\Release\SerialPortDebug.application
 G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\obj\Release\SerialPortDebug.exe
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Release\SerialPortDebug.exe.config
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Release\SerialPortDebug.exe.manifest
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Release\SerialPortDebug.application
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Release\SerialPortDebug.exe
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.Form1.resources
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.Properties.Resources.resources
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.csproj.GenerateResource.Cache
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.exe.manifest
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.application
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.exe

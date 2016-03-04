@@ -340,11 +340,12 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>Component</td><td>{2E97C3F3-6903-48F1-971B-9499FE0EC9BA}</td><td>DATABASEDIR</td><td>2</td><td/><td>File</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Component</td><td>{4814184D-0FA0-4E13-A67C-71D622BC75B6}</td><td>DATABASEDIR</td><td>2</td><td/><td>File</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{72E86184-A993-4821-B7B5-9D0AE0C7F743}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{EA519B1F-6549-49AC-B7B6-36F42DE6AF9D}</td><td>DATABASEDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>SerialPortDebug.exe</td><td>{51E0C7D3-FF34-4677-B5D9-D0C4926F91E1}</td><td>DATABASEDIR</td><td>2</td><td/><td>serialportdebug.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>SerialPortDebug.vshost.exe</td><td>{591ACFC4-D119-4312-AD5F-44698608D137}</td><td>DATABASEDIR</td><td>2</td><td/><td>serialportdebug.vshost.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{FF7E0E3F-74D0-414E-914C-9C5C955D15E6}</td><td>SYSTEMLOG</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>SerialPortDebug.exe</td><td>{6E0011F7-29FB-4372-8946-D4F240B2EA45}</td><td>DATABASEDIR</td><td>2</td><td/><td>serialportdebug.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>SerialPortDebug.vshost.exe</td><td>{29786787-4310-449A-815F-0DD41E1DE189}</td><td>DATABASEDIR</td><td>2</td><td/><td>serialportdebug.vshost.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -924,7 +925,7 @@
 		<row><td>DatabaseFolder</td><td>ChangeFolder</td><td>SpawnDialog</td><td>InstallChangeFolder</td><td>1</td><td>1</td></row>
 		<row><td>DatabaseFolder</td><td>ChangeFolder</td><td>[_BrowseProperty]</td><td>DATABASEDIR</td><td>1</td><td>2</td></row>
 		<row><td>DatabaseFolder</td><td>Next</td><td>NewDialog</td><td>SetupType</td><td>1</td><td>1</td></row>
-		<row><td>DestinationFolder</td><td>Back</td><td>NewDialog</td><td>CustomerInformation</td><td>1</td><td>0</td></row>
+		<row><td>DestinationFolder</td><td>Back</td><td>NewDialog</td><td>LicenseAgreement</td><td>NOT Installed</td><td>0</td></row>
 		<row><td>DestinationFolder</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>1</td></row>
 		<row><td>DestinationFolder</td><td>ChangeFolder</td><td>SpawnDialog</td><td>InstallChangeFolder</td><td>1</td><td>1</td></row>
 		<row><td>DestinationFolder</td><td>ChangeFolder</td><td>[_BrowseProperty]</td><td>INSTALLDIR</td><td>1</td><td>2</td></row>
@@ -1060,8 +1061,10 @@
 		<row><td>INSTALLDIR</td><td>Component</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT1</td></row>
+		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>INSTALLDIR</td><td>SerialPortDebug.exe</td></row>
 		<row><td>INSTALLDIR</td><td>SerialPortDebug.vshost.exe</td></row>
+		<row><td>SYSTEMLOG</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 	</table>
 
 	<table name="CustomAction">
@@ -1151,7 +1154,7 @@
 		<row><td>FavoritesFolder</td><td>TARGETDIR</td><td>.:FAVORI~1|Favorites</td><td/><td>0</td><td/></row>
 		<row><td>FontsFolder</td><td>TARGETDIR</td><td>.:Fonts</td><td/><td>0</td><td/></row>
 		<row><td>GlobalAssemblyCache</td><td>TARGETDIR</td><td>.:Global~1|GlobalAssemblyCache</td><td/><td>0</td><td/></row>
-		<row><td>INSTALLDIR</td><td>MY_PRODUCT_NAME1</td><td>.</td><td/><td>0</td><td/></row>
+		<row><td>INSTALLDIR</td><td>ZHUWEI</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>ISCommonFilesFolder</td><td>CommonFilesFolder</td><td>Instal~1|InstallShield</td><td/><td>0</td><td/></row>
 		<row><td>ISMyCompanyDir</td><td>ProgramFilesFolder</td><td>MYCOMP~1|My Company Name</td><td/><td>0</td><td/></row>
 		<row><td>ISMyProductDir</td><td>ISMyCompanyDir</td><td>MYPROD~1|My Product Name</td><td/><td>0</td><td/></row>
@@ -1170,6 +1173,7 @@
 		<row><td>ProgramFilesFolder</td><td>TARGETDIR</td><td>.:PROGRA~1|program files</td><td/><td>0</td><td/></row>
 		<row><td>ProgramMenuFolder</td><td>TARGETDIR</td><td>.:Programs</td><td/><td>3</td><td/></row>
 		<row><td>RecentFolder</td><td>TARGETDIR</td><td>.:Recent</td><td/><td>0</td><td/></row>
+		<row><td>SYSTEMLOG</td><td>DATABASEDIR</td><td>SYSTEM~1|SystemLog</td><td/><td>0</td><td/></row>
 		<row><td>SendToFolder</td><td>TARGETDIR</td><td>.:SendTo</td><td/><td>3</td><td/></row>
 		<row><td>StartMenuFolder</td><td>TARGETDIR</td><td>.:STARTM~1|Start Menu</td><td/><td>3</td><td/></row>
 		<row><td>StartupFolder</td><td>TARGETDIR</td><td>.:StartUp</td><td/><td>3</td><td/></row>
@@ -1182,6 +1186,7 @@
 		<row><td>USERPROFILE</td><td>TARGETDIR</td><td>.:USERPR~1|UserProfile</td><td/><td>0</td><td/></row>
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
+		<row><td>ZHUWEI</td><td>ProgramFilesFolder</td><td>ZhuWei</td><td/><td>0</td><td/></row>
 		<row><td>company_name</td><td>ProgramMenuFolder</td><td>公司名称</td><td/><td>1</td><td/></row>
 		<row><td>northe_1_northeastern_university</td><td>ProgramMenuFolder</td><td>northe~1|northeastern university</td><td/><td>1</td><td/></row>
 		<row><td>serial_1_serialport_wei</td><td>company_name</td><td>SERIAL~1|SerialPort-Wei</td><td/><td>1</td><td/></row>
@@ -1880,6 +1885,7 @@
 		<row><td>AlwaysInstall</td><td>Component</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>AlwaysInstall</td><td>SerialPortDebug.exe</td></row>
 		<row><td>AlwaysInstall</td><td>SerialPortDebug.vshost.exe</td></row>
 	</table>
@@ -1897,15 +1903,18 @@
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>File</td><td>Component</td><td>SerialPortDebug.主输出</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;SerialPortDebug&gt;|Built</td><td>3</td><td/></row>
-		<row><td>serialportdebug.application</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.APP|SerialPortDebug.application</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.application</td><td>1</td><td/></row>
-		<row><td>serialportdebug.exe</td><td>SerialPortDebug.exe</td><td>SERIAL~1.EXE|SerialPortDebug.exe</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.exe</td><td>1</td><td/></row>
-		<row><td>serialportdebug.exe.config</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.CON|SerialPortDebug.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.exe.config</td><td>1</td><td/></row>
-		<row><td>serialportdebug.exe.manifest</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.MAN|SerialPortDebug.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.exe.manifest</td><td>1</td><td/></row>
-		<row><td>serialportdebug.pdb</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.PDB|SerialPortDebug.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.pdb</td><td>1</td><td/></row>
-		<row><td>serialportdebug.vshost.appli</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.APP|SerialPortDebug.vshost.application</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.vshost.application</td><td>1</td><td/></row>
-		<row><td>serialportdebug.vshost.exe</td><td>SerialPortDebug.vshost.exe</td><td>SERIAL~1.EXE|SerialPortDebug.vshost.exe</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.vshost.exe</td><td>1</td><td/></row>
-		<row><td>serialportdebug.vshost.exe.c</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.CON|SerialPortDebug.vshost.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.vshost.exe.config</td><td>1</td><td/></row>
-		<row><td>serialportdebug.vshost.exe.m</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.MAN|SerialPortDebug.vshost.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\SerialPortDebug\SerialPortDebug\bin\Debug\SerialPortDebug.vshost.exe.manifest</td><td>1</td><td/></row>
+		<row><td>formmain_backcolor.txt</td><td>ISX_DEFAULTCOMPONENT2</td><td>FORMMA~1.TXT|FormMain_BackColor.txt</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SystemLog\FormMain_BackColor.txt</td><td>1</td><td/></row>
+		<row><td>image_height.txt</td><td>ISX_DEFAULTCOMPONENT2</td><td>IMAGE_~1.TXT|Image_Height.txt</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SystemLog\Image_Height.txt</td><td>1</td><td/></row>
+		<row><td>image_width.txt</td><td>ISX_DEFAULTCOMPONENT2</td><td>IMAGE_~1.TXT|Image_Width.txt</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SystemLog\Image_Width.txt</td><td>1</td><td/></row>
+		<row><td>serialportdebug.application</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.APP|SerialPortDebug.application</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.application</td><td>1</td><td/></row>
+		<row><td>serialportdebug.exe</td><td>SerialPortDebug.exe</td><td>SERIAL~1.EXE|SerialPortDebug.exe</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe</td><td>1</td><td/></row>
+		<row><td>serialportdebug.exe.config</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.CON|SerialPortDebug.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe.config</td><td>1</td><td/></row>
+		<row><td>serialportdebug.exe.manifest</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.MAN|SerialPortDebug.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe.manifest</td><td>1</td><td/></row>
+		<row><td>serialportdebug.pdb</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.PDB|SerialPortDebug.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.pdb</td><td>1</td><td/></row>
+		<row><td>serialportdebug.vshost.appli</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.APP|SerialPortDebug.vshost.application</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.vshost.application</td><td>1</td><td/></row>
+		<row><td>serialportdebug.vshost.exe</td><td>SerialPortDebug.vshost.exe</td><td>SERIAL~1.EXE|SerialPortDebug.vshost.exe</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.vshost.exe</td><td>1</td><td/></row>
+		<row><td>serialportdebug.vshost.exe.c</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.CON|SerialPortDebug.vshost.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.vshost.exe.config</td><td>1</td><td/></row>
+		<row><td>serialportdebug.vshost.exe.m</td><td>ISX_DEFAULTCOMPONENT1</td><td>SERIAL~1.MAN|SerialPortDebug.vshost.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.vshost.exe.manifest</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2048,11 +2057,12 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>Component</td><td/><td/><td>_91016279_F4E3_4A49_9472_FB783BC3B5DF_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Component</td><td/><td/><td>_C90B83D2_A585_4AD5_B7B2_3BFB0AB36AE8_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_572DF096_C078_4043_A8AF_8DCC31FD34CE_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_365382A6_92AA_477B_800C_5945FB673EE1_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>SerialPortDebug.exe</td><td/><td/><td>_5E82A37C_1A8F_4106_A5F8_C6B53CF8DAC3_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>SerialPortDebug.vshost.exe</td><td/><td/><td>_79D9648C_F8C7_4A1C_91D4_947024FF88A0_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_4A71CFB7_9272_434A_A22B_0FB949A666B6_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>SerialPortDebug.exe</td><td/><td/><td>_268D65DD_05DD_41B3_AE01_3C4F4B753103_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>SerialPortDebug.vshost.exe</td><td/><td/><td>_75988117_BC8F_4403_ABB1_18D0CF3DC888_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2642,7 +2652,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>2052</td><td>Northeastern University</td><td>0</td><td/><td>295980429</td></row>
+		<row><td>COMPANY_NAME</td><td>2052</td><td>Northeastern University</td><td>0</td><td/><td>564438061</td></row>
 		<row><td>DN_AlwaysInstall</td><td>2052</td><td>始终安装</td><td>0</td><td/><td>-383487308</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>2052</td><td>系统颜色设置不足以运行 [ProductName]。</td><td>0</td><td/><td>-383487308</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-383468876</td></row>
@@ -3470,6 +3480,10 @@
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME6</td><td>2052</td><td>SERIAL~1.EXE|SerialPortDebug-Wei.exe</td><td>0</td><td/><td>295985005</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME7</td><td>1033</td><td/><td>0</td><td/><td>296013517</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME7</td><td>2052</td><td>LAUNCH~1.EXE|Launch SerialPortDebug.vshost.exe</td><td>0</td><td/><td>296013517</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME8</td><td>1033</td><td/><td>0</td><td/><td>564399692</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME8</td><td>2052</td><td>SERIAL~1.EXE|SerialPortDebug-Wei.exe</td><td>0</td><td/><td>564444748</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME9</td><td>1033</td><td/><td>0</td><td/><td>564399692</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME9</td><td>2052</td><td>LAUNCH~1.EXE|Launch SerialPortDebug.vshost.exe</td><td>0</td><td/><td>564399692</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>2052</td><td>从以下服务器列表中选择要连接的数据库服务器。</td><td>0</td><td/><td>-383487308</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>2052</td><td>从以下的编录名称列表中，选择您希望将其作为目标的数据库编录。</td><td>0</td><td/><td>-383487308</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>2052</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>-383487308</td></row>
@@ -3758,14 +3772,16 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>2052</td><td>对于运行 [ProductName] 处理器不足。</td><td>0</td><td/><td>-383487308</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>2052</td><td>对于运行 [ProductName] 内存量不足。</td><td>0</td><td/><td>-383487308</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>2052</td><td>对于运行 [ProductName] 屏幕分辨率不足。</td><td>0</td><td/><td>-383487308</td></row>
-		<row><td>ID_STRING1</td><td>2052</td><td>http://www.NortheasternUniversity.com</td><td>0</td><td/><td>295980429</td></row>
-		<row><td>ID_STRING2</td><td>2052</td><td>Northeastern University</td><td>0</td><td/><td>295980429</td></row>
+		<row><td>ID_STRING1</td><td>2052</td><td>http://www.NortheasternUniversity.com</td><td>0</td><td/><td>564438061</td></row>
+		<row><td>ID_STRING2</td><td>2052</td><td>Northeastern University</td><td>0</td><td/><td>564438061</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>LAUNCH~1.EXE|Launch SerialPortDebug.vshost.exe</td><td>0</td><td/><td>-383505676</td></row>
 		<row><td>ID_STRING3</td><td>2052</td><td>LAUNCH~1.EXE|Launch SerialPortDebug.vshost.exe</td><td>0</td><td/><td>-383505676</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>LAUNCH~1.EXE|Launch SerialPortDebug.exe</td><td>0</td><td/><td>-383498860</td></row>
 		<row><td>ID_STRING4</td><td>2052</td><td>LAUNCH~1.EXE|Launch SerialPortDebug.exe</td><td>0</td><td/><td>-383498860</td></row>
 		<row><td>ID_STRING5</td><td>1033</td><td>LAUNCH~1.EXE|Launch SerialPortDebug.exe</td><td>0</td><td/><td>295987021</td></row>
 		<row><td>ID_STRING5</td><td>2052</td><td>LAUNCH~1.EXE|Launch SerialPortDebug.exe</td><td>0</td><td/><td>295987021</td></row>
+		<row><td>ID_STRING6</td><td>1033</td><td>LAUNCH~1.EXE|Launch SerialPortDebug.exe</td><td>0</td><td/><td>564409932</td></row>
+		<row><td>ID_STRING6</td><td>2052</td><td>LAUNCH~1.EXE|Launch SerialPortDebug.exe</td><td>0</td><td/><td>564409932</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>2052</td><td>系统将不安装此功能。</td><td>0</td><td/><td>-383487308</td></row>
 	</table>
 
@@ -3885,7 +3901,9 @@
 		<row><td>SerialPortDebug.ex_96E71F0C361642D4BD8EE8C93B84414B.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>SerialPortDebug.ex_9711512EF67F41049CD91E5B3B3FE92F.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>SerialPortDebug.ex_ABA186805FCA485882D983889AC65319.exe</td><td/><td>&lt;ISProjectFolder&gt;\ooopic_1456752375.ico</td><td>0</td></row>
+		<row><td>SerialPortDebug.ex_B4F79BB91B7142259400BCAB3F2C2270.exe</td><td/><td>&lt;ISProjectFolder&gt;\ooopic_1456752375.ico</td><td>0</td></row>
 		<row><td>SerialPortDebug.ex_C47CC390EE124578AC9C725B988DC5E6.exe</td><td/><td>&lt;ISProjectFolder&gt;\ooopic_1456752375.ico</td><td>0</td></row>
+		<row><td>SerialPortDebug.ex_C746369CD7A6450FB7688F1B2271A5C1.exe</td><td/><td>&lt;ISProjectFolder&gt;\ooopic_1456752375.ico</td><td>0</td></row>
 		<row><td>SerialPortDebug.vs_1D0C9CE2E0C94F95B79F3F14263312C9.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 	</table>
 
@@ -4392,9 +4410,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKAPPPOOLS</td><td>##IDS_PROGMSG_IIS_ROLLBACKAPPPOOLS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKVROOTS</td><td>##IDS_PROGMSG_IIS_ROLLBACKVROOTS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
-		<row><td>ProductCode</td><td>{FE76732E-13A8-4EFC-9FFE-C3B50AA81996}</td><td/></row>
+		<row><td>ProductCode</td><td>{C1006410-120B-4078-B22E-3C462DCA43C8}</td><td/></row>
 		<row><td>ProductName</td><td>SerialPort-Wei</td><td/></row>
-		<row><td>ProductVersion</td><td>1.2</td><td/></row>
+		<row><td>ProductVersion</td><td>1.4</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
@@ -4556,8 +4574,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>SerialPortDebug.exe</td><td>serialport_wei</td><td>##IDS_SHORTCUT_DISPLAY_NAME6##</td><td>SerialPortDebug.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>SerialPortDebug.ex_C47CC390EE124578AC9C725B988DC5E6.exe</td><td>0</td><td>1</td><td>DATABASEDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>SerialPortDebug.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME6##</td><td>SerialPortDebug.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>SerialPortDebug.ex_60477C753A6E41759BA123E46D27C63C.exe</td><td>0</td><td>1</td><td>DATABASEDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>SerialPortDebug.exe</td><td>serialport_wei</td><td>##IDS_SHORTCUT_DISPLAY_NAME8##</td><td>SerialPortDebug.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>SerialPortDebug.ex_B4F79BB91B7142259400BCAB3F2C2270.exe</td><td>0</td><td>1</td><td>DATABASEDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>SerialPortDebug.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME8##</td><td>SerialPortDebug.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>SerialPortDebug.ex_C746369CD7A6450FB7688F1B2271A5C1.exe</td><td>0</td><td>1</td><td>DATABASEDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
