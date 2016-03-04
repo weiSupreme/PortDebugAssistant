@@ -73,6 +73,7 @@
             this.textBoxPictureHeight = new System.Windows.Forms.TextBox();
             this.timerAutoSend = new System.Windows.Forms.Timer(this.components);
             this.groupBoxPicConfig = new System.Windows.Forms.GroupBox();
+            this.checkBoxWaveImage = new System.Windows.Forms.CheckBox();
             this.checkBoxIsWave = new System.Windows.Forms.CheckBox();
             this.buttonStopShowImgTemp = new System.Windows.Forms.Button();
             this.labelAutoShowImageSpeed = new System.Windows.Forms.Label();
@@ -105,7 +106,6 @@
             this.版本号v12ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemCommunicationAgreement = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemRefreshNotes = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkBoxWaveImage = new System.Windows.Forms.CheckBox();
             this.groupBoxInitialization.SuspendLayout();
             this.groupBoxConfiguration.SuspendLayout();
             this.groupBoxReceivingArea.SuspendLayout();
@@ -601,6 +601,17 @@
             this.groupBoxPicConfig.TabStop = false;
             this.groupBoxPicConfig.Text = "图像配置";
             // 
+            // checkBoxWaveImage
+            // 
+            this.checkBoxWaveImage.AutoSize = true;
+            this.checkBoxWaveImage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBoxWaveImage.Location = new System.Drawing.Point(946, 15);
+            this.checkBoxWaveImage.Name = "checkBoxWaveImage";
+            this.checkBoxWaveImage.Size = new System.Drawing.Size(163, 20);
+            this.checkBoxWaveImage.TabIndex = 20;
+            this.checkBoxWaveImage.Text = "速度曲线+三点赛道";
+            this.checkBoxWaveImage.UseVisualStyleBackColor = true;
+            // 
             // checkBoxIsWave
             // 
             this.checkBoxIsWave.AutoSize = true;
@@ -864,17 +875,6 @@
             this.ToolStripMenuItemRefreshNotes.Text = "更新说明";
             this.ToolStripMenuItemRefreshNotes.Click += new System.EventHandler(this.更新说明ToolStripMenuItem_Click);
             // 
-            // checkBoxWaveImage
-            // 
-            this.checkBoxWaveImage.AutoSize = true;
-            this.checkBoxWaveImage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBoxWaveImage.Location = new System.Drawing.Point(946, 15);
-            this.checkBoxWaveImage.Name = "checkBoxWaveImage";
-            this.checkBoxWaveImage.Size = new System.Drawing.Size(163, 20);
-            this.checkBoxWaveImage.TabIndex = 20;
-            this.checkBoxWaveImage.Text = "速度曲线+三点赛道";
-            this.checkBoxWaveImage.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -962,7 +962,6 @@
         private System.Windows.Forms.TextBox textBoxReceivingArea;
         private System.Windows.Forms.TextBox textBoxSendingArea;
         private System.Windows.Forms.Timer timerAutoSend;
-        private System.Windows.Forms.PictureBox pictureBoxShow;
         private System.Windows.Forms.GroupBox groupBoxPicConfig;
         private System.Windows.Forms.CheckBox checkBoxGrayImage;
         private System.Windows.Forms.TextBox textBoxPictureHeight;
@@ -973,8 +972,6 @@
         private System.Windows.Forms.Timer timerFreshPort;
         private System.Windows.Forms.Button buttonSaveImage;
         private System.Windows.Forms.Button buttonPictureDerectory;
-        private System.Windows.Forms.CheckBox checkBoxAutoSaveImage;
-        private System.Windows.Forms.Button buttonAutoShowImage;
         private System.Windows.Forms.Button buttonLoadImage;
         private System.Windows.Forms.Label labelAutoShowImageSpeed;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialogImage;
@@ -989,9 +986,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemAbout;
         private System.Windows.Forms.ToolStripMenuItem 版本号v12ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemRefreshNotes;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.CheckBox checkBoxThreePointTrack;
-        private System.Windows.Forms.PictureBox pictureBoxShow1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCommunicationAgreement;
         private System.Windows.Forms.ToolStripMenuItem 界面颜色ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem redToolStripMenuItem;
@@ -1009,6 +1004,11 @@
         private System.Windows.Forms.ToolStripMenuItem picturegridToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBoxIsWave;
         private System.Windows.Forms.CheckBox checkBoxWaveImage;
+        public System.Windows.Forms.PictureBox pictureBoxShow;
+        public System.Windows.Forms.PictureBox pictureBoxShow1;
+        public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        public System.Windows.Forms.CheckBox checkBoxAutoSaveImage;
+        private System.Windows.Forms.Button buttonAutoShowImage;
     }
 }
 
