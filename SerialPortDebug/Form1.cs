@@ -26,15 +26,11 @@ namespace SerialPortDebug
         //private byte* picture;
         private int height = 40, width = 140;    //图像高度和宽度
         private int image_byte_length = 0;
-        private byte[] picture = new byte[240*320];      //保存图像数组
-        private byte[] picture_rar = new byte[240*320];   //鹰眼压缩图像数组
         private uint image_get_flag = 0;      //采集图像数据标志位
-        Bitmap BMP;                          //新建BMP图片变量
         private string Image_save_path;            //保存图片路径字符串
         private UInt32 Image_save_Num=1;          //保存图片时的名字变量
         private int Image_laod_Num = 0;        //自动播放图片序列
         private uint buttonAutoShowImage_flag=0;    //自动播放图片按钮标志位
-        Queue<byte> Readdata_queue = new Queue<byte>(1024*1024);
         //private int abc = 0;
         Bitmap camera_image_bit = new Bitmap(640, 480);
         private Graphics camera_image_gra;
@@ -45,6 +41,8 @@ namespace SerialPortDebug
         private int picturebox_who_flag=0;
         private int effective_line = -5;        //三点赛道模式下的有效行
         private int picturegrid_flag = 0;
+        private SerialPortDebug.FormWave fr_wave = new FormWave();
+
         public Form1()
         {
             InitializeComponent(); 
@@ -324,8 +322,6 @@ namespace SerialPortDebug
             //----------获取串口数据------------//
             if (Com_Using.IsOpen == true)
             {
-                //object synObj = new object();
-                //Com_Using.ReadTo("\r\n");//在此就可以读取到当前缓冲区内的数据
                 if (ComPort_closing==1)
                 {
                     return;
@@ -336,25 +332,8 @@ namespace SerialPortDebug
                 foreach (byte data_temp in Cachedata)
                 {
                     Deal_PortData(data_temp);
-                    /*lock (synObj)
-                    {
-                        Readdata_queue.Enqueue(data_temp);
-                    }*/
                 }
                 Read_Cache_Data_flag = 0;
-            }
-        }
-
-        public void Deal_with_queuedata()
-        {
-            byte Data=new byte();
-            while(true)
-            {
-                if (Readdata_queue.Count > 0 && Com_Using.IsOpen==true)
-                {
-                        Data = Readdata_queue.Dequeue();
-                        Deal_PortData(Data);
-                }
             }
         }
         
@@ -383,6 +362,11 @@ namespace SerialPortDebug
                     }
                 }
             }
+            else if(checkBoxIsWave.Checked)
+            {
+                //-------------------接收波形图数据------------------//
+                fr_wave.Draw_Wave(data);
+            }
             else
             {
                 //------------接收纯文本数据------------//
@@ -408,7 +392,7 @@ namespace SerialPortDebug
                 this.Invoke(DelUpdata);
             }
         }
-
+/*------------------------------------------以下是图像处理部分------------------------------------------------------*/
         public void GetImageFramehead_Deal(byte data)   //获取图像帧头
         {
             if (image_get_flag == 0)
@@ -652,6 +636,7 @@ namespace SerialPortDebug
                 }));
             }
         }
+ /*------------------------------------------以上是图像处理部分------------------------------------------------------*/
 
         private void buttonClearReceiving_Click(object sender, EventArgs e)
         {
@@ -877,7 +862,6 @@ namespace SerialPortDebug
             if (openFileDialogImageLoad.ShowDialog() == DialogResult.OK && (openFileDialogImageLoad.FileName != ""))
             {
                 pictureBoxShow.ImageLocation = openFileDialogImageLoad.FileName;
-                BMP = (Bitmap)(pictureBoxShow.Image);
             }
         }
 
@@ -948,7 +932,6 @@ namespace SerialPortDebug
         {
             listBoxImageList.SelectedIndex = Image_laod_Num;
             pictureBoxShow.ImageLocation = folderBrowserDialogImage.SelectedPath + "\\" + listBoxImageList.SelectedItem.ToString();
-            BMP = (Bitmap)(pictureBoxShow.Image);
             Image_laod_Num++;
             if(Image_laod_Num==listBoxImageList.Items.Count)
             {
@@ -989,7 +972,6 @@ namespace SerialPortDebug
         private void listBoxImageList_SelectedIndexChanged(object sender, EventArgs e)
         {
             pictureBoxShow.ImageLocation = folderBrowserDialogImage.SelectedPath + "\\" + listBoxImageList.SelectedItem.ToString();
-            BMP = (Bitmap)(pictureBoxShow.Image);
             Image_laod_Num = listBoxImageList.SelectedIndex;
         }
 
@@ -1169,6 +1151,14 @@ namespace SerialPortDebug
             {
                 picturegrid_flag = 0;
             } 
+        }
+
+        private void checkBoxIsWave_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxIsWave.Checked)
+            {
+                fr_wave.Show();
+            }
         }
     }
 }

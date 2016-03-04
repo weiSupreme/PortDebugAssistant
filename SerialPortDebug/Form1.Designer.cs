@@ -63,10 +63,17 @@
             this.buttonOpenCom = new System.Windows.Forms.Button();
             this.groupBoxImageShow = new System.Windows.Forms.GroupBox();
             this.pictureBoxShow1 = new System.Windows.Forms.PictureBox();
+            this.checkBoxThreePointTrack = new System.Windows.Forms.CheckBox();
             this.pictureBoxShow = new System.Windows.Forms.PictureBox();
+            this.checkBoxGrayImage = new System.Windows.Forms.CheckBox();
+            this.checkBoxTwoPixelImage = new System.Windows.Forms.CheckBox();
+            this.labelPictureWidth = new System.Windows.Forms.Label();
+            this.textBoxPictureWidth = new System.Windows.Forms.TextBox();
+            this.labelPictureHeight = new System.Windows.Forms.Label();
+            this.textBoxPictureHeight = new System.Windows.Forms.TextBox();
             this.timerAutoSend = new System.Windows.Forms.Timer(this.components);
             this.groupBoxPicConfig = new System.Windows.Forms.GroupBox();
-            this.checkBoxThreePointTrack = new System.Windows.Forms.CheckBox();
+            this.checkBoxIsWave = new System.Windows.Forms.CheckBox();
             this.buttonStopShowImgTemp = new System.Windows.Forms.Button();
             this.labelAutoShowImageSpeed = new System.Windows.Forms.Label();
             this.buttonAutoShowImage = new System.Windows.Forms.Button();
@@ -74,12 +81,6 @@
             this.checkBoxAutoSaveImage = new System.Windows.Forms.CheckBox();
             this.buttonSaveImage = new System.Windows.Forms.Button();
             this.buttonPictureDerectory = new System.Windows.Forms.Button();
-            this.checkBoxTwoPixelImage = new System.Windows.Forms.CheckBox();
-            this.textBoxPictureHeight = new System.Windows.Forms.TextBox();
-            this.labelPictureHeight = new System.Windows.Forms.Label();
-            this.textBoxPictureWidth = new System.Windows.Forms.TextBox();
-            this.labelPictureWidth = new System.Windows.Forms.Label();
-            this.checkBoxGrayImage = new System.Windows.Forms.CheckBox();
             this.timerFreshPort = new System.Windows.Forms.Timer(this.components);
             this.folderBrowserDialogImage = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialogImageLoad = new System.Windows.Forms.OpenFileDialog();
@@ -99,11 +100,12 @@
             this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.whitesmokeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.picturegridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.版本号v12ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemCommunicationAgreement = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemRefreshNotes = new System.Windows.Forms.ToolStripMenuItem();
-            this.picturegridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBoxWaveImage = new System.Windows.Forms.CheckBox();
             this.groupBoxInitialization.SuspendLayout();
             this.groupBoxConfiguration.SuspendLayout();
             this.groupBoxReceivingArea.SuspendLayout();
@@ -464,8 +466,15 @@
             // 
             // groupBoxImageShow
             // 
-            this.groupBoxImageShow.Controls.Add(this.pictureBoxShow);
             this.groupBoxImageShow.Controls.Add(this.pictureBoxShow1);
+            this.groupBoxImageShow.Controls.Add(this.checkBoxThreePointTrack);
+            this.groupBoxImageShow.Controls.Add(this.pictureBoxShow);
+            this.groupBoxImageShow.Controls.Add(this.checkBoxGrayImage);
+            this.groupBoxImageShow.Controls.Add(this.checkBoxTwoPixelImage);
+            this.groupBoxImageShow.Controls.Add(this.labelPictureWidth);
+            this.groupBoxImageShow.Controls.Add(this.textBoxPictureWidth);
+            this.groupBoxImageShow.Controls.Add(this.labelPictureHeight);
+            this.groupBoxImageShow.Controls.Add(this.textBoxPictureHeight);
             this.groupBoxImageShow.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBoxImageShow.Location = new System.Drawing.Point(534, 28);
             this.groupBoxImageShow.Name = "groupBoxImageShow";
@@ -477,18 +486,29 @@
             // pictureBoxShow1
             // 
             this.pictureBoxShow1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBoxShow1.Location = new System.Drawing.Point(6, 25);
+            this.pictureBoxShow1.Location = new System.Drawing.Point(5, 13);
             this.pictureBoxShow1.Name = "pictureBoxShow1";
             this.pictureBoxShow1.Size = new System.Drawing.Size(640, 480);
             this.pictureBoxShow1.TabIndex = 1;
             this.pictureBoxShow1.TabStop = false;
             this.pictureBoxShow1.Visible = false;
             // 
+            // checkBoxThreePointTrack
+            // 
+            this.checkBoxThreePointTrack.AutoSize = true;
+            this.checkBoxThreePointTrack.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBoxThreePointTrack.Location = new System.Drawing.Point(315, 499);
+            this.checkBoxThreePointTrack.Name = "checkBoxThreePointTrack";
+            this.checkBoxThreePointTrack.Size = new System.Drawing.Size(91, 20);
+            this.checkBoxThreePointTrack.TabIndex = 19;
+            this.checkBoxThreePointTrack.Text = "三点赛道";
+            this.checkBoxThreePointTrack.UseVisualStyleBackColor = true;
+            // 
             // pictureBoxShow
             // 
             this.pictureBoxShow.BackColor = System.Drawing.Color.Transparent;
             this.pictureBoxShow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBoxShow.Location = new System.Drawing.Point(6, 25);
+            this.pictureBoxShow.Location = new System.Drawing.Point(6, 13);
             this.pictureBoxShow.Name = "pictureBoxShow";
             this.pictureBoxShow.Size = new System.Drawing.Size(640, 480);
             this.pictureBoxShow.TabIndex = 0;
@@ -497,13 +517,75 @@
             this.pictureBoxShow.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxShow_MouseDoubleClick);
             this.pictureBoxShow.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxShow_MouseMove);
             // 
+            // checkBoxGrayImage
+            // 
+            this.checkBoxGrayImage.AutoSize = true;
+            this.checkBoxGrayImage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBoxGrayImage.Location = new System.Drawing.Point(66, 499);
+            this.checkBoxGrayImage.Name = "checkBoxGrayImage";
+            this.checkBoxGrayImage.Size = new System.Drawing.Size(91, 20);
+            this.checkBoxGrayImage.TabIndex = 0;
+            this.checkBoxGrayImage.Text = "灰度图像";
+            this.checkBoxGrayImage.UseVisualStyleBackColor = true;
+            this.checkBoxGrayImage.CheckedChanged += new System.EventHandler(this.checkBoxGrayImage_CheckedChanged);
+            // 
+            // checkBoxTwoPixelImage
+            // 
+            this.checkBoxTwoPixelImage.AutoSize = true;
+            this.checkBoxTwoPixelImage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBoxTwoPixelImage.Location = new System.Drawing.Point(185, 499);
+            this.checkBoxTwoPixelImage.Name = "checkBoxTwoPixelImage";
+            this.checkBoxTwoPixelImage.Size = new System.Drawing.Size(107, 20);
+            this.checkBoxTwoPixelImage.TabIndex = 9;
+            this.checkBoxTwoPixelImage.Text = "鹰眼二值化";
+            this.checkBoxTwoPixelImage.UseVisualStyleBackColor = true;
+            this.checkBoxTwoPixelImage.CheckedChanged += new System.EventHandler(this.checkBoxTwoPixelImage_CheckedChanged);
+            // 
+            // labelPictureWidth
+            // 
+            this.labelPictureWidth.AutoSize = true;
+            this.labelPictureWidth.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelPictureWidth.Location = new System.Drawing.Point(421, 500);
+            this.labelPictureWidth.Name = "labelPictureWidth";
+            this.labelPictureWidth.Size = new System.Drawing.Size(40, 16);
+            this.labelPictureWidth.TabIndex = 2;
+            this.labelPictureWidth.Text = "宽度";
+            // 
+            // textBoxPictureWidth
+            // 
+            this.textBoxPictureWidth.Location = new System.Drawing.Point(465, 496);
+            this.textBoxPictureWidth.Name = "textBoxPictureWidth";
+            this.textBoxPictureWidth.Size = new System.Drawing.Size(29, 23);
+            this.textBoxPictureWidth.TabIndex = 3;
+            this.textBoxPictureWidth.TextChanged += new System.EventHandler(this.textBoxPictureWidth_TextChanged);
+            // 
+            // labelPictureHeight
+            // 
+            this.labelPictureHeight.AutoSize = true;
+            this.labelPictureHeight.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelPictureHeight.Location = new System.Drawing.Point(500, 500);
+            this.labelPictureHeight.Name = "labelPictureHeight";
+            this.labelPictureHeight.Size = new System.Drawing.Size(40, 16);
+            this.labelPictureHeight.TabIndex = 5;
+            this.labelPictureHeight.Text = "高度";
+            this.labelPictureHeight.Click += new System.EventHandler(this.labelPictureHeight_Click);
+            // 
+            // textBoxPictureHeight
+            // 
+            this.textBoxPictureHeight.Location = new System.Drawing.Point(546, 496);
+            this.textBoxPictureHeight.Name = "textBoxPictureHeight";
+            this.textBoxPictureHeight.Size = new System.Drawing.Size(29, 23);
+            this.textBoxPictureHeight.TabIndex = 6;
+            this.textBoxPictureHeight.TextChanged += new System.EventHandler(this.textBoxPictureHeight_TextChanged);
+            // 
             // timerAutoSend
             // 
             this.timerAutoSend.Tick += new System.EventHandler(this.timerAutoSend_Tick);
             // 
             // groupBoxPicConfig
             // 
-            this.groupBoxPicConfig.Controls.Add(this.checkBoxThreePointTrack);
+            this.groupBoxPicConfig.Controls.Add(this.checkBoxWaveImage);
+            this.groupBoxPicConfig.Controls.Add(this.checkBoxIsWave);
             this.groupBoxPicConfig.Controls.Add(this.buttonStopShowImgTemp);
             this.groupBoxPicConfig.Controls.Add(this.labelAutoShowImageSpeed);
             this.groupBoxPicConfig.Controls.Add(this.buttonAutoShowImage);
@@ -511,12 +593,6 @@
             this.groupBoxPicConfig.Controls.Add(this.checkBoxAutoSaveImage);
             this.groupBoxPicConfig.Controls.Add(this.buttonSaveImage);
             this.groupBoxPicConfig.Controls.Add(this.buttonPictureDerectory);
-            this.groupBoxPicConfig.Controls.Add(this.checkBoxTwoPixelImage);
-            this.groupBoxPicConfig.Controls.Add(this.textBoxPictureHeight);
-            this.groupBoxPicConfig.Controls.Add(this.labelPictureHeight);
-            this.groupBoxPicConfig.Controls.Add(this.textBoxPictureWidth);
-            this.groupBoxPicConfig.Controls.Add(this.labelPictureWidth);
-            this.groupBoxPicConfig.Controls.Add(this.checkBoxGrayImage);
             this.groupBoxPicConfig.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBoxPicConfig.Location = new System.Drawing.Point(0, 553);
             this.groupBoxPicConfig.Name = "groupBoxPicConfig";
@@ -525,21 +601,22 @@
             this.groupBoxPicConfig.TabStop = false;
             this.groupBoxPicConfig.Text = "图像配置";
             // 
-            // checkBoxThreePointTrack
+            // checkBoxIsWave
             // 
-            this.checkBoxThreePointTrack.AutoSize = true;
-            this.checkBoxThreePointTrack.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBoxThreePointTrack.Location = new System.Drawing.Point(194, 16);
-            this.checkBoxThreePointTrack.Name = "checkBoxThreePointTrack";
-            this.checkBoxThreePointTrack.Size = new System.Drawing.Size(91, 20);
-            this.checkBoxThreePointTrack.TabIndex = 19;
-            this.checkBoxThreePointTrack.Text = "三点赛道";
-            this.checkBoxThreePointTrack.UseVisualStyleBackColor = true;
+            this.checkBoxIsWave.AutoSize = true;
+            this.checkBoxIsWave.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBoxIsWave.Location = new System.Drawing.Point(849, 15);
+            this.checkBoxIsWave.Name = "checkBoxIsWave";
+            this.checkBoxIsWave.Size = new System.Drawing.Size(75, 20);
+            this.checkBoxIsWave.TabIndex = 19;
+            this.checkBoxIsWave.Text = "波形图";
+            this.checkBoxIsWave.UseVisualStyleBackColor = true;
+            this.checkBoxIsWave.CheckedChanged += new System.EventHandler(this.checkBoxIsWave_CheckedChanged);
             // 
             // buttonStopShowImgTemp
             // 
             this.buttonStopShowImgTemp.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonStopShowImgTemp.Location = new System.Drawing.Point(923, 14);
+            this.buttonStopShowImgTemp.Location = new System.Drawing.Point(550, 14);
             this.buttonStopShowImgTemp.Name = "buttonStopShowImgTemp";
             this.buttonStopShowImgTemp.Size = new System.Drawing.Size(82, 23);
             this.buttonStopShowImgTemp.TabIndex = 18;
@@ -552,7 +629,7 @@
             this.labelAutoShowImageSpeed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.labelAutoShowImageSpeed.Enabled = false;
             this.labelAutoShowImageSpeed.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelAutoShowImageSpeed.Location = new System.Drawing.Point(1011, 15);
+            this.labelAutoShowImageSpeed.Location = new System.Drawing.Point(657, 15);
             this.labelAutoShowImageSpeed.Name = "labelAutoShowImageSpeed";
             this.labelAutoShowImageSpeed.Size = new System.Drawing.Size(169, 22);
             this.labelAutoShowImageSpeed.TabIndex = 17;
@@ -565,7 +642,7 @@
             // buttonAutoShowImage
             // 
             this.buttonAutoShowImage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonAutoShowImage.Location = new System.Drawing.Point(832, 13);
+            this.buttonAutoShowImage.Location = new System.Drawing.Point(443, 14);
             this.buttonAutoShowImage.Name = "buttonAutoShowImage";
             this.buttonAutoShowImage.Size = new System.Drawing.Size(85, 23);
             this.buttonAutoShowImage.TabIndex = 16;
@@ -576,7 +653,7 @@
             // buttonLoadImage
             // 
             this.buttonLoadImage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonLoadImage.Location = new System.Drawing.Point(739, 13);
+            this.buttonLoadImage.Location = new System.Drawing.Point(337, 14);
             this.buttonLoadImage.Name = "buttonLoadImage";
             this.buttonLoadImage.Size = new System.Drawing.Size(87, 23);
             this.buttonLoadImage.TabIndex = 15;
@@ -588,7 +665,7 @@
             // 
             this.checkBoxAutoSaveImage.AutoSize = true;
             this.checkBoxAutoSaveImage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBoxAutoSaveImage.Location = new System.Drawing.Point(633, 15);
+            this.checkBoxAutoSaveImage.Location = new System.Drawing.Point(240, 16);
             this.checkBoxAutoSaveImage.Name = "checkBoxAutoSaveImage";
             this.checkBoxAutoSaveImage.Size = new System.Drawing.Size(91, 20);
             this.checkBoxAutoSaveImage.TabIndex = 14;
@@ -598,7 +675,7 @@
             // buttonSaveImage
             // 
             this.buttonSaveImage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonSaveImage.Location = new System.Drawing.Point(539, 13);
+            this.buttonSaveImage.Location = new System.Drawing.Point(135, 14);
             this.buttonSaveImage.Name = "buttonSaveImage";
             this.buttonSaveImage.Size = new System.Drawing.Size(88, 23);
             this.buttonSaveImage.TabIndex = 13;
@@ -609,74 +686,13 @@
             // buttonPictureDerectory
             // 
             this.buttonPictureDerectory.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonPictureDerectory.Location = new System.Drawing.Point(442, 13);
+            this.buttonPictureDerectory.Location = new System.Drawing.Point(29, 14);
             this.buttonPictureDerectory.Name = "buttonPictureDerectory";
             this.buttonPictureDerectory.Size = new System.Drawing.Size(91, 23);
             this.buttonPictureDerectory.TabIndex = 12;
             this.buttonPictureDerectory.Text = "保存路径";
             this.buttonPictureDerectory.UseVisualStyleBackColor = true;
             this.buttonPictureDerectory.Click += new System.EventHandler(this.buttonPictureDerectory_Click);
-            // 
-            // checkBoxTwoPixelImage
-            // 
-            this.checkBoxTwoPixelImage.AutoSize = true;
-            this.checkBoxTwoPixelImage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBoxTwoPixelImage.Location = new System.Drawing.Point(93, 17);
-            this.checkBoxTwoPixelImage.Name = "checkBoxTwoPixelImage";
-            this.checkBoxTwoPixelImage.Size = new System.Drawing.Size(107, 20);
-            this.checkBoxTwoPixelImage.TabIndex = 9;
-            this.checkBoxTwoPixelImage.Text = "鹰眼二值化";
-            this.checkBoxTwoPixelImage.UseVisualStyleBackColor = true;
-            this.checkBoxTwoPixelImage.CheckedChanged += new System.EventHandler(this.checkBoxTwoPixelImage_CheckedChanged);
-            // 
-            // textBoxPictureHeight
-            // 
-            this.textBoxPictureHeight.Location = new System.Drawing.Point(393, 14);
-            this.textBoxPictureHeight.Name = "textBoxPictureHeight";
-            this.textBoxPictureHeight.Size = new System.Drawing.Size(29, 23);
-            this.textBoxPictureHeight.TabIndex = 6;
-            this.textBoxPictureHeight.TextChanged += new System.EventHandler(this.textBoxPictureHeight_TextChanged);
-            // 
-            // labelPictureHeight
-            // 
-            this.labelPictureHeight.AutoSize = true;
-            this.labelPictureHeight.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelPictureHeight.Location = new System.Drawing.Point(361, 17);
-            this.labelPictureHeight.Name = "labelPictureHeight";
-            this.labelPictureHeight.Size = new System.Drawing.Size(40, 16);
-            this.labelPictureHeight.TabIndex = 5;
-            this.labelPictureHeight.Text = "高度";
-            this.labelPictureHeight.Click += new System.EventHandler(this.labelPictureHeight_Click);
-            // 
-            // textBoxPictureWidth
-            // 
-            this.textBoxPictureWidth.Location = new System.Drawing.Point(326, 14);
-            this.textBoxPictureWidth.Name = "textBoxPictureWidth";
-            this.textBoxPictureWidth.Size = new System.Drawing.Size(29, 23);
-            this.textBoxPictureWidth.TabIndex = 3;
-            this.textBoxPictureWidth.TextChanged += new System.EventHandler(this.textBoxPictureWidth_TextChanged);
-            // 
-            // labelPictureWidth
-            // 
-            this.labelPictureWidth.AutoSize = true;
-            this.labelPictureWidth.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelPictureWidth.Location = new System.Drawing.Point(291, 17);
-            this.labelPictureWidth.Name = "labelPictureWidth";
-            this.labelPictureWidth.Size = new System.Drawing.Size(40, 16);
-            this.labelPictureWidth.TabIndex = 2;
-            this.labelPictureWidth.Text = "宽度";
-            // 
-            // checkBoxGrayImage
-            // 
-            this.checkBoxGrayImage.AutoSize = true;
-            this.checkBoxGrayImage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBoxGrayImage.Location = new System.Drawing.Point(3, 17);
-            this.checkBoxGrayImage.Name = "checkBoxGrayImage";
-            this.checkBoxGrayImage.Size = new System.Drawing.Size(91, 20);
-            this.checkBoxGrayImage.TabIndex = 0;
-            this.checkBoxGrayImage.Text = "灰度图像";
-            this.checkBoxGrayImage.UseVisualStyleBackColor = true;
-            this.checkBoxGrayImage.CheckedChanged += new System.EventHandler(this.checkBoxGrayImage_CheckedChanged);
             // 
             // timerFreshPort
             // 
@@ -751,65 +767,72 @@
             // redToolStripMenuItem
             // 
             this.redToolStripMenuItem.Name = "redToolStripMenuItem";
-            this.redToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.redToolStripMenuItem.Text = "Red";
             this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
             // 
             // oringeToolStripMenuItem
             // 
             this.oringeToolStripMenuItem.Name = "oringeToolStripMenuItem";
-            this.oringeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.oringeToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.oringeToolStripMenuItem.Text = "Orange";
             this.oringeToolStripMenuItem.Click += new System.EventHandler(this.oringeToolStripMenuItem_Click);
             // 
             // yellowToolStripMenuItem
             // 
             this.yellowToolStripMenuItem.Name = "yellowToolStripMenuItem";
-            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.yellowToolStripMenuItem.Text = "Yellow";
             this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
             // 
             // greenToolStripMenuItem
             // 
             this.greenToolStripMenuItem.Name = "greenToolStripMenuItem";
-            this.greenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.greenToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.greenToolStripMenuItem.Text = "Green";
             this.greenToolStripMenuItem.Click += new System.EventHandler(this.greenToolStripMenuItem_Click);
             // 
             // goldToolStripMenuItem
             // 
             this.goldToolStripMenuItem.Name = "goldToolStripMenuItem";
-            this.goldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.goldToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.goldToolStripMenuItem.Text = "Gold";
             this.goldToolStripMenuItem.Click += new System.EventHandler(this.goldenToolStripMenuItem_Click);
             // 
             // grayToolStripMenuItem
             // 
             this.grayToolStripMenuItem.Name = "grayToolStripMenuItem";
-            this.grayToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.grayToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.grayToolStripMenuItem.Text = "Gray";
             this.grayToolStripMenuItem.Click += new System.EventHandler(this.grayToolStripMenuItem_Click);
             // 
             // blueToolStripMenuItem
             // 
             this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
-            this.blueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.blueToolStripMenuItem.Text = "Blue";
             this.blueToolStripMenuItem.Click += new System.EventHandler(this.blueToolStripMenuItem_Click);
             // 
             // pinkToolStripMenuItem
             // 
             this.pinkToolStripMenuItem.Name = "pinkToolStripMenuItem";
-            this.pinkToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pinkToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.pinkToolStripMenuItem.Text = "Pink";
             this.pinkToolStripMenuItem.Click += new System.EventHandler(this.pinkToolStripMenuItem_Click);
             // 
             // whitesmokeToolStripMenuItem
             // 
             this.whitesmokeToolStripMenuItem.Name = "whitesmokeToolStripMenuItem";
-            this.whitesmokeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.whitesmokeToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.whitesmokeToolStripMenuItem.Text = "WhiteSmoke";
             this.whitesmokeToolStripMenuItem.Click += new System.EventHandler(this.whitesmokeToolStripMenuItem_Click);
+            // 
+            // picturegridToolStripMenuItem
+            // 
+            this.picturegridToolStripMenuItem.Name = "picturegridToolStripMenuItem";
+            this.picturegridToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.picturegridToolStripMenuItem.Text = "图像栅格显示";
+            this.picturegridToolStripMenuItem.Click += new System.EventHandler(this.picturegridToolStripMenuItem_Click);
             // 
             // ToolStripMenuItemAbout
             // 
@@ -824,29 +847,33 @@
             // 版本号v12ToolStripMenuItem
             // 
             this.版本号v12ToolStripMenuItem.Name = "版本号v12ToolStripMenuItem";
-            this.版本号v12ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.版本号v12ToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.版本号v12ToolStripMenuItem.Text = "版本号：v1.3";
             // 
             // ToolStripMenuItemCommunicationAgreement
             // 
             this.ToolStripMenuItemCommunicationAgreement.Name = "ToolStripMenuItemCommunicationAgreement";
-            this.ToolStripMenuItemCommunicationAgreement.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemCommunicationAgreement.Size = new System.Drawing.Size(147, 22);
             this.ToolStripMenuItemCommunicationAgreement.Text = "通信协议";
             this.ToolStripMenuItemCommunicationAgreement.Click += new System.EventHandler(this.ToolStripMenuItemCommunicationAgreement_Click);
             // 
             // ToolStripMenuItemRefreshNotes
             // 
             this.ToolStripMenuItemRefreshNotes.Name = "ToolStripMenuItemRefreshNotes";
-            this.ToolStripMenuItemRefreshNotes.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemRefreshNotes.Size = new System.Drawing.Size(147, 22);
             this.ToolStripMenuItemRefreshNotes.Text = "更新说明";
             this.ToolStripMenuItemRefreshNotes.Click += new System.EventHandler(this.更新说明ToolStripMenuItem_Click);
             // 
-            // picturegridToolStripMenuItem
+            // checkBoxWaveImage
             // 
-            this.picturegridToolStripMenuItem.Name = "picturegridToolStripMenuItem";
-            this.picturegridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.picturegridToolStripMenuItem.Text = "图像栅格显示";
-            this.picturegridToolStripMenuItem.Click += new System.EventHandler(this.picturegridToolStripMenuItem_Click);
+            this.checkBoxWaveImage.AutoSize = true;
+            this.checkBoxWaveImage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBoxWaveImage.Location = new System.Drawing.Point(946, 15);
+            this.checkBoxWaveImage.Name = "checkBoxWaveImage";
+            this.checkBoxWaveImage.Size = new System.Drawing.Size(163, 20);
+            this.checkBoxWaveImage.TabIndex = 20;
+            this.checkBoxWaveImage.Text = "速度曲线+三点赛道";
+            this.checkBoxWaveImage.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -886,6 +913,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBoxImageShow.ResumeLayout(false);
+            this.groupBoxImageShow.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShow1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShow)).EndInit();
             this.groupBoxPicConfig.ResumeLayout(false);
@@ -979,6 +1007,8 @@
         private System.Windows.Forms.ToolStripMenuItem pinkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem whitesmokeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem picturegridToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxIsWave;
+        private System.Windows.Forms.CheckBox checkBoxWaveImage;
     }
 }
 
