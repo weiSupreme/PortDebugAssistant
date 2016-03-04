@@ -18,3 +18,5 @@ G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.exe.manifest
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.application
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.exe
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.csprojResolveAssemblyReference.cache
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.FormWave.resources

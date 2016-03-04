@@ -474,135 +474,142 @@ namespace SerialPortDebug
             }
         } 
          
+        private int threepointtrack_hang=1;
         public void ThreePointTrack_Deal(byte data)     //三点赛道模式
         {
             if (effective_line < 0)
             {
                 effective_line = data;
-                image_row_count = effective_line * pictureBoxShow.Height / height + 1;
+                image_row_count = effective_line * pictureBoxShow.Height / height + pictureBoxShow.Height / height;
             }
             else
             {
-                if (picturebox_who_flag == 0)    //使用第0个picturebox
+                if (threepointtrack_hang > ((effective_line+1)*3))
                 {
-                    if (three_point_track_dist_flag == 0)   //左边界
+                    if (picturebox_who_flag == 0)    //使用第0个picturebox
                     {
-                        camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                        if (picturegrid_flag == 0)
+                        if (three_point_track_dist_flag == 0)   //左边界
                         {
-                            camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                        }
-                        three_point_track_dist_flag = 1;
-                    }
-                    else if (three_point_track_dist_flag == 1)    //中线
-                    {
-                        camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(0, 0, 255)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                        if (picturegrid_flag == 0)
-                        {
-                            camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 255)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                        }
-                        three_point_track_dist_flag = 2;
-                    }
-                    else    //右边界
-                    {
-                        camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                        if (picturegrid_flag == 0)
-                        {
-                            camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                        }
-                        three_point_track_dist_flag = 0;
-                        image_row_count += pictureBoxShow.Height / height;
-                        if (image_row_count >= pictureBoxShow.Height)
-                        {
-                            image_row_count = 0;
-                            image_get_flag = 0;
-                            for (int i = 0; i < pictureBoxShow.Width; i += pictureBoxShow.Width / width)
+                            camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                            if (picturegrid_flag == 0)
                             {
-                                camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(0, 0, 0)), i, effective_line * pictureBoxShow.Height / height, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                                if (picturegrid_flag == 0)
-                                {
-                                    camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), i, effective_line * pictureBoxShow.Height / height, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
-                                }
+                                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
                             }
-                            effective_line = -5;
-                            this.Invoke((EventHandler)(delegate
+                            three_point_track_dist_flag = 1;
+                        }
+                        else if (three_point_track_dist_flag == 1)    //中线
+                        {
+                            camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(0, 0, 255)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                            if (picturegrid_flag == 0)
                             {
-                                pictureBoxShow.Visible = true;
-                                pictureBoxShow.Refresh();
-                                if (checkBoxAutoSaveImage.Checked)
+                                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 255)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                            }
+                            three_point_track_dist_flag = 2;
+                        }
+                        else    //右边界
+                        {
+                            camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                            if (picturegrid_flag == 0)
+                            {
+                                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow.Width / width, image_row_count, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                            }
+                            three_point_track_dist_flag = 0;
+                            image_row_count += pictureBoxShow.Height / height;
+                            if (image_row_count >= pictureBoxShow.Height)
+                            {
+                                image_row_count = 0;
+                                image_get_flag = 0;
+                                threepointtrack_hang = 0;
+                                for (int i = 0; i < pictureBoxShow.Width; i += pictureBoxShow.Width / width)
                                 {
-                                    string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
-                                    pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                                    toolStripStatusLabel2.Text = Image_save_name + "保存成功";
-                                    Image_save_Num++;
+                                    camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(0, 0, 0)), i, effective_line * pictureBoxShow.Height / height, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                                    if (picturegrid_flag == 0)
+                                    {
+                                        camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), i, effective_line * pictureBoxShow.Height / height, pictureBoxShow.Width / width, pictureBoxShow.Height / height);
+                                    }
                                 }
-                                camera_image_gra1.Clear(Color.WhiteSmoke);
-                                pictureBoxShow1.Visible = false;
-                                picturebox_who_flag = 1;
-                            }));
+                                effective_line = -5;
+                                this.Invoke((EventHandler)(delegate
+                                {
+                                    pictureBoxShow.Visible = true;
+                                    pictureBoxShow.Refresh();
+                                    if (checkBoxAutoSaveImage.Checked)
+                                    {
+                                        string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                                        pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                                        toolStripStatusLabel2.Text = Image_save_name + "保存成功";
+                                        Image_save_Num++;
+                                    }
+                                    camera_image_gra1.Clear(Color.WhiteSmoke);
+                                    pictureBoxShow1.Visible = false;
+                                    picturebox_who_flag = 1;
+                                }));
+                            }
+                        }
+                    }
+                    else      //使用第1个picturebox
+                    {
+                        if (three_point_track_dist_flag == 0)   //左边界
+                        {
+                            camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                            if (picturegrid_flag == 0)
+                            {
+                                camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                            }
+                            three_point_track_dist_flag = 1;
+                        }
+                        else if (three_point_track_dist_flag == 1)    //中线
+                        {
+                            camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(0, 0, 255)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                            if (picturegrid_flag == 0)
+                            {
+                                camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 255)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                            }
+                            three_point_track_dist_flag = 2;
+                        }
+                        else    //右边界
+                        {
+                            camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                            if (picturegrid_flag == 0)
+                            {
+                                camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                            }
+                            three_point_track_dist_flag = 0;
+                            image_row_count += pictureBoxShow1.Height / height;
+                            if (image_row_count >= pictureBoxShow1.Height)
+                            {
+                                image_row_count = 0;
+                                image_get_flag = 0;
+                                threepointtrack_hang = 0;
+                                for (int i = 0; i < pictureBoxShow1.Width; i += pictureBoxShow1.Width / width)
+                                {
+                                    camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(0, 0, 0)), i, effective_line * pictureBoxShow.Height / height, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                                    if (picturegrid_flag == 0)
+                                    {
+                                        camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), i, effective_line * pictureBoxShow.Height / height, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
+                                    }
+                                }
+                                effective_line = -5;
+                                this.Invoke((EventHandler)(delegate
+                                {
+                                    pictureBoxShow1.Visible = true;
+                                    pictureBoxShow1.Refresh();
+                                    if (checkBoxAutoSaveImage.Checked)
+                                    {
+                                        string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                                        pictureBoxShow1.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                                        toolStripStatusLabel2.Text = Image_save_name + "保存成功";
+                                        Image_save_Num++;
+                                    }
+                                    camera_image_gra.Clear(Color.WhiteSmoke);
+                                    pictureBoxShow.Visible = false;
+                                    picturebox_who_flag = 0;
+                                }));
+                            }
                         }
                     }
                 }
-                else      //使用第1个picturebox
-                {
-                    if (three_point_track_dist_flag == 0)   //左边界
-                    {
-                        camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                        if (picturegrid_flag == 0)
-                        {
-                            camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                        }
-                        three_point_track_dist_flag = 1;
-                    }
-                    else if (three_point_track_dist_flag == 1)    //中线
-                    {
-                        camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(0, 0, 255)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                        if (picturegrid_flag == 0)
-                        {
-                            camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 255)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                        }
-                        three_point_track_dist_flag = 2;
-                    }
-                    else    //右边界
-                    {
-                        camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                        if (picturegrid_flag == 0)
-                        {
-                            camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * pictureBoxShow1.Width / width, image_row_count, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                        }
-                        three_point_track_dist_flag = 0;
-                        image_row_count += pictureBoxShow1.Height / height;
-                        if (image_row_count >= pictureBoxShow1.Height)
-                        {
-                            image_row_count = 0;
-                            image_get_flag = 0;
-                            for (int i = 0; i < pictureBoxShow1.Width; i += pictureBoxShow1.Width / width)
-                            {
-                                camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(0, 0, 0)), i, effective_line * pictureBoxShow.Height / height, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                                if (picturegrid_flag == 0)
-                                {
-                                    camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), i, effective_line * pictureBoxShow.Height / height, pictureBoxShow1.Width / width, pictureBoxShow1.Height / height);
-                                }
-                            }
-                            effective_line = -5;
-                            this.Invoke((EventHandler)(delegate
-                            {
-                                pictureBoxShow1.Visible = true;
-                                pictureBoxShow1.Refresh();
-                                if (checkBoxAutoSaveImage.Checked)
-                                {
-                                    string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
-                                    pictureBoxShow1.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                                    toolStripStatusLabel2.Text = Image_save_name + "保存成功";
-                                    Image_save_Num++;
-                                }
-                                camera_image_gra.Clear(Color.WhiteSmoke);
-                                pictureBoxShow.Visible = false;
-                                picturebox_who_flag = 0;
-                            }));
-                        }
-                    }
-                }
+                threepointtrack_hang ++;
             }
         }
         
@@ -1157,7 +1164,7 @@ namespace SerialPortDebug
         {
             if(checkBoxIsWave.Checked)
             {
-                fr_wave.Show();
+                //fr_wave.Show();
             }
         }
     }

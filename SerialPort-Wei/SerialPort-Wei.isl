@@ -4410,9 +4410,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKAPPPOOLS</td><td>##IDS_PROGMSG_IIS_ROLLBACKAPPPOOLS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKVROOTS</td><td>##IDS_PROGMSG_IIS_ROLLBACKVROOTS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
-		<row><td>ProductCode</td><td>{C1006410-120B-4078-B22E-3C462DCA43C8}</td><td/></row>
+		<row><td>ProductCode</td><td>{623E34C7-DFA4-46E6-A553-621AEDA24417}</td><td/></row>
 		<row><td>ProductName</td><td>SerialPort-Wei</td><td/></row>
-		<row><td>ProductVersion</td><td>1.4</td><td/></row>
+		<row><td>ProductVersion</td><td>1.41</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
