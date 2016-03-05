@@ -91,39 +91,11 @@ namespace SerialPortDebug
             image_width = my_file.SetImage_Width();
             image_height = my_file.SetImage_Height();
             this.DoubleBuffered = true;
-            //---------获取串口号--------//
-            string[] str = SerialPort.GetPortNames();
-            if(str.Length>0)
-            {
-                comboBoxCom.SelectedText = str[0];
-                foreach(string s in str)
-                    comboBoxCom.Items.Add(s);
-            }
-            //--------选择波特率--------//
-            int[] BaudRates={9600,19200,38400,56000,57600,115200,128000,256000};
-            comboBoxBaudRate.SelectedText = "115200";
-            foreach (int baudrate in BaudRates)
-                comboBoxBaudRate.Items.Add(baudrate);
-            //--------选择数据位--------//
-            int[] bytesizes = { 5, 6, 7, 8 };
-            comboBoxByteSize.SelectedText = "8";
-            foreach (int bytesize in bytesizes)
-                comboBoxByteSize.Items.Add(bytesize);
-            //--------选择校验位-------//
-            int[] parities = { 0, 1, 2 };
-            comboBoxParity.SelectedText = "0";
-            foreach (int parity in parities)
-                comboBoxParity.Items.Add(parity);
-            //---------选择停止位---------//
-            int[] stopbits = { 1, 2 };
-            comboBoxStopBits.SelectedText = "1";
-            foreach (int stopbit in stopbits)
-                comboBoxStopBits.Items.Add(stopbit);
-            //Control.CheckForIllegalCrossThreadCalls = false; 
+            Serialport.Init_Serialport();
             
             buttonSend.Enabled = false;
             buttonAutoSend.Enabled = false;
-            Com_Using.ReadBufferSize = 4096;
+            Myserialport.ReadBufferSize = 4096;
             //textBoxReceivingArea.Text=Com_Using.ReadBufferSize.ToString();
             timerFreshPort.Interval = 500;
             textBoxPictureWidth.Text = Convert.ToString(image_width);
@@ -184,15 +156,15 @@ namespace SerialPortDebug
                     textBoxPictureHeight.Enabled = false;
                     buttonOpenCom.Text = "关闭串口";
                     toolStripStatusLabel2.Text = "串口正在使用";
-                    Com_Using.PortName = comboBoxCom.Text;
-                    Com_Using.BaudRate = int.Parse(comboBoxBaudRate.Text);
-                    Com_Using.DataBits = int.Parse(comboBoxByteSize.Text);
-                    Com_Using.Parity = (Parity)Enum.Parse(typeof(Parity), comboBoxParity.Text);
-                    Com_Using.StopBits = (StopBits)Enum.Parse(typeof(StopBits), comboBoxStopBits.Text);
-                    Com_Using.DataReceived += new SerialDataReceivedEventHandler(Com_DataReceived);
-                    Com_Using.ReceivedBytesThreshold = 1;//事件发生前内部输入缓冲区的字节数，每当缓冲区的字节达到此设定的值，就会触发对象的数据接收事件
-                    Com_Using.Open();
-                    Com_Using.DiscardInBuffer();
+                    Myserialport.PortName = comboBoxCom.Text;
+                    Myserialport.BaudRate = int.Parse(comboBoxBaudRate.Text);
+                    Myserialport.DataBits = int.Parse(comboBoxByteSize.Text);
+                    Myserialport.Parity = (Parity)Enum.Parse(typeof(Parity), comboBoxParity.Text);
+                    Myserialport.StopBits = (StopBits)Enum.Parse(typeof(StopBits), comboBoxStopBits.Text);
+                    Myserialport.DataReceived += new SerialDataReceivedEventHandler(Com_DataReceived);
+                    Myserialport.ReceivedBytesThreshold = 1;//事件发生前内部输入缓冲区的字节数，每当缓冲区的字节达到此设定的值，就会触发对象的数据接收事件
+                    Myserialport.Open();
+                    Myserialport.DiscardInBuffer();
                     //DealWith_Readdata_thread.Priority = ThreadPriority.AboveNormal;
                     //DealWith_Readdata_thread.Start();
                 }
@@ -211,7 +183,7 @@ namespace SerialPortDebug
                 //this.Close();
                 //DealWith_Readdata_thread.Abort();
                 //Com_Using.DiscardInBuffer();
-                Com_Using.Close(); 
+                Myserialport.Close(); 
                 comboBoxCom.Enabled = true;
                 comboBoxBaudRate.Enabled = true;
                 comboBoxByteSize.Enabled = true;
@@ -240,15 +212,15 @@ namespace SerialPortDebug
         private void Com_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             //----------获取串口数据------------//
-            if (Com_Using.IsOpen == true)
+            if (Myserialport.IsOpen == true)
             {
                 if (ComPort_closing==1)
                 {
                     return;
                 }
                 Read_Cache_Data_flag = 1 ;
-                byte[] Cachedata = new byte[Com_Using.BytesToRead];
-                Com_Using.Read(Cachedata, 0, Cachedata.Length);
+                byte[] Cachedata = new byte[Myserialport.BytesToRead];
+                Myserialport.Read(Cachedata, 0, Cachedata.Length);
                 foreach (byte data_temp in Cachedata)
                 {
                     Deal_PortData(data_temp);
@@ -365,10 +337,10 @@ namespace SerialPortDebug
                     sendstr += " " + Convert.ToString(b[i], 16);
                 }
             }
-            Com_Using.Write(sendstr);
+            Myserialport.Write(sendstr);
             if(checkBoxSendEndEnter.Checked)
             {
-                Com_Using.Write("\r\n");
+                Myserialport.Write("\r\n");
             }
         }
 

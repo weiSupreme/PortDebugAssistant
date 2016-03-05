@@ -12,7 +12,7 @@ namespace SerialPortDebug
 {
     public class MyImage
     {
-        /*----------------------------以下是变量声明------------------------------*/
+        /*----------------------------以下是字段声明------------------------------*/
         public static int height = 40, width = 140;    //图像高度和宽度
         public static int image_byte_length = 0;
         public static uint image_get_flag = 0;      //采集图像数据标志位
@@ -27,7 +27,7 @@ namespace SerialPortDebug
         private static int effective_line = -5;        //三点赛道模式下的有效行
         public static int picturegrid_flag = 0;
         private static Form1 fr1 = new Form1();
-        /*----------------------------以上是变量声明------------------------------*/
+        /*----------------------------以上是字段声明------------------------------*/
 
         private MyImage()    //私有构造函数
         {

@@ -86,7 +86,7 @@
             this.folderBrowserDialogImage = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialogImageLoad = new System.Windows.Forms.OpenFileDialog();
             this.timerAutoShowImage = new System.Windows.Forms.Timer(this.components);
-            this.Com_Using = new System.IO.Ports.SerialPort(this.components);
+            this.Myserialport = new System.IO.Ports.SerialPort(this.components);
             this.toolTipPicColumnRow = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -719,9 +719,9 @@
             this.timerAutoShowImage.Interval = 500;
             this.timerAutoShowImage.Tick += new System.EventHandler(this.timerAutoShowImage_Tick);
             // 
-            // Com_Using
+            // Myserialport
             // 
-            this.Com_Using.BaudRate = 115200;
+            this.Myserialport.BaudRate = 115200;
             // 
             // toolTipPicColumnRow
             // 
@@ -935,11 +935,6 @@
         private System.Windows.Forms.Label labelCom;
         private System.Windows.Forms.Label labelStopBits;
         private System.Windows.Forms.Label labelParity;
-        private System.Windows.Forms.ComboBox comboBoxCom;
-        private System.Windows.Forms.ComboBox comboBoxStopBits;
-        private System.Windows.Forms.ComboBox comboBoxParity;
-        private System.Windows.Forms.ComboBox comboBoxByteSize;
-        private System.Windows.Forms.ComboBox comboBoxBaudRate;
         private System.Windows.Forms.GroupBox groupBoxConfiguration;
         private System.Windows.Forms.CheckBox checkBoxSendEndEnter;
         private System.Windows.Forms.CheckBox checkBoxAutoClearReceivingBox;
@@ -978,7 +973,7 @@
         private System.Windows.Forms.ListBox listBoxImageList;
         private System.Windows.Forms.OpenFileDialog openFileDialogImageLoad;
         private System.Windows.Forms.Timer timerAutoShowImage;
-        private System.IO.Ports.SerialPort Com_Using;
+        private System.IO.Ports.SerialPort Myserialport;
         private System.Windows.Forms.Button buttonStopShowImgTemp;
         private System.Windows.Forms.ToolTip toolTipPicColumnRow;
         private System.Windows.Forms.StatusStrip statusStrip1;
@@ -1009,6 +1004,11 @@
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         public System.Windows.Forms.CheckBox checkBoxAutoSaveImage;
         private System.Windows.Forms.Button buttonAutoShowImage;
+        public System.Windows.Forms.ComboBox comboBoxCom;
+        public System.Windows.Forms.ComboBox comboBoxStopBits;
+        public System.Windows.Forms.ComboBox comboBoxParity;
+        public System.Windows.Forms.ComboBox comboBoxByteSize;
+        public System.Windows.Forms.ComboBox comboBoxBaudRate;
     }
 }
 
