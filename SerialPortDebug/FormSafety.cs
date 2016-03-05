@@ -90,22 +90,44 @@ namespace SerialPortDebug
 
         public string Set_Password(string machinecode)
         {
-            string pswd = "";
-            foreach(char ch in machinecode)
+            //string pswd = "";
+            /*foreach(char ch in machinecode)    //简单模式
             {
                 pswd += ch.ToString();
-            }
+            }*/
+
+            string machinecode_ch = machinecode;  //BFEBFBFF00040651
+            char[] pswd_ch = new char[16];
+            //加密
+            pswd_ch[0] = machinecode_ch[12];
+            pswd_ch[1] = machinecode_ch[8];
+            pswd_ch[2] = machinecode_ch[1];
+            pswd_ch[3] = machinecode_ch[5];
+            pswd_ch[4] = machinecode_ch[9];
+            pswd_ch[5] = machinecode_ch[15];
+            pswd_ch[6] = machinecode_ch[14];
+            pswd_ch[7] = machinecode_ch[2];
+            pswd_ch[8] = machinecode_ch[3];
+            pswd_ch[9] = machinecode_ch[10];
+            pswd_ch[10] = machinecode_ch[7];
+            pswd_ch[11] = machinecode_ch[13];
+            pswd_ch[12] = machinecode_ch[11];
+            pswd_ch[13] = machinecode_ch[15];
+            pswd_ch[14] = machinecode_ch[4];
+            pswd_ch[15] = machinecode_ch[0];
+            //以上是加密过程
+            string pswd = new string(pswd_ch);
             return pswd;
         }
 
         public bool Check_IsRegister()
         {
-            String pswd = "123", machine_code = "123";
-            machine_code = GetCPUSerialNumber();
+            String pswd = "123", pswd_own = "123";
+            pswd_own=Set_Password(GetCPUSerialNumber());
             pswd = my_file.Read_File("RegisterCodes.txt");
             //textBoxMachineCodes.Text = machine_code.Length.ToString();
             //textBoxRegistrationCodes.Text = pswd.Trim().Length.ToString();
-            if (String.Equals(machine_code.Trim(), pswd.Trim()))
+            if (String.Equals(pswd_own.Trim(), pswd.Trim()))
             {
                 return true;
             }
