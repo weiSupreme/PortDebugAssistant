@@ -54,7 +54,7 @@ namespace SerialPortDebug
                 if(textBoxTimeMs.Text=="")
                 {
                     textBoxTimeMs.BackColor = Color.Blue;
-                    toolStripStatusLabel2.Text = "亲，未输入发送间隔时间哦。";
+                    toolStripStatusLabelMessage.Text = "亲，未输入发送间隔时间哦。";
                 }
                 else
                 {
@@ -62,7 +62,7 @@ namespace SerialPortDebug
                     timerAutoSend.Enabled = true;
                     textBoxTimeMs.Enabled = false;
                     buttonAutoSend.Text = "停止发送";
-                    toolStripStatusLabel2.Text = "正在自动发送";
+                    toolStripStatusLabelMessage.Text = "正在自动发送";
                 }
             }
             else     //取消自动发送
@@ -108,6 +108,11 @@ namespace SerialPortDebug
             //camera_image_gra.InterpolationMode =(InterpolationMode) CompositingQuality.HighQuality;
             MyImage.camera_image_gra.Clear(Color.Transparent);
             MyImage.camera_image_gra1.Clear(Color.Transparent);
+            checkBoxSyetemTime.Checked = true;
+            while (toolStripProgressBar1.Value < toolStripProgressBar1.Maximum)
+            {
+                toolStripProgressBar1.PerformStep();
+            }
         }
 
         private void buttonOpenCom_Click(object sender, EventArgs e)
@@ -137,7 +142,7 @@ namespace SerialPortDebug
                         }
                         else
                         {
-                            toolStripStatusLabel2.Text = "亲，请输入图像高度和宽度";
+                            toolStripStatusLabelMessage.Text = "亲，请输入图像高度和宽度";
                             return;
                         }
                         MyImage.image_get_flag = 0;
@@ -155,7 +160,7 @@ namespace SerialPortDebug
                     textBoxPictureWidth.Enabled = false;
                     textBoxPictureHeight.Enabled = false;
                     buttonOpenCom.Text = "关闭串口";
-                    toolStripStatusLabel2.Text = "串口正在使用";
+                    toolStripStatusLabelMessage.Text = "串口正在使用";
                     Myserialport.PortName = comboBoxCom.Text;
                     Myserialport.BaudRate = int.Parse(comboBoxBaudRate.Text);
                     Myserialport.DataBits = int.Parse(comboBoxByteSize.Text);
@@ -171,7 +176,7 @@ namespace SerialPortDebug
                 else
                 {
                     comboBoxCom.BackColor = Color.Blue;
-                    toolStripStatusLabel2.Text = "亲，没找到有效串口哦";
+                    toolStripStatusLabelMessage.Text = "亲，没找到有效串口哦";
                 }
             }
             else    //串口关闭
@@ -193,7 +198,7 @@ namespace SerialPortDebug
                 checkBoxTwoPixelImage.Enabled = true;
                 checkBoxThreePointTrack.Enabled = true;
                 buttonOpenCom.Text = "打开串口";
-                toolStripStatusLabel2.Text = "串口未打开";
+                toolStripStatusLabelMessage.Text = "串口未打开";
                 buttonSend.Enabled = false;
                 buttonAutoSend.Enabled = false;
                 textBoxPictureWidth.Enabled = true;
@@ -310,7 +315,7 @@ namespace SerialPortDebug
             {
                 e.Cancel = true;
                 buttonOpenCom.BackColor = Color.Blue;
-                toolStripStatusLabel2.Text = "亲，串口没关哦";
+                toolStripStatusLabelMessage.Text = "亲，串口没关哦";
                 return;
             }
             if (MessageBox.Show("将要关闭程序，是否继续？", "确认", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -490,17 +495,17 @@ namespace SerialPortDebug
                 {
                     string Image_save_name = Convert.ToString(MyImage.Image_save_Num) + ".bmp";
                     pictureBoxShow.Image.Save(MyImage.Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                    toolStripStatusLabel2.Text = Image_save_name+"保存成功";
+                    toolStripStatusLabelMessage.Text = Image_save_name+"保存成功";
                     MyImage.Image_save_Num++;
                 }
                 else
                 {
-                    toolStripStatusLabel2.Text = "亲，没选择图片哦";
+                    toolStripStatusLabelMessage.Text = "亲，没选择图片哦";
                 }
             }
             else
             {
-                toolStripStatusLabel2.Text = "亲，请先选择保存路径哦";
+                toolStripStatusLabelMessage.Text = "亲，请先选择保存路径哦";
             }
         }
 
@@ -523,25 +528,6 @@ namespace SerialPortDebug
                     listBoxImageList.Items.Clear();
                     string[] tmp1 = System.IO.Directory.GetFiles(folderBrowserDialogImage.SelectedPath, "*.bmp ");
                     Array.Sort(tmp1);
-                    /*string[] tmp2=new string[tmp1.Count()];
-                    for (UInt32 i = 0; i < tmp1.Count(); i++)
-                    {
-                        tmp1[i] = tmp2[i];
-                    }
-                    for (UInt32 i = 0; i < tmp1.Count()-1;i++ )
-                    {
-                        for(UInt32 j=0;j<tmp1.Count()-i-1;j++)
-                        {
-                            if(string.Compare(tmp1[j],tmp1[j+1])<0)
-                            {
-                                string empty = tmp1[j];
-                                tmp1[j] = tmp1[j + 1];
-                                tmp1[j + 1] = empty;
-                            }
-                        }
-                        //tmp2[i]=new FileInfo(tmp1[i]).Name;
-                    }
-                    //Array.Sort(tmp2);*/
                     foreach(string s in tmp1)
                     {
                         listBoxImageList.Items.Add(new FileInfo(s).Name);
@@ -760,6 +746,29 @@ namespace SerialPortDebug
             if(checkBoxIsWave.Checked)
             {
                 //fr_wave.Show();
+            }
+        }
+
+        private void checkBoxSyetemTime_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxSyetemTime.Checked)
+            {
+                toolStripStatusLabelTime.Text = "当前时间：" + DateTime.Now.ToString();
+            }
+            else
+            {
+                toolStripStatusLabelTime.Text = "";
+            }
+        }
+
+        private void pictureBoxShow1_MouseMove(object sender, MouseEventArgs e)
+        {
+            double Pixel_x, Pixel_y;
+            Pixel_x = e.X * int.Parse(textBoxPictureWidth.Text) / pictureBoxShow.Width;
+            Pixel_y = e.Y * int.Parse(textBoxPictureHeight.Text) / pictureBoxShow.Height;
+            if (toolTipPicColumnRow.GetToolTip(pictureBoxShow) != (((int)(Pixel_x + 1)).ToString() + "," + ((int)(Pixel_y)).ToString()))
+            {
+                toolTipPicColumnRow.SetToolTip(pictureBoxShow, ((int)(Pixel_x + 1)).ToString() + "," + ((int)(Pixel_y)).ToString());
             }
         }
     }

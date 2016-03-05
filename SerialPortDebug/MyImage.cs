@@ -110,7 +110,7 @@ namespace SerialPortDebug
                     {
                         string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
                         fr1.pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                        fr1.toolStripStatusLabel2.Text = Image_save_name + "保存成功";
+                        fr1.toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
                         Image_save_Num++;
                     }
                 }));
@@ -180,7 +180,7 @@ namespace SerialPortDebug
                                     {
                                         string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
                                         fr1.pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                                        fr1.toolStripStatusLabel2.Text = Image_save_name + "保存成功";
+                                        fr1.toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
                                         Image_save_Num++;
                                     }
                                     camera_image_gra1.Clear(Color.WhiteSmoke);
@@ -241,7 +241,7 @@ namespace SerialPortDebug
                                     {
                                         string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
                                         fr1.pictureBoxShow1.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                                        fr1.toolStripStatusLabel2.Text = Image_save_name + "保存成功";
+                                        fr1.toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
                                         Image_save_Num++;
                                     }
                                     camera_image_gra.Clear(Color.WhiteSmoke);
@@ -280,7 +280,7 @@ namespace SerialPortDebug
                     {
                         string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
                         fr1.pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                        fr1.toolStripStatusLabel2.Text = Image_save_name + "保存成功";
+                        fr1.toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
                         Image_save_Num++;
                     }
                 }));
