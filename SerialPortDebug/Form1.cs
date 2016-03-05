@@ -29,6 +29,7 @@ namespace SerialPortDebug
         //private int abc = 0;
         Bitmap camera_image_bit = new Bitmap(640, 480);
         private SerialPortDebug.FormWave fr_wave = new FormWave();
+        private SerialPortDebug.MyFile my_file = new MyFile();
 
         public Form1()
         {
@@ -81,82 +82,14 @@ namespace SerialPortDebug
             }
         }
 
-        public void Read_Log_FormMian_BackColor()
-        {
-            string path = Application.StartupPath + "\\SystemLog\\" + "FormMain_BackColor.txt";
-            if (File.Exists(path))
-            {
-                byte[] byData = new Byte[100];
-                FileStream file = new FileStream(path, FileMode.Open);
-                file.Seek(0, SeekOrigin.Begin);
-                file.Read(byData, 0, 100); //byData传进来的字节数组,用以接受FileStream对象中的数据,第2个参数是字节数组中开始写入数据的位置,
-                                  //它通常是0,表示从数组的开端文件中向数组写数据,最后一个参数规定从文件读多少字符.
-                string str_color = System.Text.Encoding.ASCII.GetString(byData, 0, byData.Count());
-                this.BackColor = Color.FromArgb(Convert.ToInt32(str_color));
-                file.Close();
-            }
-        }
-
-        public int SetImage_Width()
-        {
-            string path = Application.StartupPath + "\\SystemLog\\" + "Image_Width.txt";
-            if (File.Exists(path))
-            {
-                byte[] byData = new Byte[100];
-                FileStream file = new FileStream(path, FileMode.Open);
-                file.Seek(0, SeekOrigin.Begin);
-                file.Read(byData, 0, 100); //byData传进来的字节数组,用以接受FileStream对象中的数据,第2个参数是字节数组中开始写入数据的位置,
-                                 //它通常是0,表示从数组的开端文件中向数组写数据,最后一个参数规定从文件读多少字符.
-                file.Close();
-                int str_width = int.Parse(System.Text.Encoding.ASCII.GetString(byData, 0, byData.Count()));
-                if(str_width!=0)
-                {
-                    return str_width;
-                }
-                else
-                {
-                    return 80;
-                }
-            }
-            else
-            {
-                return 80;
-            }
-        }
-
-        public int SetImage_Height()
-        {
-            string path = Application.StartupPath + "\\SystemLog\\" + "Image_Height.txt";
-            if (File.Exists(path))
-            {
-                byte[] byData = new Byte[100];
-                FileStream file = new FileStream(path, FileMode.Open);
-                file.Seek(0, SeekOrigin.Begin);
-                file.Read(byData, 0, 100); //byData传进来的字节数组,用以接受FileStream对象中的数据,第2个参数是字节数组中开始写入数据的位置,
-                                 //它通常是0,表示从数组的开端文件中向数组写数据,最后一个参数规定从文件读多少字符.
-                file.Close();
-                int str_height = int.Parse(System.Text.Encoding.ASCII.GetString(byData, 0, byData.Count()));
-                if (str_height != 0)
-                {
-                    return str_height;
-                }
-                else
-                {
-                    return 60;
-                }
-            }
-            else
-            {
-                return 60;
-            }
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             int image_width, image_height;
-            Read_Log_FormMian_BackColor();
-            image_width=SetImage_Width();
-            image_height=SetImage_Height();
+            Color back_form_color = new Color();
+            back_form_color=my_file.Read_Log_FormMian_BackColor();
+            this.BackColor = back_form_color;
+            image_width = my_file.SetImage_Width();
+            image_height = my_file.SetImage_Height();
             this.DoubleBuffered = true;
             //---------获取串口号--------//
             string[] str = SerialPort.GetPortNames();
@@ -777,110 +710,65 @@ namespace SerialPortDebug
         private void goldenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Gold;
-            Write_Log_FormMain_BackColor(Color.Gold.ToArgb().ToString()+"         ");
+            my_file.Write_Log_FormMain_BackColor(Color.Gold.ToArgb().ToString() + "         ");
         }
 
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Red;
-            Write_Log_FormMain_BackColor(Color.Red.ToArgb().ToString() + "         ");
+            my_file.Write_Log_FormMain_BackColor(Color.Red.ToArgb().ToString() + "         ");
         }
 
         private void oringeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Orange;
-            Write_Log_FormMain_BackColor(Color.Orange.ToArgb().ToString() + "         ");
+            my_file.Write_Log_FormMain_BackColor(Color.Orange.ToArgb().ToString() + "         ");
         }
 
         private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Yellow;
-            Write_Log_FormMain_BackColor(Color.Yellow.ToArgb().ToString() + "         ");
+            my_file.Write_Log_FormMain_BackColor(Color.Yellow.ToArgb().ToString() + "         ");
         }
 
         private void greenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor =Color.FromArgb(0,192,0);
-            Write_Log_FormMain_BackColor(Color.FromArgb(0, 192, 0).ToArgb().ToString() + "         ");
+            my_file.Write_Log_FormMain_BackColor(Color.FromArgb(0, 192, 0).ToArgb().ToString() + "         ");
         }
 
         private void grayToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Gray;
-            Write_Log_FormMain_BackColor(Color.Gray.ToArgb().ToString() + "         ");
+            my_file.Write_Log_FormMain_BackColor(Color.Gray.ToArgb().ToString() + "         ");
         }
 
         private void blueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Blue;
-            Write_Log_FormMain_BackColor(Color.Blue.ToArgb().ToString() + "          ");
+            my_file.Write_Log_FormMain_BackColor(Color.Blue.ToArgb().ToString() + "          ");
         }
 
         private void pinkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.LightPink;
-            Write_Log_FormMain_BackColor(Color.LightPink.ToArgb().ToString() + "         ");
+            my_file.Write_Log_FormMain_BackColor(Color.LightPink.ToArgb().ToString() + "         ");
         }
 
         private void whitesmokeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.WhiteSmoke;
-            Write_Log_FormMain_BackColor(Color.WhiteSmoke.ToArgb().ToString() + "         ");
-        }
-
-        public void Write_Log_FormMain_BackColor(string str)
-        {
-            string path = Application.StartupPath + "\\SystemLog\\";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            path += "FormMain_BackColor.txt";
-            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-            
-            StreamWriter sw = new StreamWriter(fs);
-            sw.Write(str);
-            //清空缓冲区
-            sw.Flush();
-            //关闭流
-            sw.Close();
-            fs.Close();
+            my_file.Write_Log_FormMain_BackColor(Color.WhiteSmoke.ToArgb().ToString() + "         ");
         }
 
         private void textBoxPictureWidth_TextChanged(object sender, EventArgs e)
         {
-            string path = Application.StartupPath + "\\SystemLog\\";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            path += "Image_Width.txt";
-            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-            StreamWriter sw = new StreamWriter(fs);
-            sw.Write(textBoxPictureWidth.Text+"   ");
-            //清空缓冲区
-            sw.Flush();
-            //关闭流
-            sw.Close();
-            fs.Close();
+            my_file.Save_HeightorWidth("Image_Width.txt", textBoxPictureWidth.Text);
         }
 
         private void textBoxPictureHeight_TextChanged(object sender, EventArgs e)
         {
-            string path = Application.StartupPath + "\\SystemLog\\";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            path += "Image_Height.txt";
-            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-            StreamWriter sw = new StreamWriter(fs);
-            sw.Write(textBoxPictureHeight.Text + "   ");
-            //清空缓冲区
-            sw.Flush();
-            //关闭流
-            sw.Close();
-            fs.Close();
+            my_file.Save_HeightorWidth("Image_Height.txt", textBoxPictureHeight.Text);
         }
 
         private void picturegridToolStripMenuItem_Click(object sender, EventArgs e)
