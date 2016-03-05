@@ -30,6 +30,7 @@ namespace SerialPortDebug
         Bitmap camera_image_bit = new Bitmap(640, 480);
         private SerialPortDebug.FormWave fr_wave = new FormWave();
         private SerialPortDebug.MyFile my_file = new MyFile();
+        private SerialPortDebug.FormSafety fm_safety = new FormSafety();
 
         public Form1()
         {
@@ -84,6 +85,12 @@ namespace SerialPortDebug
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (!fm_safety.Check_IsRegister())
+            {
+                fm_safety.Show();
+                buttonOpenCom.Enabled = false;
+                this.WindowState = FormWindowState.Minimized;
+            }
             int image_width, image_height;
             Color back_form_color = new Color();
             back_form_color=my_file.Read_Log_FormMian_BackColor();
@@ -721,12 +728,12 @@ namespace SerialPortDebug
 
         private void textBoxPictureWidth_TextChanged(object sender, EventArgs e)
         {
-            my_file.Save_HeightorWidth("Image_Width.txt", textBoxPictureWidth.Text);
+            my_file.Write_String("Image_Width.txt", textBoxPictureWidth.Text);
         }
 
         private void textBoxPictureHeight_TextChanged(object sender, EventArgs e)
         {
-            my_file.Save_HeightorWidth("Image_Height.txt", textBoxPictureHeight.Text);
+            my_file.Write_String("Image_Height.txt", textBoxPictureHeight.Text);
         }
 
         private void picturegridToolStripMenuItem_Click(object sender, EventArgs e)

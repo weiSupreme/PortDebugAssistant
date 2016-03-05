@@ -14,7 +14,7 @@ namespace SerialPortDebug
         /*----------------------------以上是字段声明------------------------------*/
 
         /*----------------------------以下是方法------------------------------*/
-        public void Save_HeightorWidth(string filename, string text)
+        public void Write_String(string filename, string text)
         {
             string path = System.Windows.Forms.Application.StartupPath + "\\SystemLog\\";
             if (!Directory.Exists(path))
@@ -123,6 +123,23 @@ namespace SerialPortDebug
             {
                 return Color.FromArgb(0, 192, 0);
             }
+        }
+
+        public string Read_File(string filename)
+        {
+            string path = System.Windows.Forms.Application.StartupPath + "\\SystemLog\\" + filename;
+            if (File.Exists(path))
+            {
+                byte[] byData = new Byte[16];
+                FileStream file = new FileStream(path, FileMode.Open);
+                file.Seek(0, SeekOrigin.Begin);
+                file.Read(byData, 0, 16); //byData传进来的字节数组,用以接受FileStream对象中的数据,第2个参数是字节数组中开始写入数据的位置,
+                //它通常是0,表示从数组的开端文件中向数组写数据,最后一个参数规定从文件读多少字符.
+                string str = System.Text.Encoding.ASCII.GetString(byData, 0, byData.Count());
+                file.Close();
+                return str;
+            }
+            return "";
         }
         /*----------------------------以上是方法------------------------------*/
     }

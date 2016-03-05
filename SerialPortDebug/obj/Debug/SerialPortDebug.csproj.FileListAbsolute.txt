@@ -34,3 +34,4 @@ G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.cs
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.exe.manifest
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.application
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.FormWave.resources
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.FormSafety.resources
