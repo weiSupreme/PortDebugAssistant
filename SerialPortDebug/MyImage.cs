@@ -117,6 +117,7 @@ namespace SerialPortDebug
             }
         }
 
+        public static int waveimage_flag = -5;
         private static int threepointtrack_hang = 1;
         public static void ThreePointTrack_Deal(byte data)     //三点赛道模式
         {
@@ -163,6 +164,7 @@ namespace SerialPortDebug
                                 image_row_count = 0;
                                 image_get_flag = 0;
                                 threepointtrack_hang = 0;
+                                waveimage_flag = -5;
                                 for (int i = 0; i < fr1.pictureBoxShow.Width; i += fr1.pictureBoxShow.Width / width)
                                 {
                                     camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(0, 0, 0)), i, effective_line * fr1.pictureBoxShow.Height / height, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
@@ -224,6 +226,7 @@ namespace SerialPortDebug
                                 image_row_count = 0;
                                 image_get_flag = 0;
                                 threepointtrack_hang = 0;
+                                waveimage_flag = -5;
                                 for (int i = 0; i < fr1.pictureBoxShow1.Width; i += fr1.pictureBoxShow1.Width / width)
                                 {
                                     camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(0, 0, 0)), i, effective_line * fr1.pictureBoxShow.Height / height, fr1.pictureBoxShow1.Width / width, fr1.pictureBoxShow1.Height / height);

@@ -89,6 +89,9 @@
             this.Myserialport = new System.IO.Ports.SerialPort(this.components);
             this.toolTipPicColumnRow = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabelMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.界面颜色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,16 +103,13 @@
             this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.whitesmokeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.picturegridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.版本号v12ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemCommunicationAgreement = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemRefreshNotes = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripStatusLabelTime = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.checkBoxSyetemTime = new System.Windows.Forms.CheckBox();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.groupBoxInitialization.SuspendLayout();
             this.groupBoxConfiguration.SuspendLayout();
             this.groupBoxReceivingArea.SuspendLayout();
@@ -616,6 +616,7 @@
             this.checkBoxWaveImage.TabIndex = 20;
             this.checkBoxWaveImage.Text = "速度曲线+三点赛道";
             this.checkBoxWaveImage.UseVisualStyleBackColor = true;
+            this.checkBoxWaveImage.CheckedChanged += new System.EventHandler(this.checkBoxWaveImage_CheckedChanged);
             // 
             // checkBoxIsWave
             // 
@@ -747,6 +748,29 @@
             this.statusStrip1.TabIndex = 12;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // toolStripStatusLabelMessage
+            // 
+            this.toolStripStatusLabelMessage.AutoSize = false;
+            this.toolStripStatusLabelMessage.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripStatusLabelMessage.Name = "toolStripStatusLabelMessage";
+            this.toolStripStatusLabelMessage.Size = new System.Drawing.Size(331, 17);
+            // 
+            // toolStripStatusLabelTime
+            // 
+            this.toolStripStatusLabelTime.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStripStatusLabelTime.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.toolStripStatusLabelTime.Name = "toolStripStatusLabelTime";
+            this.toolStripStatusLabelTime.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.AutoSize = false;
+            this.toolStripProgressBar1.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.toolStripProgressBar1.Maximum = 1000;
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(200, 16);
+            this.toolStripProgressBar1.Step = 1;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -780,7 +804,7 @@
             // 
             this.redToolStripMenuItem.BackColor = System.Drawing.Color.Red;
             this.redToolStripMenuItem.Name = "redToolStripMenuItem";
-            this.redToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.redToolStripMenuItem.Text = "Red";
             this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
             // 
@@ -788,7 +812,7 @@
             // 
             this.oringeToolStripMenuItem.BackColor = System.Drawing.Color.Orange;
             this.oringeToolStripMenuItem.Name = "oringeToolStripMenuItem";
-            this.oringeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.oringeToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.oringeToolStripMenuItem.Text = "Orange";
             this.oringeToolStripMenuItem.Click += new System.EventHandler(this.oringeToolStripMenuItem_Click);
             // 
@@ -796,7 +820,7 @@
             // 
             this.yellowToolStripMenuItem.BackColor = System.Drawing.Color.Yellow;
             this.yellowToolStripMenuItem.Name = "yellowToolStripMenuItem";
-            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.yellowToolStripMenuItem.Text = "Yellow";
             this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
             // 
@@ -804,7 +828,7 @@
             // 
             this.greenToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.greenToolStripMenuItem.Name = "greenToolStripMenuItem";
-            this.greenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.greenToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.greenToolStripMenuItem.Text = "Green";
             this.greenToolStripMenuItem.Click += new System.EventHandler(this.greenToolStripMenuItem_Click);
             // 
@@ -812,7 +836,7 @@
             // 
             this.goldToolStripMenuItem.BackColor = System.Drawing.Color.Gold;
             this.goldToolStripMenuItem.Name = "goldToolStripMenuItem";
-            this.goldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.goldToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.goldToolStripMenuItem.Text = "Gold";
             this.goldToolStripMenuItem.Click += new System.EventHandler(this.goldenToolStripMenuItem_Click);
             // 
@@ -820,7 +844,7 @@
             // 
             this.grayToolStripMenuItem.BackColor = System.Drawing.Color.Gray;
             this.grayToolStripMenuItem.Name = "grayToolStripMenuItem";
-            this.grayToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.grayToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.grayToolStripMenuItem.Text = "Gray";
             this.grayToolStripMenuItem.Click += new System.EventHandler(this.grayToolStripMenuItem_Click);
             // 
@@ -828,7 +852,7 @@
             // 
             this.blueToolStripMenuItem.BackColor = System.Drawing.Color.Blue;
             this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
-            this.blueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.blueToolStripMenuItem.Text = "Blue";
             this.blueToolStripMenuItem.Click += new System.EventHandler(this.blueToolStripMenuItem_Click);
             // 
@@ -836,7 +860,7 @@
             // 
             this.pinkToolStripMenuItem.BackColor = System.Drawing.Color.LightPink;
             this.pinkToolStripMenuItem.Name = "pinkToolStripMenuItem";
-            this.pinkToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pinkToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.pinkToolStripMenuItem.Text = "Pink";
             this.pinkToolStripMenuItem.Click += new System.EventHandler(this.pinkToolStripMenuItem_Click);
             // 
@@ -844,16 +868,21 @@
             // 
             this.whitesmokeToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
             this.whitesmokeToolStripMenuItem.Name = "whitesmokeToolStripMenuItem";
-            this.whitesmokeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.whitesmokeToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.whitesmokeToolStripMenuItem.Text = "WhiteSmoke";
             this.whitesmokeToolStripMenuItem.Click += new System.EventHandler(this.whitesmokeToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
             // 
             // picturegridToolStripMenuItem
             // 
             this.picturegridToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picturegridToolStripMenuItem.Image = global::SerialPortDebug.Properties.Resources.方格;
             this.picturegridToolStripMenuItem.Name = "picturegridToolStripMenuItem";
-            this.picturegridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.picturegridToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.picturegridToolStripMenuItem.Text = "图像栅格显示";
             this.picturegridToolStripMenuItem.Click += new System.EventHandler(this.picturegridToolStripMenuItem_Click);
             // 
@@ -870,7 +899,7 @@
             // 版本号v12ToolStripMenuItem
             // 
             this.版本号v12ToolStripMenuItem.Name = "版本号v12ToolStripMenuItem";
-            this.版本号v12ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.版本号v12ToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.版本号v12ToolStripMenuItem.Text = "版本号：v1.3";
             // 
             // ToolStripMenuItemCommunicationAgreement
@@ -887,20 +916,6 @@
             this.ToolStripMenuItemRefreshNotes.Text = "更新说明";
             this.ToolStripMenuItemRefreshNotes.Click += new System.EventHandler(this.更新说明ToolStripMenuItem_Click);
             // 
-            // toolStripStatusLabelTime
-            // 
-            this.toolStripStatusLabelTime.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripStatusLabelTime.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.toolStripStatusLabelTime.Name = "toolStripStatusLabelTime";
-            this.toolStripStatusLabelTime.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripStatusLabelMessage
-            // 
-            this.toolStripStatusLabelMessage.AutoSize = false;
-            this.toolStripStatusLabelMessage.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripStatusLabelMessage.Name = "toolStripStatusLabelMessage";
-            this.toolStripStatusLabelMessage.Size = new System.Drawing.Size(331, 17);
-            // 
             // checkBoxSyetemTime
             // 
             this.checkBoxSyetemTime.AutoSize = true;
@@ -913,20 +928,6 @@
             this.checkBoxSyetemTime.Text = "显示时间";
             this.checkBoxSyetemTime.UseVisualStyleBackColor = false;
             this.checkBoxSyetemTime.CheckedChanged += new System.EventHandler(this.checkBoxSyetemTime_CheckedChanged);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.AutoSize = false;
-            this.toolStripProgressBar1.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.toolStripProgressBar1.Maximum = 1000;
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(200, 16);
-            this.toolStripProgressBar1.Step = 1;
             // 
             // Form1
             // 

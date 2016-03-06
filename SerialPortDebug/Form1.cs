@@ -240,10 +240,11 @@ namespace SerialPortDebug
                 Read_Cache_Data_flag = 0;
             }
         }
+
         
         public void Deal_PortData(byte data)
         {
-            if (checkBoxGrayImage.Checked || checkBoxTwoPixelImage.Checked || checkBoxThreePointTrack.Checked)
+            if (checkBoxGrayImage.Checked || checkBoxTwoPixelImage.Checked || checkBoxThreePointTrack.Checked || checkBoxWaveImage.Checked)
             {
                 //------------接收图像数据------------//
                 if (MyImage.image_get_flag != 4)
@@ -256,9 +257,21 @@ namespace SerialPortDebug
                     {
                         MyImage.TwoPixelImage_Deal(data);
                     }
-                    else if (checkBoxThreePointTrack.Checked)   //三点赛道模式
+                    else if (checkBoxThreePointTrack.Checked )   //三点赛道模式
                     {
                         MyImage.ThreePointTrack_Deal(data);
+                    }
+                    else if(checkBoxWaveImage.Checked)
+                    {
+                        if (MyImage.waveimage_flag < 0)
+                        {
+                            fr_wave.Draw_Wave(data);
+                            MyImage.waveimage_flag = 10;
+                        }
+                        else
+                        {
+                            MyImage.ThreePointTrack_Deal(data);
+                        }
                     }
                     else
                     {
@@ -646,7 +659,7 @@ namespace SerialPortDebug
 
         private void 更新说明ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            textBoxReceivingArea.Text = "1.\r\n\r\n";         
+            textBoxReceivingArea.Text = "1.新增波形图功能，可以单独看曲线或同时看曲线和图像\r\n\r\n2.新增注册程序和注册机\r\n\r\n3.优化界面，增加显示时间和进度条";         
         }
 
         private void checkBoxTwoPixelImage_CheckedChanged(object sender, EventArgs e)
@@ -669,7 +682,7 @@ namespace SerialPortDebug
 
         private void ToolStripMenuItemCommunicationAgreement_Click(object sender, EventArgs e)
         {
-            textBoxReceivingArea.Text = "灰度图像：\r\n\r\n uint8 frame_head[]={1,254,254,1};\r\n uart_putbuff(UARTn,frame_head,4);\r\n uart_putbuff(UARTn,image,image_size);\r\n\r\n鹰眼二值化(压缩图像)：\r\n 同灰度图像\r\n\r\n三点赛道：\r\n uint8 frame_head[]={1,254,254,1};\r\n uart_putbuff(UARTn,frame_head,4);\r\n uart_putchar(UARTn,effective_line);\r\n for(int i=0;i<picture_height;i++){\r\n uart_putchar(UARTn,left_line[i];\r\n uart_putchar(UARTn,center_line[i];\r\n uart_putchar(UARTn,right_line[i];}";
+            textBoxReceivingArea.Text = "灰度图像：\r\n\r\n uint8 frame_head[]={1,254,254,1};\r\n uart_putbuff(UARTn,frame_head,4);\r\n uart_putbuff(UARTn,image,image_size);\r\n\r\n鹰眼二值化(压缩图像)：\r\n 同灰度图像\r\n\r\n三点赛道：\r\n uint8 frame_head[]={1,254,254,1};\r\n uart_putbuff(UARTn,frame_head,4);\r\n uart_putchar(UARTn,effective_line);\r\n for(int i=0;i<picture_height;i++){\r\n uart_putchar(UARTn,left_line[i];\r\n uart_putchar(UARTn,center_line[i];\r\n uart_putchar(UARTn,right_line[i];}\r\n\r\n速度曲线加三点赛道：\r\n 在三点赛道的通信协议中的发送有效行之前发送速度即可";
         }
 
         private void goldenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -752,7 +765,7 @@ namespace SerialPortDebug
         {
             if(checkBoxIsWave.Checked)
             {
-                //fr_wave.Show();
+                fr_wave.Show();
             }
         }
 
@@ -776,6 +789,14 @@ namespace SerialPortDebug
             if (toolTipPicColumnRow.GetToolTip(pictureBoxShow) != (((int)(Pixel_x + 1)).ToString() + "," + ((int)(Pixel_y)).ToString()))
             {
                 toolTipPicColumnRow.SetToolTip(pictureBoxShow, ((int)(Pixel_x + 1)).ToString() + "," + ((int)(Pixel_y)).ToString());
+            }
+        }
+
+        private void checkBoxWaveImage_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxWaveImage.Checked)
+            {
+                fr_wave.Show();
             }
         }
     }
