@@ -259,6 +259,7 @@ namespace SerialPortDebug
             }
         }
 
+        public static int grayImage_finish_flag=0;
         public static void GrayImage_Deal(byte data)    //处理灰度图像
         {
             camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(data, data, data)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
@@ -276,17 +277,7 @@ namespace SerialPortDebug
             {
                 image_row_count = 0;
                 image_get_flag = 0;
-                fr1.Invoke((EventHandler)(delegate
-                {
-                    fr1.pictureBoxShow.Refresh();
-                    if (fr1.checkBoxAutoSaveImage.Checked)
-                    {
-                        string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
-                        fr1.pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                        fr1.toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
-                        Image_save_Num++;
-                    }
-                }));
+                grayImage_finish_flag = 1;
             }
         }
         /*------------------------------------------以上是图像处理部分------------------------------------------------------*/

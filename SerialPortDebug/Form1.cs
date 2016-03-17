@@ -83,6 +83,33 @@ namespace SerialPortDebug
             }
         }
 
+        public void Init_Serialport()
+        {
+            //---------获取串口号--------//
+            if (Serialport.portname_str.Length > 0)
+            {
+                comboBoxCom.SelectedText = Serialport.portname_str[0];
+                foreach (string s in Serialport.portname_str)
+                    comboBoxCom.Items.Add(s);
+            }
+            //--------选择波特率--------//
+            comboBoxBaudRate.SelectedText = "115200";
+            foreach (int baudrate in Serialport.BaudRates)
+                comboBoxBaudRate.Items.Add(baudrate);
+            //--------选择数据位--------//
+            comboBoxByteSize.SelectedText = "8";
+            foreach (int bytesize in Serialport.bytesizes)
+                comboBoxByteSize.Items.Add(bytesize);
+            //--------选择校验位-------//
+            comboBoxParity.SelectedText = "0";
+            foreach (int parity in Serialport.parities)
+                comboBoxParity.Items.Add(parity);
+            //---------选择停止位---------//
+            comboBoxStopBits.SelectedText = "1";
+            foreach (int stopbit in Serialport.stopbits)
+                comboBoxStopBits.Items.Add(stopbit);
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             if (!fm_safety.Check_IsRegister())
@@ -98,7 +125,7 @@ namespace SerialPortDebug
             image_width = my_file.SetImage_Width();
             image_height = my_file.SetImage_Height();
             this.DoubleBuffered = true;
-            Serialport.Init_Serialport();
+            Init_Serialport();
             
             buttonSend.Enabled = false;
             buttonAutoSend.Enabled = false;
@@ -273,9 +300,24 @@ namespace SerialPortDebug
                             MyImage.ThreePointTrack_Deal(data);
                         }
                     }
-                    else
+                    else   //灰度图像
                     {
                         MyImage.GrayImage_Deal(data);
+                        if (MyImage.grayImage_finish_flag == 1)
+                        {
+                            this.Invoke((EventHandler)(delegate
+                            {
+                                pictureBoxShow.Refresh();
+                                if (checkBoxAutoSaveImage.Checked)
+                                {
+                                    string Image_save_name = Convert.ToString(MyImage.Image_save_Num) + ".bmp";
+                                    pictureBoxShow.Image.Save(MyImage.Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                                    toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
+                                    MyImage.Image_save_Num++;
+                                }
+                            }));
+                            MyImage.grayImage_finish_flag = 0;
+                        }
                     }
                 }
             }

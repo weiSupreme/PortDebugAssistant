@@ -40,11 +40,6 @@
             this.labelByteSize = new System.Windows.Forms.Label();
             this.labelBaudRate = new System.Windows.Forms.Label();
             this.labelCom = new System.Windows.Forms.Label();
-            this.groupBoxConfiguration = new System.Windows.Forms.GroupBox();
-            this.checkBoxSendEndEnter = new System.Windows.Forms.CheckBox();
-            this.checkBoxAutoClearReceivingBox = new System.Windows.Forms.CheckBox();
-            this.checkBoxHexSend = new System.Windows.Forms.CheckBox();
-            this.checkBoxHexShow = new System.Windows.Forms.CheckBox();
             this.groupBoxReceivingArea = new System.Windows.Forms.GroupBox();
             this.listBoxImageList = new System.Windows.Forms.ListBox();
             this.textBoxReceivingArea = new System.Windows.Forms.TextBox();
@@ -110,8 +105,28 @@
             this.ToolStripMenuItemCommunicationAgreement = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemRefreshNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxSyetemTime = new System.Windows.Forms.CheckBox();
+            this.ToolStripMenuItemCommuniMethods = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemSerialPort = new System.Windows.Forms.ToolStripMenuItem();
+            this.WifiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelLocalIP = new System.Windows.Forms.Label();
+            this.checkBoxHexShow = new System.Windows.Forms.CheckBox();
+            this.checkBoxHexSend = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoClearReceivingBox = new System.Windows.Forms.CheckBox();
+            this.checkBoxSendEndEnter = new System.Windows.Forms.CheckBox();
+            this.groupBoxConfiguration = new System.Windows.Forms.GroupBox();
+            this.groupBoxWifiSettings = new System.Windows.Forms.GroupBox();
+            this.labelServerIP = new System.Windows.Forms.Label();
+            this.textBoxServerIP = new System.Windows.Forms.TextBox();
+            this.labelServerPortNum = new System.Windows.Forms.Label();
+            this.textBoxServerPortNum = new System.Windows.Forms.TextBox();
+            this.tCPClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tCPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBoxLocalIP = new System.Windows.Forms.TextBox();
+            this.labelLocalPortNum = new System.Windows.Forms.Label();
+            this.textBoxLocalPortNum = new System.Windows.Forms.TextBox();
+            this.labelMaxClientNum = new System.Windows.Forms.Label();
+            this.textBoxMaxClientNum = new System.Windows.Forms.TextBox();
             this.groupBoxInitialization.SuspendLayout();
-            this.groupBoxConfiguration.SuspendLayout();
             this.groupBoxReceivingArea.SuspendLayout();
             this.groupBoxSendingArea.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -122,6 +137,8 @@
             this.groupBoxPicConfig.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.groupBoxConfiguration.SuspendLayout();
+            this.groupBoxWifiSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxInitialization
@@ -137,7 +154,7 @@
             this.groupBoxInitialization.Controls.Add(this.labelBaudRate);
             this.groupBoxInitialization.Controls.Add(this.labelCom);
             this.groupBoxInitialization.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBoxInitialization.Location = new System.Drawing.Point(1, 28);
+            this.groupBoxInitialization.Location = new System.Drawing.Point(0, 0);
             this.groupBoxInitialization.Name = "groupBoxInitialization";
             this.groupBoxInitialization.Size = new System.Drawing.Size(182, 178);
             this.groupBoxInitialization.TabIndex = 0;
@@ -146,26 +163,29 @@
             // 
             // comboBoxStopBits
             // 
+            this.comboBoxStopBits.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBoxStopBits.FormattingEnabled = true;
             this.comboBoxStopBits.Location = new System.Drawing.Point(84, 145);
             this.comboBoxStopBits.Name = "comboBoxStopBits";
-            this.comboBoxStopBits.Size = new System.Drawing.Size(84, 24);
+            this.comboBoxStopBits.Size = new System.Drawing.Size(84, 27);
             this.comboBoxStopBits.TabIndex = 9;
             // 
             // comboBoxParity
             // 
+            this.comboBoxParity.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBoxParity.FormattingEnabled = true;
             this.comboBoxParity.Location = new System.Drawing.Point(84, 112);
             this.comboBoxParity.Name = "comboBoxParity";
-            this.comboBoxParity.Size = new System.Drawing.Size(84, 24);
+            this.comboBoxParity.Size = new System.Drawing.Size(84, 27);
             this.comboBoxParity.TabIndex = 8;
             // 
             // comboBoxByteSize
             // 
+            this.comboBoxByteSize.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBoxByteSize.FormattingEnabled = true;
             this.comboBoxByteSize.Location = new System.Drawing.Point(84, 79);
             this.comboBoxByteSize.Name = "comboBoxByteSize";
-            this.comboBoxByteSize.Size = new System.Drawing.Size(84, 24);
+            this.comboBoxByteSize.Size = new System.Drawing.Size(84, 27);
             this.comboBoxByteSize.TabIndex = 7;
             // 
             // comboBoxBaudRate
@@ -236,62 +256,6 @@
             this.labelCom.Size = new System.Drawing.Size(66, 19);
             this.labelCom.TabIndex = 0;
             this.labelCom.Text = "端口号";
-            // 
-            // groupBoxConfiguration
-            // 
-            this.groupBoxConfiguration.Controls.Add(this.checkBoxSendEndEnter);
-            this.groupBoxConfiguration.Controls.Add(this.checkBoxAutoClearReceivingBox);
-            this.groupBoxConfiguration.Controls.Add(this.checkBoxHexSend);
-            this.groupBoxConfiguration.Controls.Add(this.checkBoxHexShow);
-            this.groupBoxConfiguration.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBoxConfiguration.Location = new System.Drawing.Point(0, 212);
-            this.groupBoxConfiguration.Name = "groupBoxConfiguration";
-            this.groupBoxConfiguration.Size = new System.Drawing.Size(182, 142);
-            this.groupBoxConfiguration.TabIndex = 1;
-            this.groupBoxConfiguration.TabStop = false;
-            this.groupBoxConfiguration.Text = "配置";
-            // 
-            // checkBoxSendEndEnter
-            // 
-            this.checkBoxSendEndEnter.AutoSize = true;
-            this.checkBoxSendEndEnter.Location = new System.Drawing.Point(16, 115);
-            this.checkBoxSendEndEnter.Name = "checkBoxSendEndEnter";
-            this.checkBoxSendEndEnter.Size = new System.Drawing.Size(123, 20);
-            this.checkBoxSendEndEnter.TabIndex = 3;
-            this.checkBoxSendEndEnter.Text = "发送末行回车";
-            this.checkBoxSendEndEnter.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxAutoClearReceivingBox
-            // 
-            this.checkBoxAutoClearReceivingBox.AutoSize = true;
-            this.checkBoxAutoClearReceivingBox.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBoxAutoClearReceivingBox.Location = new System.Drawing.Point(16, 86);
-            this.checkBoxAutoClearReceivingBox.Name = "checkBoxAutoClearReceivingBox";
-            this.checkBoxAutoClearReceivingBox.Size = new System.Drawing.Size(123, 20);
-            this.checkBoxAutoClearReceivingBox.TabIndex = 2;
-            this.checkBoxAutoClearReceivingBox.Text = "自动清空接收";
-            this.checkBoxAutoClearReceivingBox.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxHexSend
-            // 
-            this.checkBoxHexSend.AutoSize = true;
-            this.checkBoxHexSend.Location = new System.Drawing.Point(16, 57);
-            this.checkBoxHexSend.Name = "checkBoxHexSend";
-            this.checkBoxHexSend.Size = new System.Drawing.Size(123, 20);
-            this.checkBoxHexSend.TabIndex = 1;
-            this.checkBoxHexSend.Text = "十六进制发送";
-            this.checkBoxHexSend.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxHexShow
-            // 
-            this.checkBoxHexShow.AutoSize = true;
-            this.checkBoxHexShow.Location = new System.Drawing.Point(16, 28);
-            this.checkBoxHexShow.Name = "checkBoxHexShow";
-            this.checkBoxHexShow.Size = new System.Drawing.Size(123, 20);
-            this.checkBoxHexShow.TabIndex = 0;
-            this.checkBoxHexShow.Text = "十六进制显示";
-            this.checkBoxHexShow.UseVisualStyleBackColor = true;
-            this.checkBoxHexShow.CheckedChanged += new System.EventHandler(this.checkBoxHexShow_CheckedChanged);
             // 
             // groupBoxReceivingArea
             // 
@@ -774,6 +738,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemCommuniMethods,
             this.界面颜色ToolStripMenuItem,
             this.ToolStripMenuItemAbout});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -804,7 +769,7 @@
             // 
             this.redToolStripMenuItem.BackColor = System.Drawing.Color.Red;
             this.redToolStripMenuItem.Name = "redToolStripMenuItem";
-            this.redToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.redToolStripMenuItem.Text = "Red";
             this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
             // 
@@ -812,7 +777,7 @@
             // 
             this.oringeToolStripMenuItem.BackColor = System.Drawing.Color.Orange;
             this.oringeToolStripMenuItem.Name = "oringeToolStripMenuItem";
-            this.oringeToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.oringeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.oringeToolStripMenuItem.Text = "Orange";
             this.oringeToolStripMenuItem.Click += new System.EventHandler(this.oringeToolStripMenuItem_Click);
             // 
@@ -820,7 +785,7 @@
             // 
             this.yellowToolStripMenuItem.BackColor = System.Drawing.Color.Yellow;
             this.yellowToolStripMenuItem.Name = "yellowToolStripMenuItem";
-            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.yellowToolStripMenuItem.Text = "Yellow";
             this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
             // 
@@ -828,7 +793,7 @@
             // 
             this.greenToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.greenToolStripMenuItem.Name = "greenToolStripMenuItem";
-            this.greenToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.greenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.greenToolStripMenuItem.Text = "Green";
             this.greenToolStripMenuItem.Click += new System.EventHandler(this.greenToolStripMenuItem_Click);
             // 
@@ -836,7 +801,7 @@
             // 
             this.goldToolStripMenuItem.BackColor = System.Drawing.Color.Gold;
             this.goldToolStripMenuItem.Name = "goldToolStripMenuItem";
-            this.goldToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.goldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.goldToolStripMenuItem.Text = "Gold";
             this.goldToolStripMenuItem.Click += new System.EventHandler(this.goldenToolStripMenuItem_Click);
             // 
@@ -844,7 +809,7 @@
             // 
             this.grayToolStripMenuItem.BackColor = System.Drawing.Color.Gray;
             this.grayToolStripMenuItem.Name = "grayToolStripMenuItem";
-            this.grayToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.grayToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.grayToolStripMenuItem.Text = "Gray";
             this.grayToolStripMenuItem.Click += new System.EventHandler(this.grayToolStripMenuItem_Click);
             // 
@@ -852,7 +817,7 @@
             // 
             this.blueToolStripMenuItem.BackColor = System.Drawing.Color.Blue;
             this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
-            this.blueToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.blueToolStripMenuItem.Text = "Blue";
             this.blueToolStripMenuItem.Click += new System.EventHandler(this.blueToolStripMenuItem_Click);
             // 
@@ -860,7 +825,7 @@
             // 
             this.pinkToolStripMenuItem.BackColor = System.Drawing.Color.LightPink;
             this.pinkToolStripMenuItem.Name = "pinkToolStripMenuItem";
-            this.pinkToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.pinkToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pinkToolStripMenuItem.Text = "Pink";
             this.pinkToolStripMenuItem.Click += new System.EventHandler(this.pinkToolStripMenuItem_Click);
             // 
@@ -868,21 +833,21 @@
             // 
             this.whitesmokeToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
             this.whitesmokeToolStripMenuItem.Name = "whitesmokeToolStripMenuItem";
-            this.whitesmokeToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.whitesmokeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.whitesmokeToolStripMenuItem.Text = "WhiteSmoke";
             this.whitesmokeToolStripMenuItem.Click += new System.EventHandler(this.whitesmokeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // picturegridToolStripMenuItem
             // 
             this.picturegridToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picturegridToolStripMenuItem.Image = global::SerialPortDebug.Properties.Resources.方格;
             this.picturegridToolStripMenuItem.Name = "picturegridToolStripMenuItem";
-            this.picturegridToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.picturegridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.picturegridToolStripMenuItem.Text = "图像栅格显示";
             this.picturegridToolStripMenuItem.Click += new System.EventHandler(this.picturegridToolStripMenuItem_Click);
             // 
@@ -929,6 +894,211 @@
             this.checkBoxSyetemTime.UseVisualStyleBackColor = false;
             this.checkBoxSyetemTime.CheckedChanged += new System.EventHandler(this.checkBoxSyetemTime_CheckedChanged);
             // 
+            // ToolStripMenuItemCommuniMethods
+            // 
+            this.ToolStripMenuItemCommuniMethods.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemSerialPort,
+            this.WifiToolStripMenuItem});
+            this.ToolStripMenuItemCommuniMethods.Name = "ToolStripMenuItemCommuniMethods";
+            this.ToolStripMenuItemCommuniMethods.Size = new System.Drawing.Size(68, 21);
+            this.ToolStripMenuItemCommuniMethods.Text = "通信方式";
+            // 
+            // ToolStripMenuItemSerialPort
+            // 
+            this.ToolStripMenuItemSerialPort.Name = "ToolStripMenuItemSerialPort";
+            this.ToolStripMenuItemSerialPort.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemSerialPort.Text = "串口通信";
+            // 
+            // WifiToolStripMenuItem
+            // 
+            this.WifiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tCPClientToolStripMenuItem,
+            this.tCPServerToolStripMenuItem});
+            this.WifiToolStripMenuItem.Name = "WifiToolStripMenuItem";
+            this.WifiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.WifiToolStripMenuItem.Text = "WIFI通信";
+            // 
+            // labelLocalIP
+            // 
+            this.labelLocalIP.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLocalIP.Location = new System.Drawing.Point(5, 22);
+            this.labelLocalIP.Name = "labelLocalIP";
+            this.labelLocalIP.Size = new System.Drawing.Size(59, 25);
+            this.labelLocalIP.TabIndex = 10;
+            this.labelLocalIP.Text = "本机ip";
+            // 
+            // checkBoxHexShow
+            // 
+            this.checkBoxHexShow.AutoSize = true;
+            this.checkBoxHexShow.Location = new System.Drawing.Point(16, 28);
+            this.checkBoxHexShow.Name = "checkBoxHexShow";
+            this.checkBoxHexShow.Size = new System.Drawing.Size(123, 20);
+            this.checkBoxHexShow.TabIndex = 0;
+            this.checkBoxHexShow.Text = "十六进制显示";
+            this.checkBoxHexShow.UseVisualStyleBackColor = true;
+            this.checkBoxHexShow.CheckedChanged += new System.EventHandler(this.checkBoxHexShow_CheckedChanged);
+            // 
+            // checkBoxHexSend
+            // 
+            this.checkBoxHexSend.AutoSize = true;
+            this.checkBoxHexSend.Location = new System.Drawing.Point(16, 57);
+            this.checkBoxHexSend.Name = "checkBoxHexSend";
+            this.checkBoxHexSend.Size = new System.Drawing.Size(123, 20);
+            this.checkBoxHexSend.TabIndex = 1;
+            this.checkBoxHexSend.Text = "十六进制发送";
+            this.checkBoxHexSend.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAutoClearReceivingBox
+            // 
+            this.checkBoxAutoClearReceivingBox.AutoSize = true;
+            this.checkBoxAutoClearReceivingBox.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBoxAutoClearReceivingBox.Location = new System.Drawing.Point(16, 86);
+            this.checkBoxAutoClearReceivingBox.Name = "checkBoxAutoClearReceivingBox";
+            this.checkBoxAutoClearReceivingBox.Size = new System.Drawing.Size(123, 20);
+            this.checkBoxAutoClearReceivingBox.TabIndex = 2;
+            this.checkBoxAutoClearReceivingBox.Text = "自动清空接收";
+            this.checkBoxAutoClearReceivingBox.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSendEndEnter
+            // 
+            this.checkBoxSendEndEnter.AutoSize = true;
+            this.checkBoxSendEndEnter.Location = new System.Drawing.Point(16, 115);
+            this.checkBoxSendEndEnter.Name = "checkBoxSendEndEnter";
+            this.checkBoxSendEndEnter.Size = new System.Drawing.Size(123, 20);
+            this.checkBoxSendEndEnter.TabIndex = 3;
+            this.checkBoxSendEndEnter.Text = "发送末行回车";
+            this.checkBoxSendEndEnter.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxConfiguration
+            // 
+            this.groupBoxConfiguration.Controls.Add(this.checkBoxSendEndEnter);
+            this.groupBoxConfiguration.Controls.Add(this.checkBoxAutoClearReceivingBox);
+            this.groupBoxConfiguration.Controls.Add(this.checkBoxHexSend);
+            this.groupBoxConfiguration.Controls.Add(this.checkBoxHexShow);
+            this.groupBoxConfiguration.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBoxConfiguration.Location = new System.Drawing.Point(0, 212);
+            this.groupBoxConfiguration.Name = "groupBoxConfiguration";
+            this.groupBoxConfiguration.Size = new System.Drawing.Size(182, 142);
+            this.groupBoxConfiguration.TabIndex = 1;
+            this.groupBoxConfiguration.TabStop = false;
+            this.groupBoxConfiguration.Text = "配置";
+            // 
+            // groupBoxWifiSettings
+            // 
+            this.groupBoxWifiSettings.Controls.Add(this.groupBoxInitialization);
+            this.groupBoxWifiSettings.Controls.Add(this.textBoxMaxClientNum);
+            this.groupBoxWifiSettings.Controls.Add(this.labelMaxClientNum);
+            this.groupBoxWifiSettings.Controls.Add(this.textBoxLocalPortNum);
+            this.groupBoxWifiSettings.Controls.Add(this.labelLocalPortNum);
+            this.groupBoxWifiSettings.Controls.Add(this.textBoxLocalIP);
+            this.groupBoxWifiSettings.Controls.Add(this.textBoxServerPortNum);
+            this.groupBoxWifiSettings.Controls.Add(this.labelServerPortNum);
+            this.groupBoxWifiSettings.Controls.Add(this.textBoxServerIP);
+            this.groupBoxWifiSettings.Controls.Add(this.labelServerIP);
+            this.groupBoxWifiSettings.Controls.Add(this.labelLocalIP);
+            this.groupBoxWifiSettings.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBoxWifiSettings.Location = new System.Drawing.Point(0, 28);
+            this.groupBoxWifiSettings.Name = "groupBoxWifiSettings";
+            this.groupBoxWifiSettings.Size = new System.Drawing.Size(182, 178);
+            this.groupBoxWifiSettings.TabIndex = 15;
+            this.groupBoxWifiSettings.TabStop = false;
+            this.groupBoxWifiSettings.Text = "初始化";
+            // 
+            // labelServerIP
+            // 
+            this.labelServerIP.AutoSize = true;
+            this.labelServerIP.Location = new System.Drawing.Point(5, 117);
+            this.labelServerIP.Name = "labelServerIP";
+            this.labelServerIP.Size = new System.Drawing.Size(72, 16);
+            this.labelServerIP.TabIndex = 13;
+            this.labelServerIP.Text = "服务器ip";
+            this.labelServerIP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBoxServerIP
+            // 
+            this.textBoxServerIP.Enabled = false;
+            this.textBoxServerIP.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxServerIP.Location = new System.Drawing.Point(75, 114);
+            this.textBoxServerIP.Name = "textBoxServerIP";
+            this.textBoxServerIP.Size = new System.Drawing.Size(100, 23);
+            this.textBoxServerIP.TabIndex = 14;
+            // 
+            // labelServerPortNum
+            // 
+            this.labelServerPortNum.AutoSize = true;
+            this.labelServerPortNum.Location = new System.Drawing.Point(8, 149);
+            this.labelServerPortNum.Name = "labelServerPortNum";
+            this.labelServerPortNum.Size = new System.Drawing.Size(88, 16);
+            this.labelServerPortNum.TabIndex = 15;
+            this.labelServerPortNum.Text = "服务器端口";
+            // 
+            // textBoxServerPortNum
+            // 
+            this.textBoxServerPortNum.Enabled = false;
+            this.textBoxServerPortNum.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxServerPortNum.Location = new System.Drawing.Point(100, 146);
+            this.textBoxServerPortNum.Name = "textBoxServerPortNum";
+            this.textBoxServerPortNum.Size = new System.Drawing.Size(76, 29);
+            this.textBoxServerPortNum.TabIndex = 16;
+            // 
+            // tCPClientToolStripMenuItem
+            // 
+            this.tCPClientToolStripMenuItem.Name = "tCPClientToolStripMenuItem";
+            this.tCPClientToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tCPClientToolStripMenuItem.Text = "TCP Client";
+            // 
+            // tCPServerToolStripMenuItem
+            // 
+            this.tCPServerToolStripMenuItem.Name = "tCPServerToolStripMenuItem";
+            this.tCPServerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tCPServerToolStripMenuItem.Text = "TCP Server";
+            // 
+            // textBoxLocalIP
+            // 
+            this.textBoxLocalIP.Enabled = false;
+            this.textBoxLocalIP.Location = new System.Drawing.Point(58, 17);
+            this.textBoxLocalIP.Name = "textBoxLocalIP";
+            this.textBoxLocalIP.Size = new System.Drawing.Size(118, 26);
+            this.textBoxLocalIP.TabIndex = 17;
+            this.textBoxLocalIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // labelLocalPortNum
+            // 
+            this.labelLocalPortNum.AutoSize = true;
+            this.labelLocalPortNum.Location = new System.Drawing.Point(5, 54);
+            this.labelLocalPortNum.Name = "labelLocalPortNum";
+            this.labelLocalPortNum.Size = new System.Drawing.Size(88, 16);
+            this.labelLocalPortNum.TabIndex = 18;
+            this.labelLocalPortNum.Text = "本机端口号";
+            this.labelLocalPortNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBoxLocalPortNum
+            // 
+            this.textBoxLocalPortNum.Enabled = false;
+            this.textBoxLocalPortNum.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxLocalPortNum.Location = new System.Drawing.Point(100, 49);
+            this.textBoxLocalPortNum.Name = "textBoxLocalPortNum";
+            this.textBoxLocalPortNum.Size = new System.Drawing.Size(75, 29);
+            this.textBoxLocalPortNum.TabIndex = 19;
+            // 
+            // labelMaxClientNum
+            // 
+            this.labelMaxClientNum.AutoSize = true;
+            this.labelMaxClientNum.Location = new System.Drawing.Point(6, 84);
+            this.labelMaxClientNum.Name = "labelMaxClientNum";
+            this.labelMaxClientNum.Size = new System.Drawing.Size(88, 16);
+            this.labelMaxClientNum.TabIndex = 20;
+            this.labelMaxClientNum.Text = "最大连接数";
+            // 
+            // textBoxMaxClientNum
+            // 
+            this.textBoxMaxClientNum.Enabled = false;
+            this.textBoxMaxClientNum.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxMaxClientNum.Location = new System.Drawing.Point(99, 81);
+            this.textBoxMaxClientNum.Name = "textBoxMaxClientNum";
+            this.textBoxMaxClientNum.Size = new System.Drawing.Size(76, 29);
+            this.textBoxMaxClientNum.TabIndex = 21;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -936,6 +1106,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(1187, 629);
             this.Controls.Add(this.checkBoxSyetemTime);
+            this.Controls.Add(this.groupBoxWifiSettings);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.buttonOpenCom);
             this.Controls.Add(this.menuStrip1);
@@ -946,7 +1117,6 @@
             this.Controls.Add(this.groupBoxSendingArea);
             this.Controls.Add(this.groupBoxReceivingArea);
             this.Controls.Add(this.groupBoxConfiguration);
-            this.Controls.Add(this.groupBoxInitialization);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
@@ -958,8 +1128,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBoxInitialization.ResumeLayout(false);
             this.groupBoxInitialization.PerformLayout();
-            this.groupBoxConfiguration.ResumeLayout(false);
-            this.groupBoxConfiguration.PerformLayout();
             this.groupBoxReceivingArea.ResumeLayout(false);
             this.groupBoxReceivingArea.PerformLayout();
             this.groupBoxSendingArea.ResumeLayout(false);
@@ -977,6 +1145,10 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBoxConfiguration.ResumeLayout(false);
+            this.groupBoxConfiguration.PerformLayout();
+            this.groupBoxWifiSettings.ResumeLayout(false);
+            this.groupBoxWifiSettings.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -990,11 +1162,6 @@
         private System.Windows.Forms.Label labelCom;
         private System.Windows.Forms.Label labelStopBits;
         private System.Windows.Forms.Label labelParity;
-        private System.Windows.Forms.GroupBox groupBoxConfiguration;
-        private System.Windows.Forms.CheckBox checkBoxSendEndEnter;
-        private System.Windows.Forms.CheckBox checkBoxAutoClearReceivingBox;
-        private System.Windows.Forms.CheckBox checkBoxHexSend;
-        private System.Windows.Forms.CheckBox checkBoxHexShow;
         private System.Windows.Forms.GroupBox groupBoxReceivingArea;
         private System.Windows.Forms.GroupBox groupBoxSendingArea;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1058,16 +1225,37 @@
         public System.Windows.Forms.PictureBox pictureBoxShow1;
         public System.Windows.Forms.CheckBox checkBoxAutoSaveImage;
         private System.Windows.Forms.Button buttonAutoShowImage;
-        public System.Windows.Forms.ComboBox comboBoxCom;
-        public System.Windows.Forms.ComboBox comboBoxStopBits;
-        public System.Windows.Forms.ComboBox comboBoxParity;
-        public System.Windows.Forms.ComboBox comboBoxByteSize;
-        public System.Windows.Forms.ComboBox comboBoxBaudRate;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelMessage;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelTime;
         private System.Windows.Forms.CheckBox checkBoxSyetemTime;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCommuniMethods;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemSerialPort;
+        private System.Windows.Forms.ToolStripMenuItem WifiToolStripMenuItem;
+        private System.Windows.Forms.Label labelLocalIP;
+        private System.Windows.Forms.CheckBox checkBoxHexShow;
+        private System.Windows.Forms.CheckBox checkBoxHexSend;
+        private System.Windows.Forms.CheckBox checkBoxAutoClearReceivingBox;
+        private System.Windows.Forms.CheckBox checkBoxSendEndEnter;
+        private System.Windows.Forms.GroupBox groupBoxConfiguration;
+        private System.Windows.Forms.GroupBox groupBoxWifiSettings;
+        private System.Windows.Forms.ToolStripMenuItem tCPClientToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tCPServerToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBoxLocalIP;
+        private System.Windows.Forms.TextBox textBoxServerPortNum;
+        private System.Windows.Forms.Label labelServerPortNum;
+        private System.Windows.Forms.TextBox textBoxServerIP;
+        private System.Windows.Forms.Label labelServerIP;
+        private System.Windows.Forms.TextBox textBoxMaxClientNum;
+        private System.Windows.Forms.Label labelMaxClientNum;
+        private System.Windows.Forms.TextBox textBoxLocalPortNum;
+        private System.Windows.Forms.Label labelLocalPortNum;
+        private System.Windows.Forms.ComboBox comboBoxCom;
+        private System.Windows.Forms.ComboBox comboBoxStopBits;
+        private System.Windows.Forms.ComboBox comboBoxParity;
+        private System.Windows.Forms.ComboBox comboBoxByteSize;
+        private System.Windows.Forms.ComboBox comboBoxBaudRate;
     }
 }
 
