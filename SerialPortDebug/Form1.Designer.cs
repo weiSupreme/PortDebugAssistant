@@ -88,6 +88,11 @@
             this.toolStripStatusLabelTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ToolStripMenuItemCommuniMethods = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemSerialPort = new System.Windows.Forms.ToolStripMenuItem();
+            this.WifiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tCPClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tCPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.界面颜色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oringeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,9 +110,6 @@
             this.ToolStripMenuItemCommunicationAgreement = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemRefreshNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxSyetemTime = new System.Windows.Forms.CheckBox();
-            this.ToolStripMenuItemCommuniMethods = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemSerialPort = new System.Windows.Forms.ToolStripMenuItem();
-            this.WifiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelLocalIP = new System.Windows.Forms.Label();
             this.checkBoxHexShow = new System.Windows.Forms.CheckBox();
             this.checkBoxHexSend = new System.Windows.Forms.CheckBox();
@@ -115,17 +117,18 @@
             this.checkBoxSendEndEnter = new System.Windows.Forms.CheckBox();
             this.groupBoxConfiguration = new System.Windows.Forms.GroupBox();
             this.groupBoxWifiSettings = new System.Windows.Forms.GroupBox();
-            this.labelServerIP = new System.Windows.Forms.Label();
-            this.textBoxServerIP = new System.Windows.Forms.TextBox();
-            this.labelServerPortNum = new System.Windows.Forms.Label();
-            this.textBoxServerPortNum = new System.Windows.Forms.TextBox();
-            this.tCPClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tCPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBoxLocalIP = new System.Windows.Forms.TextBox();
-            this.labelLocalPortNum = new System.Windows.Forms.Label();
-            this.textBoxLocalPortNum = new System.Windows.Forms.TextBox();
-            this.labelMaxClientNum = new System.Windows.Forms.Label();
             this.textBoxMaxClientNum = new System.Windows.Forms.TextBox();
+            this.labelMaxClientNum = new System.Windows.Forms.Label();
+            this.textBoxLocalPortNum = new System.Windows.Forms.TextBox();
+            this.labelLocalPortNum = new System.Windows.Forms.Label();
+            this.textBoxLocalIP = new System.Windows.Forms.TextBox();
+            this.textBoxServerPortNum = new System.Windows.Forms.TextBox();
+            this.labelServerPortNum = new System.Windows.Forms.Label();
+            this.textBoxServerIP = new System.Windows.Forms.TextBox();
+            this.labelServerIP = new System.Windows.Forms.Label();
+            this.buttonWifiStart = new System.Windows.Forms.Button();
+            this.buttonWifiStop = new System.Windows.Forms.Button();
+            this.SocketConnectTimeOut = new System.Windows.Forms.Timer(this.components);
             this.groupBoxInitialization.SuspendLayout();
             this.groupBoxReceivingArea.SuspendLayout();
             this.groupBoxSendingArea.SuspendLayout();
@@ -212,18 +215,20 @@
             // labelStopBits
             // 
             this.labelStopBits.AutoSize = true;
+            this.labelStopBits.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelStopBits.Location = new System.Drawing.Point(12, 148);
             this.labelStopBits.Name = "labelStopBits";
-            this.labelStopBits.Size = new System.Drawing.Size(56, 16);
+            this.labelStopBits.Size = new System.Drawing.Size(66, 19);
             this.labelStopBits.TabIndex = 4;
             this.labelStopBits.Text = "停止位";
             // 
             // labelParity
             // 
             this.labelParity.AutoSize = true;
+            this.labelParity.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelParity.Location = new System.Drawing.Point(12, 115);
             this.labelParity.Name = "labelParity";
-            this.labelParity.Size = new System.Drawing.Size(56, 16);
+            this.labelParity.Size = new System.Drawing.Size(66, 19);
             this.labelParity.TabIndex = 3;
             this.labelParity.Text = "校验位";
             // 
@@ -573,6 +578,7 @@
             // checkBoxWaveImage
             // 
             this.checkBoxWaveImage.AutoSize = true;
+            this.checkBoxWaveImage.Enabled = false;
             this.checkBoxWaveImage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBoxWaveImage.Location = new System.Drawing.Point(946, 15);
             this.checkBoxWaveImage.Name = "checkBoxWaveImage";
@@ -717,7 +723,8 @@
             this.toolStripStatusLabelMessage.AutoSize = false;
             this.toolStripStatusLabelMessage.BackColor = System.Drawing.Color.Transparent;
             this.toolStripStatusLabelMessage.Name = "toolStripStatusLabelMessage";
-            this.toolStripStatusLabelMessage.Size = new System.Drawing.Size(331, 17);
+            this.toolStripStatusLabelMessage.Size = new System.Drawing.Size(610, 17);
+            this.toolStripStatusLabelMessage.Text = "欢迎使用";
             // 
             // toolStripStatusLabelTime
             // 
@@ -747,6 +754,45 @@
             this.menuStrip1.TabIndex = 13;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // ToolStripMenuItemCommuniMethods
+            // 
+            this.ToolStripMenuItemCommuniMethods.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemSerialPort,
+            this.WifiToolStripMenuItem});
+            this.ToolStripMenuItemCommuniMethods.Name = "ToolStripMenuItemCommuniMethods";
+            this.ToolStripMenuItemCommuniMethods.Size = new System.Drawing.Size(68, 21);
+            this.ToolStripMenuItemCommuniMethods.Text = "通信方式";
+            // 
+            // ToolStripMenuItemSerialPort
+            // 
+            this.ToolStripMenuItemSerialPort.Name = "ToolStripMenuItemSerialPort";
+            this.ToolStripMenuItemSerialPort.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemSerialPort.Text = "串口通信";
+            this.ToolStripMenuItemSerialPort.Click += new System.EventHandler(this.ToolStripMenuItemSerialPort_Click);
+            // 
+            // WifiToolStripMenuItem
+            // 
+            this.WifiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tCPClientToolStripMenuItem,
+            this.tCPServerToolStripMenuItem});
+            this.WifiToolStripMenuItem.Name = "WifiToolStripMenuItem";
+            this.WifiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.WifiToolStripMenuItem.Text = "WIFI通信";
+            // 
+            // tCPClientToolStripMenuItem
+            // 
+            this.tCPClientToolStripMenuItem.Name = "tCPClientToolStripMenuItem";
+            this.tCPClientToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tCPClientToolStripMenuItem.Text = "TCP Client";
+            this.tCPClientToolStripMenuItem.Click += new System.EventHandler(this.tCPClientToolStripMenuItem_Click);
+            // 
+            // tCPServerToolStripMenuItem
+            // 
+            this.tCPServerToolStripMenuItem.Name = "tCPServerToolStripMenuItem";
+            this.tCPServerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tCPServerToolStripMenuItem.Text = "TCP Server";
+            this.tCPServerToolStripMenuItem.Click += new System.EventHandler(this.tCPServerToolStripMenuItem_Click);
+            // 
             // 界面颜色ToolStripMenuItem
             // 
             this.界面颜色ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -769,7 +815,7 @@
             // 
             this.redToolStripMenuItem.BackColor = System.Drawing.Color.Red;
             this.redToolStripMenuItem.Name = "redToolStripMenuItem";
-            this.redToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.redToolStripMenuItem.Text = "Red";
             this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
             // 
@@ -777,7 +823,7 @@
             // 
             this.oringeToolStripMenuItem.BackColor = System.Drawing.Color.Orange;
             this.oringeToolStripMenuItem.Name = "oringeToolStripMenuItem";
-            this.oringeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.oringeToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.oringeToolStripMenuItem.Text = "Orange";
             this.oringeToolStripMenuItem.Click += new System.EventHandler(this.oringeToolStripMenuItem_Click);
             // 
@@ -785,7 +831,7 @@
             // 
             this.yellowToolStripMenuItem.BackColor = System.Drawing.Color.Yellow;
             this.yellowToolStripMenuItem.Name = "yellowToolStripMenuItem";
-            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.yellowToolStripMenuItem.Text = "Yellow";
             this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
             // 
@@ -793,7 +839,7 @@
             // 
             this.greenToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.greenToolStripMenuItem.Name = "greenToolStripMenuItem";
-            this.greenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.greenToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.greenToolStripMenuItem.Text = "Green";
             this.greenToolStripMenuItem.Click += new System.EventHandler(this.greenToolStripMenuItem_Click);
             // 
@@ -801,7 +847,7 @@
             // 
             this.goldToolStripMenuItem.BackColor = System.Drawing.Color.Gold;
             this.goldToolStripMenuItem.Name = "goldToolStripMenuItem";
-            this.goldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.goldToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.goldToolStripMenuItem.Text = "Gold";
             this.goldToolStripMenuItem.Click += new System.EventHandler(this.goldenToolStripMenuItem_Click);
             // 
@@ -809,7 +855,7 @@
             // 
             this.grayToolStripMenuItem.BackColor = System.Drawing.Color.Gray;
             this.grayToolStripMenuItem.Name = "grayToolStripMenuItem";
-            this.grayToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.grayToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.grayToolStripMenuItem.Text = "Gray";
             this.grayToolStripMenuItem.Click += new System.EventHandler(this.grayToolStripMenuItem_Click);
             // 
@@ -817,7 +863,7 @@
             // 
             this.blueToolStripMenuItem.BackColor = System.Drawing.Color.Blue;
             this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
-            this.blueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.blueToolStripMenuItem.Text = "Blue";
             this.blueToolStripMenuItem.Click += new System.EventHandler(this.blueToolStripMenuItem_Click);
             // 
@@ -825,7 +871,7 @@
             // 
             this.pinkToolStripMenuItem.BackColor = System.Drawing.Color.LightPink;
             this.pinkToolStripMenuItem.Name = "pinkToolStripMenuItem";
-            this.pinkToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pinkToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.pinkToolStripMenuItem.Text = "Pink";
             this.pinkToolStripMenuItem.Click += new System.EventHandler(this.pinkToolStripMenuItem_Click);
             // 
@@ -833,21 +879,21 @@
             // 
             this.whitesmokeToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
             this.whitesmokeToolStripMenuItem.Name = "whitesmokeToolStripMenuItem";
-            this.whitesmokeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.whitesmokeToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.whitesmokeToolStripMenuItem.Text = "WhiteSmoke";
             this.whitesmokeToolStripMenuItem.Click += new System.EventHandler(this.whitesmokeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
             // 
             // picturegridToolStripMenuItem
             // 
             this.picturegridToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picturegridToolStripMenuItem.Image = global::SerialPortDebug.Properties.Resources.方格;
             this.picturegridToolStripMenuItem.Name = "picturegridToolStripMenuItem";
-            this.picturegridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.picturegridToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.picturegridToolStripMenuItem.Text = "图像栅格显示";
             this.picturegridToolStripMenuItem.Click += new System.EventHandler(this.picturegridToolStripMenuItem_Click);
             // 
@@ -893,30 +939,6 @@
             this.checkBoxSyetemTime.Text = "显示时间";
             this.checkBoxSyetemTime.UseVisualStyleBackColor = false;
             this.checkBoxSyetemTime.CheckedChanged += new System.EventHandler(this.checkBoxSyetemTime_CheckedChanged);
-            // 
-            // ToolStripMenuItemCommuniMethods
-            // 
-            this.ToolStripMenuItemCommuniMethods.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItemSerialPort,
-            this.WifiToolStripMenuItem});
-            this.ToolStripMenuItemCommuniMethods.Name = "ToolStripMenuItemCommuniMethods";
-            this.ToolStripMenuItemCommuniMethods.Size = new System.Drawing.Size(68, 21);
-            this.ToolStripMenuItemCommuniMethods.Text = "通信方式";
-            // 
-            // ToolStripMenuItemSerialPort
-            // 
-            this.ToolStripMenuItemSerialPort.Name = "ToolStripMenuItemSerialPort";
-            this.ToolStripMenuItemSerialPort.Size = new System.Drawing.Size(152, 22);
-            this.ToolStripMenuItemSerialPort.Text = "串口通信";
-            // 
-            // WifiToolStripMenuItem
-            // 
-            this.WifiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tCPClientToolStripMenuItem,
-            this.tCPServerToolStripMenuItem});
-            this.WifiToolStripMenuItem.Name = "WifiToolStripMenuItem";
-            this.WifiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.WifiToolStripMenuItem.Text = "WIFI通信";
             // 
             // labelLocalIP
             // 
@@ -1004,63 +1026,32 @@
             this.groupBoxWifiSettings.TabStop = false;
             this.groupBoxWifiSettings.Text = "初始化";
             // 
-            // labelServerIP
+            // textBoxMaxClientNum
             // 
-            this.labelServerIP.AutoSize = true;
-            this.labelServerIP.Location = new System.Drawing.Point(5, 117);
-            this.labelServerIP.Name = "labelServerIP";
-            this.labelServerIP.Size = new System.Drawing.Size(72, 16);
-            this.labelServerIP.TabIndex = 13;
-            this.labelServerIP.Text = "服务器ip";
-            this.labelServerIP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.textBoxMaxClientNum.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxMaxClientNum.Location = new System.Drawing.Point(99, 81);
+            this.textBoxMaxClientNum.Name = "textBoxMaxClientNum";
+            this.textBoxMaxClientNum.Size = new System.Drawing.Size(76, 29);
+            this.textBoxMaxClientNum.TabIndex = 21;
+            this.textBoxMaxClientNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBoxServerIP
+            // labelMaxClientNum
             // 
-            this.textBoxServerIP.Enabled = false;
-            this.textBoxServerIP.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxServerIP.Location = new System.Drawing.Point(75, 114);
-            this.textBoxServerIP.Name = "textBoxServerIP";
-            this.textBoxServerIP.Size = new System.Drawing.Size(100, 23);
-            this.textBoxServerIP.TabIndex = 14;
+            this.labelMaxClientNum.AutoSize = true;
+            this.labelMaxClientNum.Location = new System.Drawing.Point(6, 84);
+            this.labelMaxClientNum.Name = "labelMaxClientNum";
+            this.labelMaxClientNum.Size = new System.Drawing.Size(88, 16);
+            this.labelMaxClientNum.TabIndex = 20;
+            this.labelMaxClientNum.Text = "最大连接数";
             // 
-            // labelServerPortNum
+            // textBoxLocalPortNum
             // 
-            this.labelServerPortNum.AutoSize = true;
-            this.labelServerPortNum.Location = new System.Drawing.Point(8, 149);
-            this.labelServerPortNum.Name = "labelServerPortNum";
-            this.labelServerPortNum.Size = new System.Drawing.Size(88, 16);
-            this.labelServerPortNum.TabIndex = 15;
-            this.labelServerPortNum.Text = "服务器端口";
-            // 
-            // textBoxServerPortNum
-            // 
-            this.textBoxServerPortNum.Enabled = false;
-            this.textBoxServerPortNum.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxServerPortNum.Location = new System.Drawing.Point(100, 146);
-            this.textBoxServerPortNum.Name = "textBoxServerPortNum";
-            this.textBoxServerPortNum.Size = new System.Drawing.Size(76, 29);
-            this.textBoxServerPortNum.TabIndex = 16;
-            // 
-            // tCPClientToolStripMenuItem
-            // 
-            this.tCPClientToolStripMenuItem.Name = "tCPClientToolStripMenuItem";
-            this.tCPClientToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.tCPClientToolStripMenuItem.Text = "TCP Client";
-            // 
-            // tCPServerToolStripMenuItem
-            // 
-            this.tCPServerToolStripMenuItem.Name = "tCPServerToolStripMenuItem";
-            this.tCPServerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.tCPServerToolStripMenuItem.Text = "TCP Server";
-            // 
-            // textBoxLocalIP
-            // 
-            this.textBoxLocalIP.Enabled = false;
-            this.textBoxLocalIP.Location = new System.Drawing.Point(58, 17);
-            this.textBoxLocalIP.Name = "textBoxLocalIP";
-            this.textBoxLocalIP.Size = new System.Drawing.Size(118, 26);
-            this.textBoxLocalIP.TabIndex = 17;
-            this.textBoxLocalIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxLocalPortNum.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxLocalPortNum.Location = new System.Drawing.Point(100, 49);
+            this.textBoxLocalPortNum.Name = "textBoxLocalPortNum";
+            this.textBoxLocalPortNum.Size = new System.Drawing.Size(75, 29);
+            this.textBoxLocalPortNum.TabIndex = 19;
+            this.textBoxLocalPortNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labelLocalPortNum
             // 
@@ -1072,32 +1063,81 @@
             this.labelLocalPortNum.Text = "本机端口号";
             this.labelLocalPortNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBoxLocalPortNum
+            // textBoxLocalIP
             // 
-            this.textBoxLocalPortNum.Enabled = false;
-            this.textBoxLocalPortNum.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxLocalPortNum.Location = new System.Drawing.Point(100, 49);
-            this.textBoxLocalPortNum.Name = "textBoxLocalPortNum";
-            this.textBoxLocalPortNum.Size = new System.Drawing.Size(75, 29);
-            this.textBoxLocalPortNum.TabIndex = 19;
+            this.textBoxLocalIP.Location = new System.Drawing.Point(58, 17);
+            this.textBoxLocalIP.Name = "textBoxLocalIP";
+            this.textBoxLocalIP.Size = new System.Drawing.Size(118, 26);
+            this.textBoxLocalIP.TabIndex = 17;
+            this.textBoxLocalIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // labelMaxClientNum
+            // textBoxServerPortNum
             // 
-            this.labelMaxClientNum.AutoSize = true;
-            this.labelMaxClientNum.Location = new System.Drawing.Point(6, 84);
-            this.labelMaxClientNum.Name = "labelMaxClientNum";
-            this.labelMaxClientNum.Size = new System.Drawing.Size(88, 16);
-            this.labelMaxClientNum.TabIndex = 20;
-            this.labelMaxClientNum.Text = "最大连接数";
+            this.textBoxServerPortNum.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxServerPortNum.Location = new System.Drawing.Point(100, 146);
+            this.textBoxServerPortNum.Name = "textBoxServerPortNum";
+            this.textBoxServerPortNum.Size = new System.Drawing.Size(76, 29);
+            this.textBoxServerPortNum.TabIndex = 16;
+            this.textBoxServerPortNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBoxMaxClientNum
+            // labelServerPortNum
             // 
-            this.textBoxMaxClientNum.Enabled = false;
-            this.textBoxMaxClientNum.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxMaxClientNum.Location = new System.Drawing.Point(99, 81);
-            this.textBoxMaxClientNum.Name = "textBoxMaxClientNum";
-            this.textBoxMaxClientNum.Size = new System.Drawing.Size(76, 29);
-            this.textBoxMaxClientNum.TabIndex = 21;
+            this.labelServerPortNum.AutoSize = true;
+            this.labelServerPortNum.Location = new System.Drawing.Point(8, 149);
+            this.labelServerPortNum.Name = "labelServerPortNum";
+            this.labelServerPortNum.Size = new System.Drawing.Size(88, 16);
+            this.labelServerPortNum.TabIndex = 15;
+            this.labelServerPortNum.Text = "服务器端口";
+            // 
+            // textBoxServerIP
+            // 
+            this.textBoxServerIP.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxServerIP.Location = new System.Drawing.Point(75, 114);
+            this.textBoxServerIP.Name = "textBoxServerIP";
+            this.textBoxServerIP.Size = new System.Drawing.Size(100, 23);
+            this.textBoxServerIP.TabIndex = 14;
+            this.textBoxServerIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelServerIP
+            // 
+            this.labelServerIP.AutoSize = true;
+            this.labelServerIP.Location = new System.Drawing.Point(5, 117);
+            this.labelServerIP.Name = "labelServerIP";
+            this.labelServerIP.Size = new System.Drawing.Size(72, 16);
+            this.labelServerIP.TabIndex = 13;
+            this.labelServerIP.Text = "服务器ip";
+            this.labelServerIP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // buttonWifiStart
+            // 
+            this.buttonWifiStart.BackColor = System.Drawing.Color.Transparent;
+            this.buttonWifiStart.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonWifiStart.Location = new System.Drawing.Point(11, 510);
+            this.buttonWifiStart.Name = "buttonWifiStart";
+            this.buttonWifiStart.Size = new System.Drawing.Size(73, 37);
+            this.buttonWifiStart.TabIndex = 16;
+            this.buttonWifiStart.Text = "WIFI";
+            this.buttonWifiStart.UseVisualStyleBackColor = false;
+            this.buttonWifiStart.Visible = false;
+            this.buttonWifiStart.Click += new System.EventHandler(this.buttonWifiStart_Click);
+            // 
+            // buttonWifiStop
+            // 
+            this.buttonWifiStop.BackColor = System.Drawing.Color.Transparent;
+            this.buttonWifiStop.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonWifiStop.Location = new System.Drawing.Point(101, 510);
+            this.buttonWifiStop.Name = "buttonWifiStop";
+            this.buttonWifiStop.Size = new System.Drawing.Size(75, 37);
+            this.buttonWifiStop.TabIndex = 17;
+            this.buttonWifiStop.Text = "停止";
+            this.buttonWifiStop.UseVisualStyleBackColor = false;
+            this.buttonWifiStop.Visible = false;
+            this.buttonWifiStop.Click += new System.EventHandler(this.buttonWifiStop_Click);
+            // 
+            // SocketConnectTimeOut
+            // 
+            this.SocketConnectTimeOut.Interval = 1000;
+            this.SocketConnectTimeOut.Tick += new System.EventHandler(this.SocketConnectTimeOut_Tick);
             // 
             // Form1
             // 
@@ -1105,6 +1145,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(1187, 629);
+            this.Controls.Add(this.buttonWifiStop);
+            this.Controls.Add(this.buttonWifiStart);
             this.Controls.Add(this.checkBoxSyetemTime);
             this.Controls.Add(this.groupBoxWifiSettings);
             this.Controls.Add(this.statusStrip1);
@@ -1256,6 +1298,9 @@
         private System.Windows.Forms.ComboBox comboBoxParity;
         private System.Windows.Forms.ComboBox comboBoxByteSize;
         private System.Windows.Forms.ComboBox comboBoxBaudRate;
+        private System.Windows.Forms.Button buttonWifiStart;
+        private System.Windows.Forms.Button buttonWifiStop;
+        private System.Windows.Forms.Timer SocketConnectTimeOut;
     }
 }
 

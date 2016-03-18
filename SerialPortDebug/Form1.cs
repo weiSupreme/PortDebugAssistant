@@ -12,7 +12,9 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using System.IO;
 using System.Threading;
-//using System.Collections;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
 
 namespace SerialPortDebug
 {
@@ -483,21 +485,24 @@ namespace SerialPortDebug
 
         private void buttonSend_Click(object sender, EventArgs e)
         {
-            string sendstr = textBoxSendingArea.Text;
-            if (checkBoxHexSend.Checked==true)
+            if (Myserialport.IsOpen == true)
             {
-                byte[] b = Encoding.ASCII.GetBytes(sendstr);//按照指定编码将string编程字节数组
-                //string result = string.Empty;
-                sendstr = "";
-                for (int i = 0; i < b.Length; i++)//逐字节变为16进制字符，以%隔开
+                string sendstr = textBoxSendingArea.Text;
+                if (checkBoxHexSend.Checked == true)
                 {
-                    sendstr += " " + Convert.ToString(b[i], 16);
+                    byte[] b = Encoding.ASCII.GetBytes(sendstr);//按照指定编码将string编程字节数组
+                    //string result = string.Empty;
+                    sendstr = "";
+                    for (int i = 0; i < b.Length; i++)//逐字节变为16进制字符，以%隔开
+                    {
+                        sendstr += " " + Convert.ToString(b[i], 16);
+                    }
                 }
-            }
-            Myserialport.Write(sendstr);
-            if(checkBoxSendEndEnter.Checked)
-            {
-                Myserialport.Write("\r\n");
+                Myserialport.Write(sendstr);
+                if (checkBoxSendEndEnter.Checked)
+                {
+                    Myserialport.Write("\r\n");
+                }
             }
         }
 
@@ -930,6 +935,121 @@ namespace SerialPortDebug
             {
                 fr_wave.Show();
             }
+        }
+
+        private void tCPClientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            groupBoxInitialization.Visible = false;
+            buttonOpenCom.Visible = false;
+            groupBoxWifiSettings.Visible = true;
+            textBoxLocalIP.Enabled = false;
+            textBoxLocalPortNum.Enabled = false;
+            textBoxMaxClientNum.Enabled = false;
+            textBoxServerIP.Enabled = true;
+            textBoxServerPortNum.Enabled = true;
+            buttonWifiStart.Visible = true;
+            buttonWifiStart.Enabled = true;
+            buttonWifiStop.Visible = true;
+            buttonWifiStop.Enabled = false;
+            buttonWifiStart.Text = "连接";
+            textBoxServerIP.Text = "192.168.191.2";
+            textBoxServerPortNum.Text = "5001";
+        }
+
+        private void tCPServerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            groupBoxInitialization.Visible = false;
+            buttonOpenCom.Visible = false;
+            groupBoxWifiSettings.Visible = true;
+            textBoxLocalIP.Enabled = true;
+            textBoxLocalPortNum.Enabled = true;
+            textBoxMaxClientNum.Enabled = true;
+            textBoxServerIP.Enabled = false;
+            textBoxServerPortNum.Enabled = false;
+            buttonWifiStart.Visible = true;
+            buttonWifiStart.Enabled = true;
+            buttonWifiStop.Visible = true;
+            buttonWifiStop.Enabled = false;
+            buttonWifiStart.Text = "监听";
+            System.Net.IPHostEntry myEntry = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+            string ipAddress = myEntry.AddressList[0].ToString();
+            textBoxLocalIP.Text = "192.168.1.1";
+            textBoxLocalPortNum.Text = "6000";
+            textBoxMaxClientNum.Text = "10";
+        }
+
+        private void ToolStripMenuItemSerialPort_Click(object sender, EventArgs e)
+        {
+            groupBoxInitialization.Visible = true;
+            buttonOpenCom.Visible = true;
+            buttonWifiStart.Visible = false;
+            buttonWifiStop.Visible = false;
+        }
+
+        private IPAddress serverIP = IPAddress.Parse("192.168.1.1");
+        private IPEndPoint serverFullAddr;//完整终端地址
+        private Socket TCP_socket;
+        private Thread TcpClient_Receive_thread;
+        private void buttonWifiStart_Click(object sender, EventArgs e)
+        {
+            if (textBoxServerIP.Enabled)    //客户端模式
+            {
+                serverIP = IPAddress.Parse(textBoxServerIP.Text);
+                try
+                {
+                    serverFullAddr = new IPEndPoint(serverIP, int.Parse(textBoxServerPortNum.Text));//设置IP，端口
+                    TCP_socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    //SocketConnectTimeOut.Enabled = true;
+                    TCP_socket.Connect(serverFullAddr);
+                    toolStripStatusLabelMessage.Text = "连接服务器成功。。。。";
+                    buttonWifiStart.Enabled = false;
+                    buttonWifiStop.Enabled = true;
+                    TcpClient_Receive_thread = new System.Threading.Thread(tcpclient_receive_data);
+                    TcpClient_Receive_thread.Start();
+                }
+                catch (Exception ee)
+                {
+                    textBoxReceivingArea.Text = "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
+                }
+            }
+        }
+
+        public void tcpclient_receive_data()
+        {
+            byte[] recei_data = new byte[1024];
+            while (true)
+            {
+                if (TCP_socket.Connected)
+                {
+                    int len = TCP_socket.Receive(recei_data);
+                    if (len > 0)
+                    {
+                        foreach (byte data in recei_data)
+                        {
+                            Deal_PortData(data);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void buttonWifiStop_Click(object sender, EventArgs e)
+        {
+            TCP_socket.Close();
+            toolStripStatusLabelMessage.Text = "已断开与服务器的连接。。。。";
+            buttonWifiStart.Enabled = true;
+            buttonWifiStop.Enabled = false;
+            TcpClient_Receive_thread.Abort();
+        }
+
+        private void SocketConnectTimeOut_Tick(object sender, EventArgs e)
+        {
+            TCP_socket.Close();
+            //TCP_socket.Disconnect(true);
+            buttonWifiStart.Enabled = true;
+            buttonWifiStop.Enabled = false;
+            SocketConnectTimeOut.Enabled = false;
+            toolStripStatusLabelMessage.Text = "连接服务器失败。。。请仔细检查服务器是否开启";
         }
     }
 }
