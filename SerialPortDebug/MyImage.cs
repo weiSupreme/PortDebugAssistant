@@ -16,8 +16,6 @@ namespace SerialPortDebug
         public static int height = 40, width = 140;    //图像高度和宽度
         public static int image_byte_length = 0;
         public static uint image_get_flag = 0;      //采集图像数据标志位
-        public static string Image_save_path;            //保存图片路径字符串
-        public static UInt32 Image_save_Num = 1;          //保存图片时的名字变量
         public static Graphics camera_image_gra;
         public static Graphics camera_image_gra1;
         private static int image_row_count = 0;
@@ -80,6 +78,7 @@ namespace SerialPortDebug
             }
         }
 
+        public static int TwoPixelImage_finish_flag = 0;
         public static void TwoPixelImage_Deal(byte data)   //处理鹰眼二值化压缩图像
         {
             byte pixel = new byte();
@@ -103,22 +102,13 @@ namespace SerialPortDebug
             {
                 image_row_count = 0;
                 image_get_flag = 0;
-                fr1.Invoke((EventHandler)(delegate
-                {
-                    fr1.pictureBoxShow.Refresh();
-                    if (fr1.checkBoxAutoSaveImage.Checked)
-                    {
-                        string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
-                        fr1.pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                        fr1.toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
-                        Image_save_Num++;
-                    }
-                }));
+                TwoPixelImage_finish_flag = 1;
             }
         }
 
         public static int waveimage_flag = -5;
         private static int threepointtrack_hang = 1;
+        public static int ThreePointTrack0_finish_flag = 0, ThreePointTrack1_finish_flag = 0;
         public static void ThreePointTrack_Deal(byte data)     //三点赛道模式
         {
             if (effective_line < 0)
@@ -174,21 +164,8 @@ namespace SerialPortDebug
                                     }
                                 }
                                 effective_line = -5;
-                                fr1.Invoke((EventHandler)(delegate
-                                {
-                                    fr1.pictureBoxShow.Visible = true;
-                                    fr1.pictureBoxShow.Refresh();
-                                    if (fr1.checkBoxAutoSaveImage.Checked)
-                                    {
-                                        string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
-                                        fr1.pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                                        fr1.toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
-                                        Image_save_Num++;
-                                    }
-                                    camera_image_gra1.Clear(Color.WhiteSmoke);
-                                    fr1.pictureBoxShow1.Visible = false;
-                                    picturebox_who_flag = 1;
-                                }));
+                                ThreePointTrack0_finish_flag = 1;
+                                picturebox_who_flag = 1;
                             }
                         }
                     }
@@ -236,21 +213,8 @@ namespace SerialPortDebug
                                     }
                                 }
                                 effective_line = -5;
-                                fr1.Invoke((EventHandler)(delegate
-                                {
-                                    fr1.pictureBoxShow1.Visible = true;
-                                    fr1.pictureBoxShow1.Refresh();
-                                    if (fr1.checkBoxAutoSaveImage.Checked)
-                                    {
-                                        string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
-                                        fr1.pictureBoxShow1.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
-                                        fr1.toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
-                                        Image_save_Num++;
-                                    }
-                                    camera_image_gra.Clear(Color.WhiteSmoke);
-                                    fr1.pictureBoxShow.Visible = false;
-                                    picturebox_who_flag = 0;
-                                }));
+                                ThreePointTrack1_finish_flag = 1;
+                                picturebox_who_flag = 0;
                             }
                         }
                     }

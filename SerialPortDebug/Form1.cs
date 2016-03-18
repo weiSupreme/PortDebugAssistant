@@ -26,6 +26,8 @@ namespace SerialPortDebug
         //private byte* picture;
         private int Image_laod_Num = 0;        //自动播放图片序列
         private uint buttonAutoShowImage_flag=0;    //自动播放图片按钮标志位
+        private string Image_save_path;            //保存图片路径字符串
+        private UInt32 Image_save_Num = 1;          //保存图片时的名字变量
         //private int abc = 0;
         Bitmap camera_image_bit = new Bitmap(640, 480);
         private SerialPortDebug.FormWave fr_wave = new FormWave();
@@ -283,10 +285,62 @@ namespace SerialPortDebug
                     if (checkBoxTwoPixelImage.Checked)    //鹰眼压缩图像模式
                     {
                         MyImage.TwoPixelImage_Deal(data);
+                        if (MyImage.TwoPixelImage_finish_flag == 1)
+                        {
+                            this.Invoke((EventHandler)(delegate
+                            {
+                                pictureBoxShow.Refresh();
+                                if (checkBoxAutoSaveImage.Checked)
+                                {
+                                    string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                                    pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                                    toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
+                                    Image_save_Num++;
+                                }
+                            }));
+                            MyImage.TwoPixelImage_finish_flag = 0;
+                        }
+                    
                     }
                     else if (checkBoxThreePointTrack.Checked )   //三点赛道模式
                     {
                         MyImage.ThreePointTrack_Deal(data);
+                        if(MyImage.ThreePointTrack0_finish_flag ==1)
+                        {
+                            this.Invoke((EventHandler)(delegate
+                            {
+                                pictureBoxShow.Visible = true;
+                                pictureBoxShow.Refresh();
+                                if (checkBoxAutoSaveImage.Checked)
+                                {
+                                    string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                                    pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                                    toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
+                                    Image_save_Num++;
+                                }
+                                MyImage.camera_image_gra1.Clear(Color.WhiteSmoke);
+                                pictureBoxShow1.Visible = false;
+                            }));
+                            MyImage.ThreePointTrack0_finish_flag = 0;
+                        }
+                        else if(MyImage.ThreePointTrack1_finish_flag ==1)
+                        {
+                            this.Invoke((EventHandler)(delegate
+                            {
+                                pictureBoxShow1.Visible = true;
+                                pictureBoxShow1.Refresh();
+                                if (checkBoxAutoSaveImage.Checked)
+                                {
+                                    string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                                    pictureBoxShow1.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                                    toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
+                                    Image_save_Num++;
+                                }
+                                MyImage.camera_image_gra.Clear(Color.WhiteSmoke);
+                                pictureBoxShow.Visible = false;
+                            }));
+                            MyImage.ThreePointTrack1_finish_flag = 0;
+                        }
                     }
                     else if(checkBoxWaveImage.Checked)
                     {
@@ -298,6 +352,42 @@ namespace SerialPortDebug
                         else
                         {
                             MyImage.ThreePointTrack_Deal(data);
+                            if (MyImage.ThreePointTrack0_finish_flag == 1)
+                            {
+                                this.Invoke((EventHandler)(delegate
+                                {
+                                    pictureBoxShow.Visible = true;
+                                    pictureBoxShow.Refresh();
+                                    if (checkBoxAutoSaveImage.Checked)
+                                    {
+                                        string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                                        pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                                        toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
+                                        Image_save_Num++;
+                                    }
+                                    MyImage.camera_image_gra1.Clear(Color.WhiteSmoke);
+                                    pictureBoxShow1.Visible = false;
+                                }));
+                                MyImage.ThreePointTrack0_finish_flag = 0;
+                            }
+                            else if (MyImage.ThreePointTrack1_finish_flag == 1)
+                            {
+                                this.Invoke((EventHandler)(delegate
+                                {
+                                    pictureBoxShow1.Visible = true;
+                                    pictureBoxShow1.Refresh();
+                                    if (checkBoxAutoSaveImage.Checked)
+                                    {
+                                        string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                                        pictureBoxShow1.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                                        toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
+                                        Image_save_Num++;
+                                    }
+                                    MyImage.camera_image_gra.Clear(Color.WhiteSmoke);
+                                    pictureBoxShow.Visible = false;
+                                }));
+                                MyImage.ThreePointTrack1_finish_flag = 0;
+                            }
                         }
                     }
                     else   //灰度图像
@@ -310,10 +400,10 @@ namespace SerialPortDebug
                                 pictureBoxShow.Refresh();
                                 if (checkBoxAutoSaveImage.Checked)
                                 {
-                                    string Image_save_name = Convert.ToString(MyImage.Image_save_Num) + ".bmp";
-                                    pictureBoxShow.Image.Save(MyImage.Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                                    string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                                    pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
                                     toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
-                                    MyImage.Image_save_Num++;
+                                    Image_save_Num++;
                                 }
                             }));
                             MyImage.grayImage_finish_flag = 0;
@@ -544,21 +634,21 @@ namespace SerialPortDebug
             folderBrowserDialogImage.ShowDialog();
             Picture_Dialog_path = folderBrowserDialogImage.SelectedPath;
             groupBoxPicConfig.Text = "保存路径:"+Picture_Dialog_path;
-            MyImage.Image_save_path = Picture_Dialog_path.Replace("\\", "\\\\");    //将单斜杠路径转换为双斜杠路径,引用自博客：http://blog.csdn.net/chenlunju/article/details/7615670
+            Image_save_path = Picture_Dialog_path.Replace("\\", "\\\\");    //将单斜杠路径转换为双斜杠路径,引用自博客：http://blog.csdn.net/chenlunju/article/details/7615670
             //groupBoxPicConfig.Text = Image_save_path;
         }
 
         private void buttonSaveImage_Click(object sender, EventArgs e)
         {
-            if (MyImage.Image_save_path != "")
+            if (Image_save_path != "")
             {
                 //pictureBoxShow.Image.Save("C:\\Users\\Zhu wei\\Desktop\\1.bmp",System.Drawing.Imaging.ImageFormat.Bmp);
                 if (pictureBoxShow.Image != null)
                 {
-                    string Image_save_name = Convert.ToString(MyImage.Image_save_Num) + ".bmp";
-                    pictureBoxShow.Image.Save(MyImage.Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                    string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                    pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
                     toolStripStatusLabelMessage.Text = Image_save_name+"保存成功";
-                    MyImage.Image_save_Num++;
+                    Image_save_Num++;
                 }
                 else
                 {

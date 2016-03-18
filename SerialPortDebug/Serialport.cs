@@ -16,7 +16,6 @@ namespace SerialPortDebug
         public static int[] bytesizes = { 5, 6, 7, 8 };
         public static int[] parities = { 0, 1, 2 };
         public static int[] stopbits = { 1, 2 };
-        private static Form1 fr1 = new Form1();
         /*----------------------------以上是字段声明------------------------------*/
 
 
