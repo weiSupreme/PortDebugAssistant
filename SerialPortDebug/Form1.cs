@@ -1022,13 +1022,23 @@ namespace SerialPortDebug
             {
                 if (TCP_socket.Connected)
                 {
-                    int len = TCP_socket.Receive(recei_data);
-                    if (len > 0)
+                    try
                     {
-                        foreach (byte data in recei_data)
+                        int len = TCP_socket.Receive(recei_data);
+                        if (len > 0)
                         {
-                            Deal_PortData(data);
+                            foreach (byte data in recei_data)
+                            {
+                                Deal_PortData(data);
+                            }
                         }
+                    }
+                    catch (Exception ee)
+                    {
+                        this.Invoke((EventHandler)(delegate
+                        {
+                            textBoxReceivingArea.Text = "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
+                         }));
                     }
                 }
             }
