@@ -1017,6 +1017,7 @@ namespace SerialPortDebug
         public void tcpclient_receive_data()
         {
             byte[] recei_data = new byte[1024];
+            TCP_socket.ReceiveTimeout = 3000; 
             while (true)
             {
                 if (TCP_socket.Connected)
