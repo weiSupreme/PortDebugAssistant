@@ -939,6 +939,7 @@ namespace SerialPortDebug
 
         private void tCPClientToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            wifi_mode = 2;
             groupBoxInitialization.Visible = false;
             buttonOpenCom.Visible = false;
             groupBoxWifiSettings.Visible = true;
@@ -958,6 +959,7 @@ namespace SerialPortDebug
 
         private void tCPServerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            wifi_mode = 1;
             groupBoxInitialization.Visible = false;
             buttonOpenCom.Visible = false;
             groupBoxWifiSettings.Visible = true;
@@ -986,59 +988,107 @@ namespace SerialPortDebug
             buttonWifiStop.Visible = false;
         }
 
+        private int wifi_mode=0;  //1-TCP_sever,2-TCP_client,3-UDP_sever,4-UDP_client
         private IPAddress serverIP = IPAddress.Parse("192.168.1.1");
         private IPEndPoint serverFullAddr;//完整终端地址
         private Socket TCP_socket;
-        private Thread TcpClient_Receive_thread;
+        private Thread Client_Receive_thread;
         private void buttonWifiStart_Click(object sender, EventArgs e)
         {
-            if (textBoxServerIP.Enabled)    //客户端模式
+            if (wifi_mode==2)    //TCP客户端模式
             {
                 serverIP = IPAddress.Parse(textBoxServerIP.Text);
                 try
                 {
                     serverFullAddr = new IPEndPoint(serverIP, int.Parse(textBoxServerPortNum.Text));//设置IP，端口
                     TCP_socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                    //SocketConnectTimeOut.Enabled = true;
                     TCP_socket.Connect(serverFullAddr);
                     toolStripStatusLabelMessage.Text = "连接服务器成功。。。。";
                     buttonWifiStart.Enabled = false;
                     buttonWifiStop.Enabled = true;
-                    TcpClient_Receive_thread = new System.Threading.Thread(tcpclient_receive_data);
-                    TcpClient_Receive_thread.Start();
+                    Client_Receive_thread = new System.Threading.Thread(client_receive_data);
+                    Client_Receive_thread.Start();
                 }
                 catch (Exception ee)
                 {
-                    textBoxReceivingArea.Text = "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
+                    textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
+                }
+            }
+            else if (wifi_mode==4)
+            {
+                serverIP = IPAddress.Parse(textBoxServerIP.Text);
+                try
+                {
+                    serverFullAddr = new IPEndPoint(serverIP, int.Parse(textBoxServerPortNum.Text));//设置IP，端口
+                    UDP_socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                    UDP_socket.Connect(serverFullAddr);
+                    toolStripStatusLabelMessage.Text = "连接服务器成功。。。。";
+                    Remote = (EndPoint)(serverFullAddr);
+                    buttonWifiStart.Enabled = false;
+                    buttonWifiStop.Enabled = true;
+                    Client_Receive_thread = new System.Threading.Thread(client_receive_data);
+                    Client_Receive_thread.Start();
+                }
+                catch (Exception ee)
+                {
+                    textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
                 }
             }
         }
 
-        public void tcpclient_receive_data()
+        private EndPoint Remote ;
+        public void client_receive_data()
         {
             byte[] recei_data = new byte[1024];
-            TCP_socket.ReceiveTimeout = 3000; 
+            //TCP_socket.ReceiveTimeout = 3000; 
             while (true)
             {
-                if (TCP_socket.Connected)
+                if (wifi_mode == 2)
                 {
-                    try
+                    if (TCP_socket.Connected)
                     {
-                        int len = TCP_socket.Receive(recei_data);
-                        if (len > 0)
+                        try
                         {
-                            foreach (byte data in recei_data)
+                            int len = TCP_socket.Receive(recei_data);
+                            if (len > 0)
                             {
-                                Deal_PortData(data);
+                                foreach (byte data in recei_data)
+                                {
+                                    Deal_PortData(data);
+                                }
                             }
                         }
-                    }
-                    catch (Exception ee)
-                    {
-                        this.Invoke((EventHandler)(delegate
+                        catch (Exception ee)
                         {
-                            textBoxReceivingArea.Text = "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
-                         }));
+                            this.Invoke((EventHandler)(delegate
+                            {
+                                textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
+                            }));
+                        }
+                    }
+                }
+                else if (wifi_mode == 4)
+                {
+                    if (UDP_socket.Connected)
+                    {
+                        try
+                        {
+                            int len = UDP_socket.ReceiveFrom(recei_data, ref Remote);
+                            if (len > 0)
+                            {
+                                foreach (byte data in recei_data)
+                                {
+                                    Deal_PortData(data);
+                                }
+                            }
+                        }
+                        catch (Exception ee)
+                        {
+                            this.Invoke((EventHandler)(delegate
+                            {
+                                textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
+                            }));
+                        }
                     }
                 }
             }
@@ -1046,21 +1096,39 @@ namespace SerialPortDebug
 
         private void buttonWifiStop_Click(object sender, EventArgs e)
         {
-            TCP_socket.Close();
+            if (wifi_mode == 2)
+            {
+                TCP_socket.Close();
+            }
+            if (wifi_mode == 4)
+            {
+                UDP_socket.Close();
+            }
             toolStripStatusLabelMessage.Text = "已断开与服务器的连接。。。。";
             buttonWifiStart.Enabled = true;
             buttonWifiStop.Enabled = false;
-            TcpClient_Receive_thread.Abort();
+            Client_Receive_thread.Abort();
         }
 
-        private void SocketConnectTimeOut_Tick(object sender, EventArgs e)
+        private Socket UDP_socket;
+        private void uDPClientToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TCP_socket.Close();
-            //TCP_socket.Disconnect(true);
+            wifi_mode = 4;
+            groupBoxInitialization.Visible = false;
+            buttonOpenCom.Visible = false;
+            groupBoxWifiSettings.Visible = true;
+            textBoxLocalIP.Enabled = false;
+            textBoxLocalPortNum.Enabled = false;
+            textBoxMaxClientNum.Enabled = false;
+            textBoxServerIP.Enabled = true;
+            textBoxServerPortNum.Enabled = true;
+            buttonWifiStart.Visible = true;
             buttonWifiStart.Enabled = true;
+            buttonWifiStop.Visible = true;
             buttonWifiStop.Enabled = false;
-            SocketConnectTimeOut.Enabled = false;
-            toolStripStatusLabelMessage.Text = "连接服务器失败。。。请仔细检查服务器是否开启";
+            buttonWifiStart.Text = "连接";
+            textBoxServerIP.Text = "192.168.1.24";
+            textBoxServerPortNum.Text = "5001";
         }
     }
 }

@@ -93,6 +93,7 @@
             this.WifiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tCPClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tCPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uDPClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.界面颜色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oringeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -128,7 +129,6 @@
             this.labelServerIP = new System.Windows.Forms.Label();
             this.buttonWifiStart = new System.Windows.Forms.Button();
             this.buttonWifiStop = new System.Windows.Forms.Button();
-            this.SocketConnectTimeOut = new System.Windows.Forms.Timer(this.components);
             this.groupBoxInitialization.SuspendLayout();
             this.groupBoxReceivingArea.SuspendLayout();
             this.groupBoxSendingArea.SuspendLayout();
@@ -766,7 +766,7 @@
             // ToolStripMenuItemSerialPort
             // 
             this.ToolStripMenuItemSerialPort.Name = "ToolStripMenuItemSerialPort";
-            this.ToolStripMenuItemSerialPort.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemSerialPort.Size = new System.Drawing.Size(126, 22);
             this.ToolStripMenuItemSerialPort.Text = "串口通信";
             this.ToolStripMenuItemSerialPort.Click += new System.EventHandler(this.ToolStripMenuItemSerialPort_Click);
             // 
@@ -774,7 +774,8 @@
             // 
             this.WifiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tCPClientToolStripMenuItem,
-            this.tCPServerToolStripMenuItem});
+            this.tCPServerToolStripMenuItem,
+            this.uDPClientToolStripMenuItem});
             this.WifiToolStripMenuItem.Name = "WifiToolStripMenuItem";
             this.WifiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.WifiToolStripMenuItem.Text = "WIFI通信";
@@ -782,16 +783,24 @@
             // tCPClientToolStripMenuItem
             // 
             this.tCPClientToolStripMenuItem.Name = "tCPClientToolStripMenuItem";
-            this.tCPClientToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tCPClientToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.tCPClientToolStripMenuItem.Text = "TCP Client";
             this.tCPClientToolStripMenuItem.Click += new System.EventHandler(this.tCPClientToolStripMenuItem_Click);
             // 
             // tCPServerToolStripMenuItem
             // 
             this.tCPServerToolStripMenuItem.Name = "tCPServerToolStripMenuItem";
-            this.tCPServerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tCPServerToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.tCPServerToolStripMenuItem.Text = "TCP Server";
             this.tCPServerToolStripMenuItem.Click += new System.EventHandler(this.tCPServerToolStripMenuItem_Click);
+            // 
+            // uDPClientToolStripMenuItem
+            // 
+            this.uDPClientToolStripMenuItem.Enabled = false;
+            this.uDPClientToolStripMenuItem.Name = "uDPClientToolStripMenuItem";
+            this.uDPClientToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.uDPClientToolStripMenuItem.Text = "UDP Client";
+            this.uDPClientToolStripMenuItem.Click += new System.EventHandler(this.uDPClientToolStripMenuItem_Click);
             // 
             // 界面颜色ToolStripMenuItem
             // 
@@ -1134,11 +1143,6 @@
             this.buttonWifiStop.Visible = false;
             this.buttonWifiStop.Click += new System.EventHandler(this.buttonWifiStop_Click);
             // 
-            // SocketConnectTimeOut
-            // 
-            this.SocketConnectTimeOut.Interval = 1000;
-            this.SocketConnectTimeOut.Tick += new System.EventHandler(this.SocketConnectTimeOut_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1300,7 +1304,7 @@
         private System.Windows.Forms.ComboBox comboBoxBaudRate;
         private System.Windows.Forms.Button buttonWifiStart;
         private System.Windows.Forms.Button buttonWifiStop;
-        private System.Windows.Forms.Timer SocketConnectTimeOut;
+        private System.Windows.Forms.ToolStripMenuItem uDPClientToolStripMenuItem;
     }
 }
 
