@@ -206,8 +206,18 @@ namespace SerialPortDebug
                     Myserialport.StopBits = (StopBits)Enum.Parse(typeof(StopBits), comboBoxStopBits.Text);
                     Myserialport.DataReceived += new SerialDataReceivedEventHandler(Com_DataReceived);
                     Myserialport.ReceivedBytesThreshold = 1;//事件发生前内部输入缓冲区的字节数，每当缓冲区的字节达到此设定的值，就会触发对象的数据接收事件
-                    Myserialport.Open();
-                    Myserialport.DiscardInBuffer();
+                    try
+                    {
+                        Myserialport.Open();
+                        Myserialport.DiscardInBuffer();
+                    }
+                    catch (Exception ee)
+                    {
+                        this.Invoke((EventHandler)(delegate
+                        {
+                            textBoxReceivingArea.Text += ee;
+                        }));
+                    }
                     //DealWith_Readdata_thread.Priority = ThreadPriority.AboveNormal;
                     //DealWith_Readdata_thread.Start();
                 }
@@ -1003,7 +1013,7 @@ namespace SerialPortDebug
                     serverFullAddr = new IPEndPoint(serverIP, int.Parse(textBoxServerPortNum.Text));//设置IP，端口
                     TCP_socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                     TCP_socket.Connect(serverFullAddr);
-                    toolStripStatusLabelMessage.Text = "连接服务器成功。。。。";
+                    toolStripStatusLabelMessage.Text = "连接TCP服务器成功。。。。";
                     buttonWifiStart.Enabled = false;
                     buttonWifiStop.Enabled = true;
                     Client_Receive_thread = new System.Threading.Thread(client_receive_data);
@@ -1022,7 +1032,7 @@ namespace SerialPortDebug
                     serverFullAddr = new IPEndPoint(serverIP, int.Parse(textBoxServerPortNum.Text));//设置IP，端口
                     UDP_socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                     UDP_socket.Connect(serverFullAddr);
-                    toolStripStatusLabelMessage.Text = "连接服务器成功。。。。";
+                    toolStripStatusLabelMessage.Text = "连接UDP服务器成功。。。。";
                     Remote = (EndPoint)(serverFullAddr);
                     buttonWifiStart.Enabled = false;
                     buttonWifiStop.Enabled = true;
@@ -1073,9 +1083,13 @@ namespace SerialPortDebug
                     {
                         try
                         {
-                            int len = UDP_socket.ReceiveFrom(recei_data, ref Remote);
+                            int len = UDP_socket.Receive(recei_data);// ReceiveFrom(recei_data, ref Remote);
                             if (len > 0)
                             {
+                                this.Invoke((EventHandler)(delegate
+                                {
+                                    textBoxReceivingArea.Text += "接收到数据";
+                                }));
                                 foreach (byte data in recei_data)
                                 {
                                     Deal_PortData(data);
@@ -1127,7 +1141,7 @@ namespace SerialPortDebug
             buttonWifiStop.Visible = true;
             buttonWifiStop.Enabled = false;
             buttonWifiStart.Text = "连接";
-            textBoxServerIP.Text = "192.168.1.24";
+            textBoxServerIP.Text = "192.168.191.2";
             textBoxServerPortNum.Text = "5001";
         }
     }

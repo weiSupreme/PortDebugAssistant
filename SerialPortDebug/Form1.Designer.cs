@@ -766,7 +766,7 @@
             // ToolStripMenuItemSerialPort
             // 
             this.ToolStripMenuItemSerialPort.Name = "ToolStripMenuItemSerialPort";
-            this.ToolStripMenuItemSerialPort.Size = new System.Drawing.Size(126, 22);
+            this.ToolStripMenuItemSerialPort.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItemSerialPort.Text = "串口通信";
             this.ToolStripMenuItemSerialPort.Click += new System.EventHandler(this.ToolStripMenuItemSerialPort_Click);
             // 
@@ -783,14 +783,14 @@
             // tCPClientToolStripMenuItem
             // 
             this.tCPClientToolStripMenuItem.Name = "tCPClientToolStripMenuItem";
-            this.tCPClientToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.tCPClientToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tCPClientToolStripMenuItem.Text = "TCP Client";
             this.tCPClientToolStripMenuItem.Click += new System.EventHandler(this.tCPClientToolStripMenuItem_Click);
             // 
             // tCPServerToolStripMenuItem
             // 
             this.tCPServerToolStripMenuItem.Name = "tCPServerToolStripMenuItem";
-            this.tCPServerToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.tCPServerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tCPServerToolStripMenuItem.Text = "TCP Server";
             this.tCPServerToolStripMenuItem.Click += new System.EventHandler(this.tCPServerToolStripMenuItem_Click);
             // 
