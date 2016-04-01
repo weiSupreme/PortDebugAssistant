@@ -94,6 +94,7 @@
             this.tCPClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tCPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uDPClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uDPSeverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.界面颜色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oringeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -774,6 +775,7 @@
             // 
             this.WifiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tCPClientToolStripMenuItem,
+            this.uDPSeverToolStripMenuItem,
             this.tCPServerToolStripMenuItem,
             this.uDPClientToolStripMenuItem});
             this.WifiToolStripMenuItem.Name = "WifiToolStripMenuItem";
@@ -789,6 +791,7 @@
             // 
             // tCPServerToolStripMenuItem
             // 
+            this.tCPServerToolStripMenuItem.Enabled = false;
             this.tCPServerToolStripMenuItem.Name = "tCPServerToolStripMenuItem";
             this.tCPServerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tCPServerToolStripMenuItem.Text = "TCP Server";
@@ -801,6 +804,13 @@
             this.uDPClientToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.uDPClientToolStripMenuItem.Text = "UDP Client";
             this.uDPClientToolStripMenuItem.Click += new System.EventHandler(this.uDPClientToolStripMenuItem_Click);
+            // 
+            // uDPSeverToolStripMenuItem
+            // 
+            this.uDPSeverToolStripMenuItem.Name = "uDPSeverToolStripMenuItem";
+            this.uDPSeverToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.uDPSeverToolStripMenuItem.Text = "UDP Sever";
+            this.uDPSeverToolStripMenuItem.Click += new System.EventHandler(this.uDPSeverToolStripMenuItem_Click_1);
             // 
             // 界面颜色ToolStripMenuItem
             // 
@@ -1305,6 +1315,7 @@
         private System.Windows.Forms.Button buttonWifiStart;
         private System.Windows.Forms.Button buttonWifiStop;
         private System.Windows.Forms.ToolStripMenuItem uDPClientToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uDPSeverToolStripMenuItem;
     }
 }
 

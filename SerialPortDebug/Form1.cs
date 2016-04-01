@@ -1000,9 +1000,12 @@ namespace SerialPortDebug
 
         private int wifi_mode=0;  //1-TCP_sever,2-TCP_client,3-UDP_sever,4-UDP_client
         private IPAddress serverIP = IPAddress.Parse("192.168.1.1");
+        private IPAddress localIP = IPAddress.Parse("192.168.1.1");
         private IPEndPoint serverFullAddr;//完整终端地址
+        private IPEndPoint localFullAddr;//完整终端地址
         private Socket TCP_socket;
         private Thread Client_Receive_thread;
+        private Thread Sever_Receive_thread;
         private void buttonWifiStart_Click(object sender, EventArgs e)
         {
             if (wifi_mode==2)    //TCP客户端模式
@@ -1024,7 +1027,26 @@ namespace SerialPortDebug
                     textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
                 }
             }
-            else if (wifi_mode==4)
+            else if (wifi_mode == 3)    //UDP服务器模式
+            {
+                localIP = IPAddress.Parse(textBoxLocalIP.Text);
+                try
+                {
+                    localFullAddr = new IPEndPoint(localIP, int.Parse(textBoxLocalPortNum.Text));//设置IP，端口
+                    UDP_socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                    UDP_socket.Bind(localFullAddr);
+                    toolStripStatusLabelMessage.Text = "监听成功。。。。";
+                    buttonWifiStart.Enabled = false;
+                    buttonWifiStop.Enabled = true;
+                    Sever_Receive_thread = new System.Threading.Thread(sever_receive_data);
+                    Sever_Receive_thread.Start();
+                }
+                catch (Exception ee)
+                {
+                    textBoxReceivingArea.Text += "监听失败" + ee;
+                }
+            }
+            else if (wifi_mode==4)   //udp客户端
             {
                 serverIP = IPAddress.Parse(textBoxServerIP.Text);
                 try
@@ -1046,25 +1068,59 @@ namespace SerialPortDebug
             }
         }
 
+        public void sever_receive_data()
+        {
+            byte[] recei_data = new byte[65536];
+            if(wifi_mode==3)
+            {
+                while(true)
+                {
+                    if(UDP_socket.IsBound)
+                    {
+                        try
+                        {
+                            int len = UDP_socket.Receive(recei_data);
+                            if (len > 0)
+                            {
+                                for (int i = 0; i < len; i++)
+                                {
+                                    Deal_PortData(recei_data[i]);
+                                }
+                            }
+                        }
+                        catch (Exception ee)
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
+
         private EndPoint Remote ;
         public void client_receive_data()
         {
-            byte[] recei_data = new byte[1024];
+            byte[] recei_data = new byte[65536];
             //TCP_socket.ReceiveTimeout = 3000; 
-            while (true)
+            if (wifi_mode == 2)
             {
-                if (wifi_mode == 2)
+                while (true)
                 {
                     if (TCP_socket.Connected)
                     {
                         try
                         {
                             int len = TCP_socket.Receive(recei_data);
+                            /* this.Invoke((EventHandler)(delegate
+                            {
+                                textBoxReceivingArea.Text += "  len=" + len.ToString();
+                            }));*/
                             if (len > 0)
                             {
-                                foreach (byte data in recei_data)
+                                for (int i = 0; i < len; i++)
+              
                                 {
-                                    Deal_PortData(data);
+                                    Deal_PortData(recei_data[i]);
                                 }
                             }
                         }
@@ -1077,7 +1133,10 @@ namespace SerialPortDebug
                         }
                     }
                 }
-                else if (wifi_mode == 4)
+            }
+            else if (wifi_mode == 4)
+            {
+                while (true)
                 {
                     if (UDP_socket.Connected)
                     {
@@ -1090,9 +1149,9 @@ namespace SerialPortDebug
                                 {
                                     textBoxReceivingArea.Text += "接收到数据";
                                 }));
-                                foreach (byte data in recei_data)
+                                for (int i = 0; i < len; i++)
                                 {
-                                    Deal_PortData(data);
+                                    Deal_PortData(recei_data[i]);
                                 }
                             }
                         }
@@ -1113,15 +1172,22 @@ namespace SerialPortDebug
             if (wifi_mode == 2)
             {
                 TCP_socket.Close();
+                Client_Receive_thread.Abort();
             }
-            if (wifi_mode == 4)
+            else if(wifi_mode ==3)
             {
                 UDP_socket.Close();
+                Sever_Receive_thread.Abort();
             }
-            toolStripStatusLabelMessage.Text = "已断开与服务器的连接。。。。";
+            else if (wifi_mode == 4)
+            {
+                UDP_socket.Close();
+                Client_Receive_thread.Abort();
+            }
+            toolStripStatusLabelMessage.Text = "已断开连接。。。。";
             buttonWifiStart.Enabled = true;
             buttonWifiStop.Enabled = false;
-            Client_Receive_thread.Abort();
+            
         }
 
         private Socket UDP_socket;
@@ -1141,8 +1207,36 @@ namespace SerialPortDebug
             buttonWifiStop.Visible = true;
             buttonWifiStop.Enabled = false;
             buttonWifiStart.Text = "连接";
-            textBoxServerIP.Text = "192.168.191.2";
+            textBoxServerIP.Text = "192.168.191.5";
             textBoxServerPortNum.Text = "5001";
+        }
+
+        /*private void uDPSeverToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }*/
+
+        private void uDPSeverToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            wifi_mode = 3;
+            groupBoxInitialization.Visible = false;
+            buttonOpenCom.Visible = false;
+            groupBoxWifiSettings.Visible = true;
+            textBoxLocalIP.Enabled = true;
+            textBoxLocalPortNum.Enabled = true;
+            textBoxMaxClientNum.Enabled = true;
+            textBoxServerIP.Enabled = false;
+            textBoxServerPortNum.Enabled = false;
+            buttonWifiStart.Visible = true;
+            buttonWifiStart.Enabled = true;
+            buttonWifiStop.Visible = true;
+            buttonWifiStop.Enabled = false;
+            buttonWifiStart.Text = "监听";
+            //System.Net.IPHostEntry myEntry = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+            //string ipAddress = myEntry.AddressList[0].ToString();
+            textBoxLocalIP.Text = "192.168.191.1";
+            textBoxLocalPortNum.Text = "5001";
+            textBoxMaxClientNum.Text = "10";
         }
     }
 }
