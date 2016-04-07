@@ -14,7 +14,6 @@ using System.IO;
 using System.Threading;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading;
 
 namespace SerialPortDebug
 {
@@ -276,20 +275,21 @@ namespace SerialPortDebug
                 Myserialport.Read(Cachedata, 0, Cachedata.Length);
                 foreach (byte data_temp in Cachedata)
                 {
-                    Deal_PortData(data_temp);
+                    Deal_RcData(data_temp);
                 }
                 Read_Cache_Data_flag = 0;
             }
         }
 
-        
-        public void Deal_PortData(byte data)
+        uint time_count = 0;
+        public void Deal_RcData(byte data)
         {
             if (checkBoxGrayImage.Checked || checkBoxTwoPixelImage.Checked || checkBoxThreePointTrack.Checked || checkBoxWaveImage.Checked)
             {
                 //------------接收图像数据------------//
                 if (MyImage.image_get_flag != 4)
                 {
+                    //timerCal.Enabled = true;
                     MyImage.GetImageFramehead_Deal(data);
                 }
                 else //采集图像
@@ -297,11 +297,13 @@ namespace SerialPortDebug
                     if (checkBoxTwoPixelImage.Checked)    //鹰眼压缩图像模式
                     {
                         MyImage.TwoPixelImage_Deal(data);
-                        if (MyImage.TwoPixelImage_finish_flag == 1)
+                        if (MyImage.TwoPixelImage_finish0_flag == 1)
                         {
+                            //timerCal.Enabled = false;
                             this.Invoke((EventHandler)(delegate
                             {
                                 pictureBoxShow.Refresh();
+                                //textBoxReceivingArea.Text = time_count.ToString();  //计时
                                 if (checkBoxAutoSaveImage.Checked)
                                 {
                                     string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
@@ -309,10 +311,32 @@ namespace SerialPortDebug
                                     toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
                                     Image_save_Num++;
                                 }
+                                pictureBoxShow.Visible = true;
+                                pictureBoxShow1.Visible = false;
+                                MyImage.camera_image_gra1.Clear(Color.WhiteSmoke);
                             }));
-                            MyImage.TwoPixelImage_finish_flag = 0;
+                            MyImage.TwoPixelImage_finish0_flag = 0;
                         }
-                    
+                        else if (MyImage.TwoPixelImage_finish1_flag == 1)
+                        {
+                            //timerCal.Enabled = false;
+                            this.Invoke((EventHandler)(delegate
+                            {
+                                pictureBoxShow1.Refresh();
+                                //textBoxReceivingArea.Text = time_count.ToString();  //计时
+                                if (checkBoxAutoSaveImage.Checked)
+                                {
+                                    string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                                    pictureBoxShow1.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                                    toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
+                                    Image_save_Num++;
+                                }
+                                pictureBoxShow1.Visible = true;
+                                pictureBoxShow.Visible = false;
+                                MyImage.camera_image_gra.Clear(Color.WhiteSmoke);
+                            }));
+                            MyImage.TwoPixelImage_finish1_flag = 0;
+                        }
                     }
                     else if (checkBoxThreePointTrack.Checked )   //三点赛道模式
                     {
@@ -1021,6 +1045,9 @@ namespace SerialPortDebug
                     buttonWifiStop.Enabled = true;
                     Client_Receive_thread = new System.Threading.Thread(client_receive_data);
                     Client_Receive_thread.Start();
+                    //StateObject obj = new StateObject();
+                    //obj.workSocket = TCP_socket;
+                    //TCP_socket.BeginReceive(obj.buffer, 0, StateObject.BUFFER_SIZE, 0, new AsyncCallback(Read_Callback), obj);
                 }
                 catch (Exception ee)
                 {
@@ -1068,6 +1095,28 @@ namespace SerialPortDebug
             }
         }
 
+        public void Read_Callback(IAsyncResult ar)   //异步接收数据
+        {
+            StateObject so = (StateObject)ar.AsyncState;
+            //Socket s = so.workSocket;
+            try
+            {
+                int len = TCP_socket.EndReceive(ar);
+                if (len > 0)
+                {
+                    for (int i = 0; i < len; i++)
+                    {
+                        Deal_RcData(so.buffer[i]);
+                    }
+                    TCP_socket.BeginReceive(so.buffer, 0, StateObject.BUFFER_SIZE, 0, new AsyncCallback(Read_Callback), so);
+                }
+            }
+            catch(Exception ee)
+            {
+
+            }
+        }
+
         public void sever_receive_data()
         {
             byte[] recei_data = new byte[65536];
@@ -1084,7 +1133,7 @@ namespace SerialPortDebug
                             {
                                 for (int i = 0; i < len; i++)
                                 {
-                                    Deal_PortData(recei_data[i]);
+                                    Deal_RcData(recei_data[i]);
                                 }
                             }
                         }
@@ -1100,8 +1149,8 @@ namespace SerialPortDebug
         private EndPoint Remote ;
         public void client_receive_data()
         {
-            byte[] recei_data = new byte[65536];
-            //TCP_socket.ReceiveTimeout = 3000; 
+            byte[] recei_data = new byte[128];
+            //TCP_socket.ReceiveBufferSize=65536*4; 
             if (wifi_mode == 2)
             {
                 while (true)
@@ -1118,9 +1167,8 @@ namespace SerialPortDebug
                             if (len > 0)
                             {
                                 for (int i = 0; i < len; i++)
-              
                                 {
-                                    Deal_PortData(recei_data[i]);
+                                    Deal_RcData(recei_data[i]);
                                 }
                             }
                         }
@@ -1151,7 +1199,7 @@ namespace SerialPortDebug
                                 }));
                                 for (int i = 0; i < len; i++)
                                 {
-                                    Deal_PortData(recei_data[i]);
+                                    Deal_RcData(recei_data[i]);
                                 }
                             }
                         }
@@ -1238,5 +1286,18 @@ namespace SerialPortDebug
             textBoxLocalPortNum.Text = "5001";
             textBoxMaxClientNum.Text = "10";
         }
+
+        private void timerCal_Tick(object sender, EventArgs e)
+        {
+            time_count++;
+        }
+    }
+
+    public class StateObject
+    {
+        public Socket workSocket = null;
+        public const int BUFFER_SIZE = 1024;
+        public byte[] buffer = new byte[BUFFER_SIZE];
+        public StringBuilder sb = new StringBuilder();
     }
 }

@@ -78,31 +78,61 @@ namespace SerialPortDebug
             }
         }
 
-        public static int TwoPixelImage_finish_flag = 0;
+        public static int TwoPixelImage_finish0_flag = 0;
+        public static int TwoPixelImage_finish1_flag = 0;
         public static void TwoPixelImage_Deal(byte data)   //处理鹰眼二值化压缩图像
         {
             byte pixel = new byte();
             byte[] colour = { 255, 0 };
-            for (int i = 7; i >= 0; i--)
+            if (picturebox_who_flag == 0)
             {
-                pixel = colour[(data >> i) & 0x01];
-                camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
-                if (picturegrid_flag == 0)
+                for (int i = 7; i >= 0; i--)
                 {
-                    camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                    pixel = colour[(data >> i) & 0x01];
+                    camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                    if (picturegrid_flag == 0)
+                    {
+                        camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                    }
+                    image_column_count += fr1.pictureBoxShow.Width / width;
+                    if (image_column_count >= fr1.pictureBoxShow.Width)
+                    {
+                        image_column_count = 0;
+                        image_row_count += fr1.pictureBoxShow.Height / height;
+                    }
                 }
-                image_column_count += fr1.pictureBoxShow.Width / width;
-                if (image_column_count >= fr1.pictureBoxShow.Width)
+                if (image_row_count >= fr1.pictureBoxShow.Height)
                 {
-                    image_column_count = 0;
-                    image_row_count += fr1.pictureBoxShow.Height / height;
+                    image_row_count = 0;
+                    image_get_flag = 0;
+                    TwoPixelImage_finish0_flag = 1;
+                    picturebox_who_flag = 1;
                 }
             }
-            if (image_row_count >= fr1.pictureBoxShow.Height)
+            else
             {
-                image_row_count = 0;
-                image_get_flag = 0;
-                TwoPixelImage_finish_flag = 1;
+                for (int i = 7; i >= 0; i--)
+                {
+                    pixel = colour[(data >> i) & 0x01];
+                    camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                    if (picturegrid_flag == 0)
+                    {
+                        camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                    }
+                    image_column_count += fr1.pictureBoxShow.Width / width;
+                    if (image_column_count >= fr1.pictureBoxShow.Width)
+                    {
+                        image_column_count = 0;
+                        image_row_count += fr1.pictureBoxShow.Height / height;
+                    }
+                }
+                if (image_row_count >= fr1.pictureBoxShow.Height)
+                {
+                    image_row_count = 0;
+                    image_get_flag = 0;
+                    TwoPixelImage_finish1_flag = 1;
+                    picturebox_who_flag = 0;
+                }
             }
         }
 
