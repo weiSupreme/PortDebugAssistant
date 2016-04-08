@@ -101,6 +101,7 @@ namespace SerialPortDebug
                         image_row_count += fr1.pictureBoxShow.Height / height;
                     }
                 }
+                //if (image_row_count>0 && image_row_count % 160 == 0){ }
                 if (image_row_count >= fr1.pictureBoxShow.Height)
                 {
                     image_row_count = 0;

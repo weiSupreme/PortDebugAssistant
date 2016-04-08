@@ -52,6 +52,7 @@
             this.labelSendZifu = new System.Windows.Forms.Label();
             this.labelReceiveZifu = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonResetRcCount = new System.Windows.Forms.Button();
             this.buttonSend = new System.Windows.Forms.Button();
             this.buttonClearSending = new System.Windows.Forms.Button();
             this.buttonClearReceiving = new System.Windows.Forms.Button();
@@ -131,6 +132,7 @@
             this.buttonWifiStart = new System.Windows.Forms.Button();
             this.buttonWifiStop = new System.Windows.Forms.Button();
             this.timerCal = new System.Windows.Forms.Timer(this.components);
+            this.toolTipRcTotalCounts = new System.Windows.Forms.ToolTip(this.components);
             this.groupBoxInitialization.SuspendLayout();
             this.groupBoxReceivingArea.SuspendLayout();
             this.groupBoxSendingArea.SuspendLayout();
@@ -164,7 +166,7 @@
             this.groupBoxInitialization.Size = new System.Drawing.Size(182, 178);
             this.groupBoxInitialization.TabIndex = 0;
             this.groupBoxInitialization.TabStop = false;
-            this.groupBoxInitialization.Text = "初始化";
+            this.groupBoxInitialization.Text = "串口通信";
             // 
             // comboBoxStopBits
             // 
@@ -301,6 +303,7 @@
             this.textBoxReceivingArea.TabIndex = 0;
             this.textBoxReceivingArea.TextChanged += new System.EventHandler(this.textBoxReceivingArea_TextChanged);
             this.textBoxReceivingArea.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxReceivingArea_MouseDoubleClick);
+            this.textBoxReceivingArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.textBoxReceivingArea_MouseMove);
             // 
             // groupBoxSendingArea
             // 
@@ -388,6 +391,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonResetRcCount);
             this.groupBox2.Controls.Add(this.buttonSend);
             this.groupBox2.Controls.Add(this.buttonClearSending);
             this.groupBox2.Controls.Add(this.buttonClearReceiving);
@@ -397,9 +401,19 @@
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             // 
+            // buttonResetRcCount
+            // 
+            this.buttonResetRcCount.Location = new System.Drawing.Point(6, 74);
+            this.buttonResetRcCount.Name = "buttonResetRcCount";
+            this.buttonResetRcCount.Size = new System.Drawing.Size(76, 23);
+            this.buttonResetRcCount.TabIndex = 4;
+            this.buttonResetRcCount.Text = "清空计数";
+            this.buttonResetRcCount.UseVisualStyleBackColor = true;
+            this.buttonResetRcCount.Click += new System.EventHandler(this.buttonResetRcCount_Click);
+            // 
             // buttonSend
             // 
-            this.buttonSend.Location = new System.Drawing.Point(6, 100);
+            this.buttonSend.Location = new System.Drawing.Point(6, 106);
             this.buttonSend.Name = "buttonSend";
             this.buttonSend.Size = new System.Drawing.Size(76, 23);
             this.buttonSend.TabIndex = 3;
@@ -409,7 +423,7 @@
             // 
             // buttonClearSending
             // 
-            this.buttonClearSending.Location = new System.Drawing.Point(7, 62);
+            this.buttonClearSending.Location = new System.Drawing.Point(7, 45);
             this.buttonClearSending.Name = "buttonClearSending";
             this.buttonClearSending.Size = new System.Drawing.Size(76, 23);
             this.buttonClearSending.TabIndex = 1;
@@ -419,7 +433,7 @@
             // 
             // buttonClearReceiving
             // 
-            this.buttonClearReceiving.Location = new System.Drawing.Point(6, 26);
+            this.buttonClearReceiving.Location = new System.Drawing.Point(6, 16);
             this.buttonClearReceiving.Name = "buttonClearReceiving";
             this.buttonClearReceiving.Size = new System.Drawing.Size(76, 23);
             this.buttonClearReceiving.TabIndex = 0;
@@ -1044,7 +1058,7 @@
             this.groupBoxWifiSettings.Size = new System.Drawing.Size(182, 178);
             this.groupBoxWifiSettings.TabIndex = 15;
             this.groupBoxWifiSettings.TabStop = false;
-            this.groupBoxWifiSettings.Text = "初始化";
+            this.groupBoxWifiSettings.Text = "WIFI";
             // 
             // textBoxMaxClientNum
             // 
@@ -1090,6 +1104,7 @@
             this.textBoxLocalIP.Size = new System.Drawing.Size(118, 26);
             this.textBoxLocalIP.TabIndex = 17;
             this.textBoxLocalIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxLocalIP.TextChanged += new System.EventHandler(this.textBoxLocalIP_TextChanged);
             // 
             // textBoxServerPortNum
             // 
@@ -1117,6 +1132,7 @@
             this.textBoxServerIP.Size = new System.Drawing.Size(100, 23);
             this.textBoxServerIP.TabIndex = 14;
             this.textBoxServerIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxServerIP.TextChanged += new System.EventHandler(this.textBoxServerIP_TextChanged);
             // 
             // labelServerIP
             // 
@@ -1158,6 +1174,16 @@
             // 
             this.timerCal.Interval = 1;
             this.timerCal.Tick += new System.EventHandler(this.timerCal_Tick);
+            // 
+            // toolTipRcTotalCounts
+            // 
+            this.toolTipRcTotalCounts.AutomaticDelay = 50;
+            this.toolTipRcTotalCounts.AutoPopDelay = 5000;
+            this.toolTipRcTotalCounts.BackColor = System.Drawing.Color.Transparent;
+            this.toolTipRcTotalCounts.InitialDelay = 50;
+            this.toolTipRcTotalCounts.ReshowDelay = 10;
+            this.toolTipRcTotalCounts.UseAnimation = false;
+            this.toolTipRcTotalCounts.UseFading = false;
             // 
             // Form1
             // 
@@ -1323,6 +1349,8 @@
         private System.Windows.Forms.ToolStripMenuItem uDPClientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uDPSeverToolStripMenuItem;
         private System.Windows.Forms.Timer timerCal;
+        private System.Windows.Forms.ToolTip toolTipRcTotalCounts;
+        private System.Windows.Forms.Button buttonResetRcCount;
     }
 }
 

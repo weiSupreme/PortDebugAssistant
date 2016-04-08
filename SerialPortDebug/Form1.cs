@@ -34,6 +34,7 @@ namespace SerialPortDebug
         private SerialPortDebug.FormWave fr_wave = new FormWave();
         private SerialPortDebug.MyFile my_file = new MyFile();
         private SerialPortDebug.FormSafety fm_safety = new FormSafety();
+        private UInt64 RCTotalCount = 0;
 
         public Form1()
         {
@@ -127,6 +128,9 @@ namespace SerialPortDebug
             this.BackColor = back_form_color;
             image_width = my_file.SetImage_Width();
             image_height = my_file.SetImage_Height();
+            textBoxServerIP.Text = my_file.Read_File("SeverIP.text").Trim();
+            textBoxLocalIP.Text = my_file.Read_File("LocalIP.text").Trim();
+
             this.DoubleBuffered = true;
             Init_Serialport();
             
@@ -232,10 +236,14 @@ namespace SerialPortDebug
                 {
                     System.Windows.Forms.Application.DoEvents();
                 }
-                //this.Close();
-                //DealWith_Readdata_thread.Abort();
-                //Com_Using.DiscardInBuffer();
-                Myserialport.Close(); 
+                try
+                {
+                    Myserialport.Close();
+                }
+                catch
+                {
+
+                }
                 comboBoxCom.Enabled = true;
                 comboBoxBaudRate.Enabled = true;
                 comboBoxByteSize.Enabled = true;
@@ -271,11 +279,19 @@ namespace SerialPortDebug
                     return;
                 }
                 Read_Cache_Data_flag = 1 ;
-                byte[] Cachedata = new byte[Myserialport.BytesToRead];
-                Myserialport.Read(Cachedata, 0, Cachedata.Length);
-                foreach (byte data_temp in Cachedata)
+                try
                 {
-                    Deal_RcData(data_temp);
+                    byte[] Cachedata = new byte[Myserialport.BytesToRead];
+                    RCTotalCount +=(UInt64)(Cachedata.Count());
+                    Myserialport.Read(Cachedata, 0, Cachedata.Length);
+                    foreach (byte data_temp in Cachedata)
+                    {
+                        Deal_RcData(data_temp);
+                    }
+                }
+                catch
+                {
+
                 }
                 Read_Cache_Data_flag = 0;
             }
@@ -313,7 +329,7 @@ namespace SerialPortDebug
                                 }
                                 pictureBoxShow.Visible = true;
                                 pictureBoxShow1.Visible = false;
-                                MyImage.camera_image_gra1.Clear(Color.WhiteSmoke);
+                               // MyImage.camera_image_gra1.Clear(Color.Blue);
                             }));
                             MyImage.TwoPixelImage_finish0_flag = 0;
                         }
@@ -333,7 +349,7 @@ namespace SerialPortDebug
                                 }
                                 pictureBoxShow1.Visible = true;
                                 pictureBoxShow.Visible = false;
-                                MyImage.camera_image_gra.Clear(Color.WhiteSmoke);
+                               // MyImage.camera_image_gra.Clear(Color.Blue);
                             }));
                             MyImage.TwoPixelImage_finish1_flag = 0;
                         }
@@ -531,11 +547,38 @@ namespace SerialPortDebug
                     {
                         sendstr += " " + Convert.ToString(b[i], 16);
                     }
-                }
-                Myserialport.Write(sendstr);
-                if (checkBoxSendEndEnter.Checked)
+                } 
+                if (Myserialport.IsOpen)
                 {
-                    Myserialport.Write("\r\n");
+                    try
+                    {
+                        Myserialport.Write(sendstr);
+                        if (checkBoxSendEndEnter.Checked)
+                        {
+                            Myserialport.Write("\r\n");
+                        }
+                    }
+                    catch(Exception ee)
+                    {
+
+                    }
+                }
+                else if(TCP_socket.Connected)
+                {
+                    byte[] buff = new byte[1024];
+                    buff = System.Text.Encoding.Default.GetBytes(sendstr);
+                    try
+                    {
+                        TCP_socket.Send(buff);
+                        if (checkBoxSendEndEnter.Checked)
+                        {
+                            TCP_socket.Send(System.Text.Encoding.Default.GetBytes("\r\n"));
+                        }
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }
         }
@@ -631,9 +674,9 @@ namespace SerialPortDebug
             double Pixel_x, Pixel_y;
             Pixel_x = e.X * int.Parse(textBoxPictureWidth.Text) / pictureBoxShow.Width;
             Pixel_y = e.Y * int.Parse(textBoxPictureHeight.Text) / pictureBoxShow.Height;
-            if (toolTipPicColumnRow.GetToolTip(pictureBoxShow)!=(((int)(Pixel_x + 1)).ToString() + "," + ((int)(Pixel_y)).ToString()))
+            if (toolTipPicColumnRow.GetToolTip(pictureBoxShow)!=(((int)(Pixel_x )).ToString() + "," + ((int)(Pixel_y)).ToString()))
             {
-                toolTipPicColumnRow.SetToolTip(pictureBoxShow, ((int)(Pixel_x + 1)).ToString() + "," + ((int)(Pixel_y )).ToString());
+                toolTipPicColumnRow.SetToolTip(pictureBoxShow, ((int)(Pixel_x )).ToString() + "," + ((int)(Pixel_y )).ToString());
             }
         }
 
@@ -704,6 +747,8 @@ namespace SerialPortDebug
         {
             if (openFileDialogImageLoad.ShowDialog() == DialogResult.OK && (openFileDialogImageLoad.FileName != ""))
             {
+                pictureBoxShow.Visible = true;
+                pictureBoxShow1.Visible = false;
                 pictureBoxShow.ImageLocation = openFileDialogImageLoad.FileName;
             }
         }
@@ -713,6 +758,8 @@ namespace SerialPortDebug
             buttonAutoShowImage_flag++;
             if (buttonAutoShowImage_flag == 1)
             {
+                pictureBoxShow.Visible = true;
+                pictureBoxShow1.Visible = false;
                 folderBrowserDialogImage.ShowDialog();
                 if (folderBrowserDialogImage.ShowDialog() == DialogResult.OK)
                 {
@@ -830,7 +877,7 @@ namespace SerialPortDebug
 
         private void 更新说明ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            textBoxReceivingArea.Text = "1.新增波形图功能，可以单独看曲线或同时看曲线和图像\r\n\r\n2.新增注册程序和注册机\r\n\r\n3.优化界面，增加显示时间和进度条";         
+            textBoxReceivingArea.Text = "SPI+WIFI高速传输图像";         
         }
 
         private void checkBoxTwoPixelImage_CheckedChanged(object sender, EventArgs e)
@@ -987,7 +1034,7 @@ namespace SerialPortDebug
             buttonWifiStop.Visible = true;
             buttonWifiStop.Enabled = false;
             buttonWifiStart.Text = "连接";
-            textBoxServerIP.Text = "192.168.191.2";
+            //textBoxServerIP.Text = "192.168.191.2";
             textBoxServerPortNum.Text = "5001";
         }
 
@@ -1009,7 +1056,7 @@ namespace SerialPortDebug
             buttonWifiStart.Text = "监听";
             System.Net.IPHostEntry myEntry = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
             string ipAddress = myEntry.AddressList[0].ToString();
-            textBoxLocalIP.Text = "192.168.1.1";
+            //textBoxLocalIP.Text = "192.168.1.1";
             textBoxLocalPortNum.Text = "6000";
             textBoxMaxClientNum.Text = "10";
         }
@@ -1034,15 +1081,17 @@ namespace SerialPortDebug
         {
             if (wifi_mode==2)    //TCP客户端模式
             {
-                serverIP = IPAddress.Parse(textBoxServerIP.Text);
                 try
                 {
+                    serverIP = IPAddress.Parse(textBoxServerIP.Text);
                     serverFullAddr = new IPEndPoint(serverIP, int.Parse(textBoxServerPortNum.Text));//设置IP，端口
                     TCP_socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                     TCP_socket.Connect(serverFullAddr);
                     toolStripStatusLabelMessage.Text = "连接TCP服务器成功。。。。";
                     buttonWifiStart.Enabled = false;
                     buttonWifiStop.Enabled = true;
+                    buttonSend.Enabled = true;
+                    buttonAutoSend.Enabled = true;
                     Client_Receive_thread = new System.Threading.Thread(client_receive_data);
                     Client_Receive_thread.Start();
                     //StateObject obj = new StateObject();
@@ -1051,33 +1100,35 @@ namespace SerialPortDebug
                 }
                 catch (Exception ee)
                 {
-                    textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
+                    textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" ;
                 }
             }
             else if (wifi_mode == 3)    //UDP服务器模式
             {
-                localIP = IPAddress.Parse(textBoxLocalIP.Text);
                 try
                 {
+                    localIP = IPAddress.Parse(textBoxLocalIP.Text);
                     localFullAddr = new IPEndPoint(localIP, int.Parse(textBoxLocalPortNum.Text));//设置IP，端口
                     UDP_socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                     UDP_socket.Bind(localFullAddr);
                     toolStripStatusLabelMessage.Text = "监听成功。。。。";
                     buttonWifiStart.Enabled = false;
                     buttonWifiStop.Enabled = true;
+                    buttonSend.Enabled = true;
+                    buttonAutoSend.Enabled = true;
                     Sever_Receive_thread = new System.Threading.Thread(sever_receive_data);
                     Sever_Receive_thread.Start();
                 }
                 catch (Exception ee)
                 {
-                    textBoxReceivingArea.Text += "监听失败" + ee;
+                    textBoxReceivingArea.Text += "监听失败" ;
                 }
             }
             else if (wifi_mode==4)   //udp客户端
             {
-                serverIP = IPAddress.Parse(textBoxServerIP.Text);
                 try
                 {
+                    serverIP = IPAddress.Parse(textBoxServerIP.Text);
                     serverFullAddr = new IPEndPoint(serverIP, int.Parse(textBoxServerPortNum.Text));//设置IP，端口
                     UDP_socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                     UDP_socket.Connect(serverFullAddr);
@@ -1085,12 +1136,13 @@ namespace SerialPortDebug
                     Remote = (EndPoint)(serverFullAddr);
                     buttonWifiStart.Enabled = false;
                     buttonWifiStop.Enabled = true;
+                    buttonAutoSend.Enabled = true;
                     Client_Receive_thread = new System.Threading.Thread(client_receive_data);
                     Client_Receive_thread.Start();
                 }
                 catch (Exception ee)
                 {
-                    textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
+                    textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启";
                 }
             }
         }
@@ -1131,6 +1183,7 @@ namespace SerialPortDebug
                             int len = UDP_socket.Receive(recei_data);
                             if (len > 0)
                             {
+                                RCTotalCount += (UInt64)(len);
                                 for (int i = 0; i < len; i++)
                                 {
                                     Deal_RcData(recei_data[i]);
@@ -1166,6 +1219,7 @@ namespace SerialPortDebug
                             }));*/
                             if (len > 0)
                             {
+                                RCTotalCount += (UInt64)(len);
                                 for (int i = 0; i < len; i++)
                                 {
                                     Deal_RcData(recei_data[i]);
@@ -1176,7 +1230,7 @@ namespace SerialPortDebug
                         {
                             this.Invoke((EventHandler)(delegate
                             {
-                                textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
+                                textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" ;
                             }));
                         }
                     }
@@ -1193,6 +1247,7 @@ namespace SerialPortDebug
                             int len = UDP_socket.Receive(recei_data);// ReceiveFrom(recei_data, ref Remote);
                             if (len > 0)
                             {
+                                RCTotalCount += (UInt64)(len);
                                 this.Invoke((EventHandler)(delegate
                                 {
                                     textBoxReceivingArea.Text += "接收到数据";
@@ -1207,7 +1262,7 @@ namespace SerialPortDebug
                         {
                             this.Invoke((EventHandler)(delegate
                             {
-                                textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" + ee;
+                                textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" ;
                             }));
                         }
                     }
@@ -1217,6 +1272,8 @@ namespace SerialPortDebug
 
         private void buttonWifiStop_Click(object sender, EventArgs e)
         {
+            buttonSend.Enabled = false;
+            buttonAutoSend.Enabled = false;
             if (wifi_mode == 2)
             {
                 TCP_socket.Close();
@@ -1255,7 +1312,7 @@ namespace SerialPortDebug
             buttonWifiStop.Visible = true;
             buttonWifiStop.Enabled = false;
             buttonWifiStart.Text = "连接";
-            textBoxServerIP.Text = "192.168.191.5";
+            //textBoxServerIP.Text = "192.168.191.5";
             textBoxServerPortNum.Text = "5001";
         }
 
@@ -1282,7 +1339,7 @@ namespace SerialPortDebug
             buttonWifiStart.Text = "监听";
             //System.Net.IPHostEntry myEntry = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
             //string ipAddress = myEntry.AddressList[0].ToString();
-            textBoxLocalIP.Text = "192.168.191.1";
+            //textBoxLocalIP.Text = "192.168.191.1";
             textBoxLocalPortNum.Text = "5001";
             textBoxMaxClientNum.Text = "10";
         }
@@ -1290,6 +1347,29 @@ namespace SerialPortDebug
         private void timerCal_Tick(object sender, EventArgs e)
         {
             time_count++;
+        }
+
+        private void textBoxServerIP_TextChanged(object sender, EventArgs e)
+        {
+            my_file.Write_String("SeverIP.text", textBoxServerIP.Text);
+        }
+
+        private void textBoxLocalIP_TextChanged(object sender, EventArgs e)
+        {
+            my_file.Write_String("LocalIP.text", textBoxLocalIP.Text);
+        }
+
+        private void textBoxReceivingArea_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (toolTipRcTotalCounts.GetToolTip(textBoxReceivingArea) != ("共接收到" + RCTotalCount.ToString() + "字节"))
+            {
+                toolTipRcTotalCounts.SetToolTip(textBoxReceivingArea, "共接收到"+RCTotalCount.ToString()+"字节");
+            }
+        }
+
+        private void buttonResetRcCount_Click(object sender, EventArgs e)
+        {
+            RCTotalCount = 0;
         }
     }
 
