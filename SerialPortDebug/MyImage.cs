@@ -24,6 +24,7 @@ namespace SerialPortDebug
         private static int picturebox_who_flag = 0;
         private static int effective_line = -5;        //三点赛道模式下的有效行
         public static int picturegrid_flag = 0;
+        private const int Image_Width = 640, Image_Height = 480;
         private static Form1 fr1 = new Form1();
         /*----------------------------以上是字段声明------------------------------*/
 
@@ -89,20 +90,20 @@ namespace SerialPortDebug
                 for (int i = 7; i >= 0; i--)
                 {
                     pixel = colour[(data >> i) & 0x01];
-                    camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                    camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, Image_Width / width, Image_Height / height);
                     if (picturegrid_flag == 0)
                     {
-                        camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                        camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, Image_Width / width, Image_Height / height);
                     }
-                    image_column_count += fr1.pictureBoxShow.Width / width;
-                    if (image_column_count >= fr1.pictureBoxShow.Width)
+                    image_column_count += Image_Width / width;
+                    if (image_column_count >= Image_Width)
                     {
                         image_column_count = 0;
-                        image_row_count += fr1.pictureBoxShow.Height / height;
+                        image_row_count += Image_Height / height;
                     }
                 }
-                //if (image_row_count>0 && image_row_count % 160 == 0){ }
-                if (image_row_count >= fr1.pictureBoxShow.Height)
+                //if (image_row_count>0 && image_row_count % 160 == 0){TwoPixelImage_finish0_flag = 1; }
+                if (image_row_count >= Image_Height)
                 {
                     image_row_count = 0;
                     image_get_flag = 0;
@@ -115,19 +116,19 @@ namespace SerialPortDebug
                 for (int i = 7; i >= 0; i--)
                 {
                     pixel = colour[(data >> i) & 0x01];
-                    camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                    camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, Image_Width / width, Image_Height / height);
                     if (picturegrid_flag == 0)
                     {
-                        camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                        camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(pixel, pixel, pixel)), image_column_count, image_row_count, Image_Width / width, Image_Height / height);
                     }
-                    image_column_count += fr1.pictureBoxShow.Width / width;
-                    if (image_column_count >= fr1.pictureBoxShow.Width)
+                    image_column_count += Image_Width / width;
+                    if (image_column_count >= Image_Width)
                     {
                         image_column_count = 0;
-                        image_row_count += fr1.pictureBoxShow.Height / height;
+                        image_row_count += Image_Height / height;
                     }
                 }
-                if (image_row_count >= fr1.pictureBoxShow.Height)
+                if (image_row_count >= Image_Height)
                 {
                     image_row_count = 0;
                     image_get_flag = 0;
@@ -145,7 +146,7 @@ namespace SerialPortDebug
             if (effective_line < 0)
             {
                 effective_line = data;
-                image_row_count = effective_line * fr1.pictureBoxShow.Height / height + fr1.pictureBoxShow.Height / height;
+                image_row_count = effective_line * Image_Height / height + Image_Height / height;
             }
             else
             {
@@ -155,43 +156,43 @@ namespace SerialPortDebug
                     {
                         if (three_point_track_dist_flag == 0)   //左边界
                         {
-                            camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * fr1.pictureBoxShow.Width / width, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                            camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * Image_Width / width, image_row_count, Image_Width / width, Image_Height / height);
                             if (picturegrid_flag == 0)
                             {
-                                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * fr1.pictureBoxShow.Width / width, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * Image_Width / width, image_row_count, Image_Width / width, Image_Height / height);
                             }
                             three_point_track_dist_flag = 1;
                         }
                         else if (three_point_track_dist_flag == 1)    //中线
                         {
-                            camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(0, 0, 255)), data * fr1.pictureBoxShow.Width / width, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                            camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(0, 0, 255)), data * Image_Width / width, image_row_count, Image_Width / width, Image_Height / height);
                             if (picturegrid_flag == 0)
                             {
-                                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 255)), data * fr1.pictureBoxShow.Width / width, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 255)), data * Image_Width / width, image_row_count, Image_Width / width, Image_Height / height);
                             }
                             three_point_track_dist_flag = 2;
                         }
                         else    //右边界
                         {
-                            camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * fr1.pictureBoxShow.Width / width, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                            camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(255, 0, 0)), data * Image_Width / width, image_row_count, Image_Width / width, Image_Height / height);
                             if (picturegrid_flag == 0)
                             {
-                                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * fr1.pictureBoxShow.Width / width, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0)), data * Image_Width / width, image_row_count, Image_Width / width, Image_Height / height);
                             }
                             three_point_track_dist_flag = 0;
-                            image_row_count += fr1.pictureBoxShow.Height / height;
-                            if (image_row_count >= fr1.pictureBoxShow.Height)
+                            image_row_count += Image_Height / height;
+                            if (image_row_count >= Image_Height)
                             {
                                 image_row_count = 0;
                                 image_get_flag = 0;
                                 threepointtrack_hang = 0;
                                 waveimage_flag = -5;
-                                for (int i = 0; i < fr1.pictureBoxShow.Width; i += fr1.pictureBoxShow.Width / width)
+                                for (int i = 0; i < Image_Width; i += Image_Width / width)
                                 {
-                                    camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(0, 0, 0)), i, effective_line * fr1.pictureBoxShow.Height / height, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                                    camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(0, 0, 0)), i, effective_line * Image_Height / height, Image_Width / width, Image_Height / height);
                                     if (picturegrid_flag == 0)
                                     {
-                                        camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), i, effective_line * fr1.pictureBoxShow.Height / height, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                                        camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), i, effective_line * Image_Height / height, Image_Width / width, Image_Height / height);
                                     }
                                 }
                                 effective_line = -5;
@@ -237,10 +238,10 @@ namespace SerialPortDebug
                                 waveimage_flag = -5;
                                 for (int i = 0; i < fr1.pictureBoxShow1.Width; i += fr1.pictureBoxShow1.Width / width)
                                 {
-                                    camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(0, 0, 0)), i, effective_line * fr1.pictureBoxShow.Height / height, fr1.pictureBoxShow1.Width / width, fr1.pictureBoxShow1.Height / height);
+                                    camera_image_gra1.DrawRectangle(new Pen(Color.FromArgb(0, 0, 0)), i, effective_line * Image_Height / height, fr1.pictureBoxShow1.Width / width, fr1.pictureBoxShow1.Height / height);
                                     if (picturegrid_flag == 0)
                                     {
-                                        camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), i, effective_line * fr1.pictureBoxShow.Height / height, fr1.pictureBoxShow1.Width / width, fr1.pictureBoxShow1.Height / height);
+                                        camera_image_gra1.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0)), i, effective_line * Image_Height / height, fr1.pictureBoxShow1.Width / width, fr1.pictureBoxShow1.Height / height);
                                     }
                                 }
                                 effective_line = -5;
@@ -257,18 +258,18 @@ namespace SerialPortDebug
         public static int grayImage_finish_flag=0;
         public static void GrayImage_Deal(byte data)    //处理灰度图像
         {
-            camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(data, data, data)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+            camera_image_gra.DrawRectangle(new Pen(Color.FromArgb(data, data, data)), image_column_count, image_row_count, Image_Width / width, Image_Height / height);
             if (picturegrid_flag == 0)
             {
-                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(data, data, data)), image_column_count, image_row_count, fr1.pictureBoxShow.Width / width, fr1.pictureBoxShow.Height / height);
+                camera_image_gra.FillRectangle(new SolidBrush(Color.FromArgb(data, data, data)), image_column_count, image_row_count, Image_Width / width, Image_Height / height);
             }
-            image_column_count += fr1.pictureBoxShow.Width / width;
-            if (image_column_count >= fr1.pictureBoxShow.Width)
+            image_column_count += Image_Width / width;
+            if (image_column_count >= Image_Width)
             {
                 image_column_count = 0;
-                image_row_count += fr1.pictureBoxShow.Height / height;
+                image_row_count += Image_Height / height;
             }
-            if (image_row_count >= fr1.pictureBoxShow.Height)
+            if (image_row_count >= Image_Height)
             {
                 image_row_count = 0;
                 image_get_flag = 0;

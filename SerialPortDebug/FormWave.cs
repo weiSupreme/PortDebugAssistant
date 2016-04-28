@@ -35,7 +35,7 @@ namespace SerialPortDebug
 
         public void Draw_Wave(byte y)
         {
-            wave_x = wave_x_last+4;
+            wave_x = wave_x_last+1;
             wave_y = pictureBoxWave.Height - y-1;
             wave_gra.DrawLine(new Pen(Color.Red, 0.5f), new Point(wave_x_last, wave_y_last), new Point(wave_x, wave_y));
             this.Invoke((EventHandler)(delegate

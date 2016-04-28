@@ -27,7 +27,6 @@ G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.ex
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.application
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.pdb
-G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.csprojResolveAssemblyReference.cache
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.Properties.Resources.resources
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.csproj.GenerateResource.Cache
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.exe.manifest
@@ -35,3 +34,5 @@ G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.ap
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.FormWave.resources
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.FormSafety.resources
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.Form1.resources
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe.CodeAnalysisLog.xml
+G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe.lastcodeanalysissucceeded

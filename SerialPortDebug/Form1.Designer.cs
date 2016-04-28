@@ -85,9 +85,9 @@
             this.Myserialport = new System.IO.Ports.SerialPort(this.components);
             this.toolTipPicColumnRow = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabelMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelTime = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ToolStripMenuItemCommuniMethods = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemSerialPort = new System.Windows.Forms.ToolStripMenuItem();
@@ -725,14 +725,23 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripProgressBar1,
             this.toolStripStatusLabelMessage,
-            this.toolStripStatusLabelTime,
-            this.toolStripProgressBar1});
+            this.toolStripStatusLabelTime});
             this.statusStrip1.Location = new System.Drawing.Point(0, 607);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1187, 22);
             this.statusStrip1.TabIndex = 12;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.AutoSize = false;
+            this.toolStripProgressBar1.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.toolStripProgressBar1.Maximum = 1000;
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(200, 16);
+            this.toolStripProgressBar1.Step = 1;
             // 
             // toolStripStatusLabelMessage
             // 
@@ -748,15 +757,6 @@
             this.toolStripStatusLabelTime.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.toolStripStatusLabelTime.Name = "toolStripStatusLabelTime";
             this.toolStripStatusLabelTime.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.AutoSize = false;
-            this.toolStripProgressBar1.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.toolStripProgressBar1.Maximum = 1000;
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(200, 16);
-            this.toolStripProgressBar1.Step = 1;
             // 
             // menuStrip1
             // 

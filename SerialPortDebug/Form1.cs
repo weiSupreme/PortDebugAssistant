@@ -30,7 +30,9 @@ namespace SerialPortDebug
         private string Image_save_path;            //保存图片路径字符串
         private UInt32 Image_save_Num = 1;          //保存图片时的名字变量
         //private int abc = 0;
-        Bitmap camera_image_bit = new Bitmap(640, 480);
+        private const int Image_Width = 640, Image_Height = 480;
+        Bitmap camera_image_bit = new Bitmap(Image_Width, Image_Height);
+        Bitmap camera_image_bit1 = new Bitmap(Image_Width, Image_Height);
         private SerialPortDebug.FormWave fr_wave = new FormWave();
         private SerialPortDebug.MyFile my_file = new MyFile();
         private SerialPortDebug.FormSafety fm_safety = new FormSafety();
@@ -114,6 +116,7 @@ namespace SerialPortDebug
                 comboBoxStopBits.Items.Add(stopbit);
         }
 
+        Thread RefreshPicturebox_thread ;
         private void Form1_Load(object sender, EventArgs e)
         {
             if (!fm_safety.Check_IsRegister())
@@ -143,7 +146,7 @@ namespace SerialPortDebug
             textBoxPictureHeight.Text = Convert.ToString(image_height);
             timerFreshPort.Enabled = true;
             pictureBoxShow.Image = camera_image_bit;
-            pictureBoxShow1.Image = camera_image_bit;
+            pictureBoxShow1.Image = camera_image_bit1;
             MyImage.camera_image_gra = Graphics.FromImage(pictureBoxShow.Image);
             MyImage.camera_image_gra1 = Graphics.FromImage(pictureBoxShow1.Image);
             //camera_image_gra.InterpolationMode =(InterpolationMode) CompositingQuality.HighQuality;
@@ -153,6 +156,55 @@ namespace SerialPortDebug
             while (toolStripProgressBar1.Value < toolStripProgressBar1.Maximum)
             {
                 toolStripProgressBar1.PerformStep();
+            }
+            RefreshPicturebox_thread = new System.Threading.Thread(RefreshPicturebox_fun);
+            //RefreshPicturebox_thread.Start();
+        }
+
+        void RefreshPicturebox_fun()
+        {
+            while (true)
+            {
+                if (MyImage.TwoPixelImage_finish0_flag == 1)
+                {
+                    //timerCal.Enabled = false;
+                    //this.Invoke((EventHandler)(delegate
+                    //{
+                    pictureBoxShow.BackgroundImage = camera_image_bit;
+                    //textBoxReceivingArea.Text = time_count.ToString();  //计时
+                    if (checkBoxAutoSaveImage.Checked)
+                    {
+                        string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                        pictureBoxShow.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                        toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
+                        Image_save_Num++;
+                    }
+                    //pictureBoxShow.Visible = true;
+                    //pictureBoxShow1.Visible = false;
+                    // MyImage.camera_image_gra1.Clear(Color.Blue);
+                    //}));
+                    MyImage.TwoPixelImage_finish0_flag = 0;
+                }
+                else if (MyImage.TwoPixelImage_finish1_flag == 1)
+                {
+                    //timerCal.Enabled = false;
+                    //this.Invoke((EventHandler)(delegate
+                    //{
+                    pictureBoxShow1.BackgroundImage = camera_image_bit1;
+                    //textBoxReceivingArea.Text = time_count.ToString();  //计时
+                    if (checkBoxAutoSaveImage.Checked)
+                    {
+                        string Image_save_name = Convert.ToString(Image_save_Num) + ".bmp";
+                        pictureBoxShow1.Image.Save(Image_save_path + "\\" + Image_save_name, System.Drawing.Imaging.ImageFormat.Bmp);
+                        toolStripStatusLabelMessage.Text = Image_save_name + "保存成功";
+                        Image_save_Num++;
+                    }
+                    pictureBoxShow1.Visible = true;
+                    pictureBoxShow.Visible = false;
+                    // MyImage.camera_image_gra.Clear(Color.Blue);
+                    // }));
+                    MyImage.TwoPixelImage_finish1_flag = 0;
+                }
             }
         }
 
@@ -319,6 +371,7 @@ namespace SerialPortDebug
                             this.Invoke((EventHandler)(delegate
                             {
                                 pictureBoxShow.Refresh();
+                                //pictureBoxShow.Image = camera_image_bit ;
                                 //textBoxReceivingArea.Text = time_count.ToString();  //计时
                                 if (checkBoxAutoSaveImage.Checked)
                                 {
@@ -329,7 +382,7 @@ namespace SerialPortDebug
                                 }
                                 pictureBoxShow.Visible = true;
                                 pictureBoxShow1.Visible = false;
-                               // MyImage.camera_image_gra1.Clear(Color.Blue);
+                                //MyImage.camera_image_gra1.Clear(Color.Blue);
                             }));
                             MyImage.TwoPixelImage_finish0_flag = 0;
                         }
@@ -339,6 +392,7 @@ namespace SerialPortDebug
                             this.Invoke((EventHandler)(delegate
                             {
                                 pictureBoxShow1.Refresh();
+                                //pictureBoxShow1.Image = camera_image_bit1;
                                 //textBoxReceivingArea.Text = time_count.ToString();  //计时
                                 if (checkBoxAutoSaveImage.Checked)
                                 {
@@ -349,8 +403,8 @@ namespace SerialPortDebug
                                 }
                                 pictureBoxShow1.Visible = true;
                                 pictureBoxShow.Visible = false;
-                               // MyImage.camera_image_gra.Clear(Color.Blue);
-                            }));
+                                //MyImage.camera_image_gra.Clear(Color.Blue);
+                             }));
                             MyImage.TwoPixelImage_finish1_flag = 0;
                         }
                     }
@@ -1094,6 +1148,7 @@ namespace SerialPortDebug
                     buttonAutoSend.Enabled = true;
                     Client_Receive_thread = new System.Threading.Thread(client_receive_data);
                     Client_Receive_thread.Start();
+                    //Client_Receive_thread.Priority = System.Threading.ThreadPriority.Highest;
                     //StateObject obj = new StateObject();
                     //obj.workSocket = TCP_socket;
                     //TCP_socket.BeginReceive(obj.buffer, 0, StateObject.BUFFER_SIZE, 0, new AsyncCallback(Read_Callback), obj);
@@ -1202,8 +1257,8 @@ namespace SerialPortDebug
         private EndPoint Remote ;
         public void client_receive_data()
         {
-            byte[] recei_data = new byte[128];
-            //TCP_socket.ReceiveBufferSize=65536*4; 
+            byte[] recei_data = new byte[4096];
+            //TCP_socket.ReceiveBufferSize=4096; 
             if (wifi_mode == 2)
             {
                 while (true)
@@ -1233,6 +1288,13 @@ namespace SerialPortDebug
                                 textBoxReceivingArea.Text += "连接服务器失败。。。请仔细检查服务器是否开启" ;
                             }));
                         }
+                    }
+                    else
+                    {
+                        this.Invoke((EventHandler)(delegate
+                        {
+                            textBoxReceivingArea.Text += "已断开服务器连接";
+                        }));
                     }
                 }
             }
