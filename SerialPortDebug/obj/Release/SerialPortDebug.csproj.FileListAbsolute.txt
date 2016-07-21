@@ -20,4 +20,3 @@ G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.exe
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.FormWave.resources
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.FormSafety.resources
-G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Release\SerialPortDebug.csprojResolveAssemblyReference.cache

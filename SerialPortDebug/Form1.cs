@@ -119,12 +119,13 @@ namespace SerialPortDebug
         Thread RefreshPicturebox_thread ;
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (!fm_safety.Check_IsRegister())
+            //此部分为注册程序
+            /*if (!fm_safety.Check_IsRegister())  
             {
                 fm_safety.Show();
                 buttonOpenCom.Enabled = false;
                 this.WindowState = FormWindowState.Minimized;
-            }
+            }*/
             int image_width, image_height;
             Color back_form_color = new Color();
             back_form_color=my_file.Read_Log_FormMian_BackColor();
@@ -1432,6 +1433,11 @@ namespace SerialPortDebug
         private void buttonResetRcCount_Click(object sender, EventArgs e)
         {
             RCTotalCount = 0;
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 
