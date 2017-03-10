@@ -12,7 +12,7 @@ namespace SerialPortDebug
     {
         /*----------------------------以下是字段声明------------------------------*/
         public static string[] portname_str = SerialPort.GetPortNames();
-        public static int[] BaudRates = { 9600, 19200, 38400, 56000, 57600, 115200, 128000, 256000 };
+        public static int[] BaudRates = { 9600, 19200, 38400, 56000, 57600, 115200, 128000, 230400, 256000, 500000 };
         public static int[] bytesizes = { 5, 6, 7, 8 };
         public static int[] parities = { 0, 1, 2 };
         public static int[] stopbits = { 1, 2 };

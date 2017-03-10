@@ -35,3 +35,36 @@ G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.Fo
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.FormSafety.resources
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.Form1.resources
 G:\Users\Zhu wei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.csprojResolveAssemblyReference.cache
+E:\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe.config
+E:\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.exe
+E:\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.pdb
+E:\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe.manifest
+E:\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.application
+E:\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe
+E:\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.pdb
+E:\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.csprojResolveAssemblyReference.cache
+E:\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.Form1.resources
+E:\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.FormSafety.resources
+E:\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.FormWave.resources
+E:\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.Properties.Resources.resources
+E:\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.csproj.GenerateResource.Cache
+E:\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.exe.manifest
+E:\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.application
+C:\Users\zhuwei\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe.config
+C:\Users\zhuwei\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.exe
+C:\Users\zhuwei\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.pdb
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe.config
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.exe
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.pdb
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe.manifest
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.application
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.exe
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\bin\Debug\SerialPortDebug.pdb
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.csprojResolveAssemblyReference.cache
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.Form1.resources
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.FormSafety.resources
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.FormWave.resources
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.Properties.Resources.resources
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.csproj.GenerateResource.Cache
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.exe.manifest
+C:\Users\zhuwei\Documents\GitHub\-\SerialPortDebug\obj\Debug\SerialPortDebug.application

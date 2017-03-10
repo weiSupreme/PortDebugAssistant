@@ -1258,6 +1258,8 @@ namespace SerialPortDebug
         private EndPoint Remote ;
         public void client_receive_data()
         {
+            FileStream fs = new FileStream(folderBrowserDialogImage.SelectedPath + "\\" + "tmp.txt", FileMode.OpenOrCreate, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);//, System.Text.Encoding.GetEncoding("us-ascii"));
             byte[] recei_data = new byte[4096];
             //TCP_socket.ReceiveBufferSize=4096; 
             if (wifi_mode == 2)
@@ -1275,11 +1277,14 @@ namespace SerialPortDebug
                             }));*/
                             if (len > 0)
                             {
+                                fs.Write(recei_data,0, len);
                                 RCTotalCount += (UInt64)(len);
-                                for (int i = 0; i < len; i++)
+                                /*for (int i = 0; i < len; i++)
                                 {
                                     Deal_RcData(recei_data[i]);
-                                }
+                                    //sw.Write(recei_data[i].ToString());
+                                }*/
+                                //sw.Close;
                             }
                         }
                         catch (Exception ee)
