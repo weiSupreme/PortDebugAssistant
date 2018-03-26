@@ -1259,7 +1259,7 @@ namespace SerialPortDebug
         public void client_receive_data()
         {
             FileStream fs = new FileStream(folderBrowserDialogImage.SelectedPath + "\\" + "tmp.txt", FileMode.OpenOrCreate, FileAccess.Write);
-            StreamWriter sw = new StreamWriter(fs);//, System.Text.Encoding.GetEncoding("us-ascii"));
+            //StreamWriter sw = new StreamWriter(fs);//, System.Text.Encoding.GetEncoding("us-ascii"));
             byte[] recei_data = new byte[4096];
             //TCP_socket.ReceiveBufferSize=4096; 
             if (wifi_mode == 2)
